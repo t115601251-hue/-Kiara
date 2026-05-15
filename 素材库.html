@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自媒体创作素材库</title>
+<style>
+  :root {
+    --bg: #08040f;
+    --surface: #100b1a;
+    --card: #1f1733;
+    --card-hover: #281e42;
+    --text: #f5f0e8;
+    --sub: #c4b5d0;
+    --muted: #8b7d9a;
+    --purple: #a855f7;
+    --purple-light: #c084fc;
+    --gold: #f0a028;
+    --gold-light: #fbbf24;
+    --rose: #e11d48;
+    --border: rgba(255,255,255,.06);
+    --border-hover: rgba(192,132,252,.3);
+    --glow-purple: rgba(168,85,247,.15);
+    --glow-gold: rgba(240,160,40,.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  /* Background image layer */
+  .bg-image {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: url('Gemini_Generated_Image_qudnqwqudnqwqudn.png') center/cover no-repeat;
+    opacity: .6;
+    pointer-events: none;
+  }
+  .bg-image::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 0%, transparent 70%, var(--bg) 100%);
+    pointer-events: none;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 5%, rgba(168,85,247,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 70% at 85% 90%, rgba(240,160,40,.05) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(192,132,252,.03) 0%, transparent 70%);
+    animation: bgPulse 8s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes bgPulse {
+    0% { opacity: .8; }
+    100% { opacity: 1.2; }
+  }
+
+  /* Grid overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+  }
+
+  /* Floating particles */
+  .particles {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(168,85,247,.25);
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  /* Everything above background */
+  header, nav, main, footer { position: relative; z-index: 1; }
+
+  /* ---- Header ---- */
+  header {
+    padding: 36px 28px 22px;
+    position: sticky; top:0; z-index:100;
+    background: rgba(10,8,18,.5);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  header .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1500px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  header h1 {
+    font-size: 26px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #c084fc 0%, #f0a028 50%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+  }
+  header .sub { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  header input {
+    width: 360px; max-width: 50vw;
+    padding: 12px 16px 12px 40px;
+    border: 1.5px solid var(--border);
+    border-radius: 24px;
+    font-size: 16px;
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    transition: all .3s;
+  }
+  header input:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 4px rgba(168,85,247,.12);
+  }
+  header input::placeholder { color: var(--muted); font-size: 15px; }
+  .search-wrap { position: relative; display: inline-block; }
+  .search-wrap::before {
+    content: '🔍';
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  /* ---- Nav ---- */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 16px 28px 6px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  nav a {
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--sub);
+    background: var(--surface);
+    border: 1px solid transparent;
+    transition: all .3s;
+    cursor: pointer;
+  }
+  nav a:hover {
+    color: #fff;
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+  }
+  nav a.active {
+    color: #fff;
+    background: linear-gradient(135deg, #9333ea, #f0a028);
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(240,160,40,.25);
+  }
+
+  /* ---- Page intro overlay ---- */
+  .intro-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    animation: overlayOut .6s ease .3s both;
+    pointer-events: none;
+  }
+  .intro-overlay .glow {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168,85,247,.8) 0%, rgba(240,160,40,.4) 50%, transparent 70%);
+    animation: introPulse .8s ease both;
+  }
+  @keyframes introPulse {
+    0% { transform: scale(.3); opacity: 0; }
+    50% { transform: scale(1.4); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  @keyframes overlayOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+
+  /* ---- Main ---- */
+  main {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px 28px 80px;
+    animation: mainIn .8s ease .5s both;
+  }
+  @keyframes mainIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .category {
+    margin-top: 44px;
+    padding: 28px 28px 16px;
+    background: rgba(0,0,0,.2);
+    border: 1px solid rgba(255,255,255,.05);
+    border-radius: 16px;
+    animation: fadeSlideIn .6s ease both;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .category:nth-child(1) { animation-delay: .05s; }
+  .category:nth-child(2) { animation-delay: .1s; }
+  .category:nth-child(3) { animation-delay: .15s; }
+  .category:nth-child(4) { animation-delay: .2s; }
+  .category:nth-child(5) { animation-delay: .25s; }
+
+  .cat-title {
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--text);
+    letter-spacing: 1px;
+  }
+  .cat-title .gradient-bar {
+    width: 6px; height: 34px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(168,85,247,.3);
+  }
+
+  .subcat { margin-top: 28px; }
+  .subcat-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e0d4e8;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 6px 0 6px 14px;
+    border-left: 3px solid rgba(240,160,40,.5);
+    transition: color .3s, border-color .3s;
+    background: linear-gradient(90deg, rgba(240,160,40,.06), transparent);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ---- Cards ---- */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all .35s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    overflow: hidden;
+    animation: cardIn .4s ease both;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(10px) scale(.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .35s;
+    border-radius: 12px;
+  }
+  .link-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(0,0,0,.5);
+    z-index: 2;
+  }
+  .link-card:hover::before { opacity: 1; }
+
+  .link-card .icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: transform .35s;
+  }
+  .link-card:hover .icon { transform: scale(1.15) rotate(-5deg); }
+
+  .link-card .text { position: relative; z-index: 1; min-width: 0; }
+  .link-card .name {
+    font-size: 16px; font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .link-card .desc {
+    font-size: 13px; color: #d4c9de;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin-top: 3px;
+    font-weight: 500;
+  }
+  .link-card .arrow {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 16px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all .35s;
+  }
+  .link-card:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .note {
+    font-size: 13px; color: var(--muted);
+    padding: 4px 0; margin-top: 6px;
+    font-style: italic;
+  }
+  .note a { color: var(--muted); text-decoration: none; }
+  .note a:hover { color: var(--sub); }
+
+  /* Card variants */
+  .card-ai:hover { border-color: rgba(168,85,247,.5); }
+  .card-ai .icon { background: linear-gradient(135deg, #2a1540, #3d1f5c); }
+  .card-ai::before { background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(192,132,252,.04)); }
+
+  .card-img:hover { border-color: rgba(192,132,252,.45); }
+  .card-img .icon { background: linear-gradient(135deg, #1f1640, #261d4a); }
+  .card-img::before { background: linear-gradient(135deg, rgba(147,51,234,.06), rgba(168,85,247,.04)); }
+
+  .card-video:hover { border-color: rgba(240,160,40,.45); }
+  .card-video .icon { background: linear-gradient(135deg, #2d1a14, #3a2218); }
+  .card-video::before { background: linear-gradient(135deg, rgba(240,160,40,.06), rgba(251,191,36,.04)); }
+
+  .card-music:hover { border-color: rgba(168,85,247,.45); }
+  .card-music .icon { background: linear-gradient(135deg, #1a1428, #221a34); }
+  .card-music::before { background: linear-gradient(135deg, rgba(147,51,234,.06), rgba(168,85,247,.04)); }
+
+  .card-tool:hover { border-color: rgba(240,160,40,.5); }
+  .card-tool .icon { background: linear-gradient(135deg, #2a1c10, #352414); }
+  .card-tool::before { background: linear-gradient(135deg, rgba(240,160,40,.08), rgba(251,191,36,.04)); }
+
+  .card-data:hover { border-color: rgba(192,132,252,.5); }
+  .card-data .icon { background: linear-gradient(135deg, #1a1430, #241d42); }
+  .card-data::before { background: linear-gradient(135deg, rgba(147,51,234,.08), rgba(168,85,247,.04)); }
+
+  .card-design:hover { border-color: rgba(240,160,40,.45); }
+  .card-design .icon { background: linear-gradient(135deg, #281840, #322050); }
+  .card-design::before { background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(240,160,40,.04)); }
+
+  /* ---- Hidden / No result ---- */
+  .hidden { display: none !important; }
+  .no-result {
+    text-align: center;
+    padding: 100px 20px;
+    color: var(--muted);
+    font-size: 17px;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 50px 20px;
+    font-size: 13px;
+    color: #8b7d9a;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    body { font-size: 15px; }
+    header { padding: 24px 16px 16px; }
+    header h1 { font-size: 20px; }
+    header input { max-width: 55vw; font-size: 14px; }
+    nav { padding: 10px 16px 4px; gap: 4px; }
+    nav a { font-size: 13px; padding: 7px 14px; }
+    main { padding: 8px 14px 60px; }
+    .category { padding: 20px 16px 12px; }
+    .links { grid-template-columns: 1fr; }
+    .cat-title { font-size: 20px; }
+    .link-card { padding: 12px 14px; }
+    .link-card .name { font-size: 15px; }
+    .link-card .desc { font-size: 12px; }
+    .link-card .icon { width: 36px; height: 36px; font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background image -->
+<div class="bg-image"></div>
+
+<!-- Intro overlay -->
+<div class="intro-overlay"><div class="glow"></div></div>
+
+<!-- Floating particles -->
+<div class="particles" id="particles"></div>
+
+<header>
+  <div class="top">
+    <div>
+      <h1>自媒体创作素材库</h1>
+      <div class="sub">资源导航 · 持续更新</div>
+    </div>
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="搜索工具、网站、关键词...">
+    </div>
+  </div>
+</header>
+
+<nav id="nav">
+  <a class="active" data-cat="all">全部</a>
+  <a data-cat="数据热点">📊 数据热点</a>
+  <a data-cat="素材资源">🎬 素材资源</a>
+  <a data-cat="设计创作">🎨 设计创作</a>
+  <a data-cat="AI工具">🤖 AI 工具</a>
+  <a data-cat="效率工具">⚡ 效率工具</a>
+</nav>
+
+<main id="main">
+
+<!-- ====== 一、自媒体矩阵管理 ====== -->
+<section class="category" data-cats="自媒体">
+  <div class="cat-title">
+    <div class="gradient-bar" style="background:linear-gradient(180deg,#c084fc,#a855f7)"></div>
+    自媒体矩阵管理
+  </div>
+  <div class="subcat">
+    <div class="links">
+      <a class="link-card card-tool" href="https://www.baoteyun.com/vcat" target="_blank">
+        <div class="icon">🐱</div>
+        <div class="text"><div class="name">小V猫</div><div class="desc">自媒体多平台矩阵管理（原作者推荐）</div></div>
+        <div class="arrow">↗</div>
+      </a>
+      <a class="link-card card-tool" href="https://www.dazdata.com/" target="_blank">
+        <div class="icon">📱</div>
+        <div class="text"><div class="name">达之云®驭影</div><div class="desc">自媒体多平台管理工具</div></div>
+        <div class="arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 二、数据热点 ====== -->
+<section class="category" data-cats="数据热点">
+  <div class="cat-title">
+    <div class="gradient-bar" style="background:linear-gradient(180deg,#f0a028,#f59e0b)"></div>
+    数据热点追踪
+  </div>
+  <div class="subcat">
+    <div class="links">
+      <a class="link-card card-data" href="https://trendinsight.oceanengine.com/" target="_blank">
+        <div class="icon">🔥</div><div class="text"><div class="name">抖音指数</div><div class="desc">抖音热点趋势查询</div></div><div class="arrow">↗</div>
+      </a>
+      <a class="link-card card-data" href="https://top.baidu.com/" target="_blank">
+        <div class="icon">🔴</div><div class="text"><div class="name">百度热搜</div><div class="desc">百度实时热点榜单</div></div><div class="arrow">↗</div>
+      </a>
+      <a class="link-card card-data" href="https://weibo.com/hot/mine" target="_blank">
+        <div class="icon">🟠</div><div class="text"><div class="name">微博热搜</div><div class="desc">微博实时热搜榜单</div></div><div class="arrow">↗</div>
+      </a>
+      <a class="link-card card-data" href="https://trendinsight.oceanengine.com/" target="_blank">
+        <div class="icon">📈</div><div class="text"><div class="name">巨量算数</div><div class="desc">抖音官方数据洞察平台</div></div><div class="arrow">↗</div>
+      </a>
+      <a class="link-card card-data" href="https://www.feigua.cn/" target="_blank">
+        <div class="icon">🎯</div><div class="text"><div class="name">飞瓜数据</div><div class="desc">抖音第三方数据分析平台</div></div><div class="arrow">↗</div>
+      </a>
+      <a class="link-card card-data" href="https://www.xhdata.com/" target="_blank">
+        <div class="icon">📕</div><div class="text"><div class="name">新红数据</div><div class="desc">小红书专业数据分析</div></div><div class="arrow">↗</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 三、素材资源 ====== -->
+<section class="category" data-cats="素材资源">
+  <div class="cat-title">
+    <div class="gradient-bar" style="background:linear-gradient(180deg,#c084fc,#a855f7)"></div>
+    素材资源
+  </div>
+
+  <div class="subcat"><div class="subcat-title">图片素材</div>
+    <div class="links">
+      <a class="link-card card-img" href="https://www.pexels.com/" target="_blank"><div class="icon">📷</div><div class="text"><div class="name">Pexels</div><div class="desc">免费高质量摄影图片</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://unsplash.com/" target="_blank"><div class="icon">🖼️</div><div class="text"><div class="name">Unsplash</div><div class="desc">免费高清摄影图库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://pixabay.com/" target="_blank"><div class="icon">🌄</div><div class="text"><div class="name">Pixabay</div><div class="desc">免费图片视频素材库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://pxhere.com/" target="_blank"><div class="icon">🏞️</div><div class="text"><div class="name">PxHere</div><div class="desc">免费摄影图片库</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">动图 GIF</div>
+    <div class="links">
+      <a class="link-card card-img" href="https://giphy.com/" target="_blank"><div class="icon">🎞️</div><div class="text"><div class="name">GIPHY</div><div class="desc">全球最大GIF动图平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://alphacoders.com/" target="_blank"><div class="icon">🖥️</div><div class="text"><div class="name">Alpha Coders</div><div class="desc">高清壁纸与动图资源</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://www.soogif.com/" target="_blank"><div class="icon">✨</div><div class="text"><div class="name">闪萌</div><div class="desc">中文GIF搜索引擎</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">视频素材</div>
+    <div class="links">
+      <a class="link-card card-video" href="https://www.zhiyusucai.com/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">知鱼素材</div><div class="desc">正版视频图片音乐素材库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://coverr.co/" target="_blank"><div class="icon">📹</div><div class="text"><div class="name">Coverr</div><div class="desc">免费高清视频背景素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://www.yugaopian.com/" target="_blank"><div class="icon">🎥</div><div class="text"><div class="name">预告片世界</div><div class="desc">影视预告片高清下载</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://mixkit.co/" target="_blank"><div class="icon">📽️</div><div class="text"><div class="name">Mixkit</div><div class="desc">免费高清视频与音效素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://www.pexels.com/zh-cn/video/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">Pexels 视频</div><div class="desc">免费高清视频素材</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">音频素材</div>
+    <div class="links">
+      <a class="link-card card-music" href="https://www.yinxiaowang.com/" target="_blank"><div class="icon">🔊</div><div class="text"><div class="name">音效网</div><div class="desc">免费音效素材下载</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://www.aigei.com/" target="_blank"><div class="icon">🎵</div><div class="text"><div class="name">爱给网</div><div class="desc">音效配乐素材库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://www.taosheng.com/" target="_blank"><div class="icon">🎶</div><div class="text"><div class="name">淘声网</div><div class="desc">免费音效与配乐资源</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://mixkit.co/free-sound-effects/" target="_blank"><div class="icon">🎧</div><div class="text"><div class="name">Mixkit 音效</div><div class="desc">免费音效与背景音乐</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">字体文字</div>
+    <div class="links">
+      <a class="link-card card-design" href="https://www.100font.com/" target="_blank"><div class="icon">✍️</div><div class="text"><div class="name">100font</div><div class="desc">免费商用字体下载</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://ziyouziti.com/" target="_blank"><div class="icon">🔤</div><div class="text"><div class="name">自由字体</div><div class="desc">免费可商用字体库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.pinterest.com/pin/633387441287210/" target="_blank"><div class="icon">📌</div><div class="text"><div class="name">浩哥推荐字体</div><div class="desc">Pinterest 精选好看字体合集</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">PPT 模板</div>
+    <div class="links">
+      <a class="link-card card-design" href="https://www.officeplus.cn/" target="_blank"><div class="icon">📊</div><div class="text"><div class="name">微软官方PPT模板</div><div class="desc">OfficePlus 精品模板</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">图标资源</div>
+    <div class="links">
+      <a class="link-card card-design" href="https://www.flaticon.com/" target="_blank"><div class="icon">🔣</div><div class="text"><div class="name">Flaticon</div><div class="desc">全球最大免费图标库</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">壁纸资源</div>
+    <div class="links">
+      <a class="link-card card-img" href="https://www.wallpaperup.com/" target="_blank"><div class="icon">🖼️</div><div class="text"><div class="name">手机壁纸大全</div><div class="desc">高清手机壁纸下载</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 四、设计创作 ====== -->
+<section class="category" data-cats="设计创作">
+  <div class="cat-title">
+    <div class="gradient-bar" style="background:linear-gradient(180deg,#eab308,#f0a028)"></div>
+    设计创作
+  </div>
+
+  <div class="subcat"><div class="subcat-title">图片设计</div>
+    <div class="links">
+      <a class="link-card card-design" href="https://www.canva.cn/" target="_blank"><div class="icon">🎨</div><div class="text"><div class="name">Canva可画</div><div class="desc">在线设计全能工具</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.gaoding.com/" target="_blank"><div class="icon">🖌️</div><div class="text"><div class="name">稿定设计</div><div class="desc">智能在线设计平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.chuangkit.com/" target="_blank"><div class="icon">✂️</div><div class="text"><div class="name">创客贴</div><div class="desc">广告设计印刷一站式</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.iconfont.cn/" target="_blank"><div class="icon">🔷</div><div class="text"><div class="name">Iconfont</div><div class="desc">阿里巴巴矢量图标库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://js.design/" target="_blank"><div class="icon">💎</div><div class="text"><div class="name">即时设计</div><div class="desc">国产免费在线设计协作平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.wanxiangyunying.com/" target="_blank"><div class="icon">🛒</div><div class="text"><div class="name">万相营造</div><div class="desc">阿里电商AI设计工具</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.quiverai.com/" target="_blank"><div class="icon">🤖</div><div class="text"><div class="name">QuiverAI</div><div class="desc">点击图标量图制作</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">视频创作</div>
+    <div class="links">
+      <a class="link-card card-video" href="https://jianying.com/" target="_blank"><div class="icon">🎞️</div><div class="text"><div class="name">即梦AI</div><div class="desc">字节跳动一站式AI创作平台</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">词云工具</div>
+    <div class="links">
+      <a class="link-card card-design" href="https://www.meijici.com/" target="_blank"><div class="icon">☁️</div><div class="text"><div class="name">美寄词云</div><div class="desc">在线词云生成器</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.ciyuntu.com/" target="_blank"><div class="icon">🌥️</div><div class="text"><div class="name">AI词云生成器</div><div class="desc">智能词云制作</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.ciyuntu.com/" target="_blank"><div class="icon">💬</div><div class="text"><div class="name">词云图在线生成器</div><div class="desc">免费词云设计</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">AI 声音</div>
+    <div class="links">
+      <a class="link-card card-music" href="https://fish.audio/" target="_blank"><div class="icon">🐟</div><div class="text"><div class="name">Fish Audio</div><div class="desc">AI语音克隆与合成</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">工作流图</div>
+    <div class="links">
+      <a class="link-card card-tool" href="https://boardmix.cn/" target="_blank"><div class="icon">🧩</div><div class="text"><div class="name">BoardMix</div><div class="desc">在线协作白板与流程图</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">表单工具</div>
+    <div class="links">
+      <a class="link-card card-tool" href="https://jinshuju.net/" target="_blank"><div class="icon">📋</div><div class="text"><div class="name">金数据</div><div class="desc">在线表单制作与数据收集</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 五、效率工具 ====== -->
+<section class="category" data-cats="AI工具 效率工具">
+  <div class="cat-title">
+    <div class="gradient-bar" style="background:linear-gradient(180deg,#a855f7,#f0a028)"></div>
+    效率工具
+  </div>
+
+  <div class="subcat"><div class="subcat-title">AI 大语言模型</div>
+    <div class="links">
+      <a class="link-card card-ai" href="https://chatgpt.com/" target="_blank"><div class="icon">🧠</div><div class="text"><div class="name">ChatGPT</div><div class="desc">OpenAI 全球领先AI对话助手</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://claude.ai/" target="_blank"><div class="icon">💡</div><div class="text"><div class="name">Claude</div><div class="desc">Anthropic 深度推理编程写作</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://gemini.google.com/" target="_blank"><div class="icon">🌐</div><div class="text"><div class="name">Gemini</div><div class="desc">Google 多模态免费AI模型</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://chat.deepseek.com/" target="_blank"><div class="icon">🐋</div><div class="text"><div class="name">DeepSeek</div><div class="desc">国产开源推理大模型</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.doubao.com/" target="_blank"><div class="icon">🫘</div><div class="text"><div class="name">豆包</div><div class="desc">字节跳动智能对话助手</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://tongyi.aliyun.com/" target="_blank"><div class="icon">☁️</div><div class="text"><div class="name">通义千问</div><div class="desc">阿里多模态AI助手</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://kimi.moonshot.cn/" target="_blank"><div class="icon">🌙</div><div class="text"><div class="name">Kimi</div><div class="desc">月之暗面超长文本阅读写作</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://grok.com/" target="_blank"><div class="icon">⚡</div><div class="text"><div class="name">Grok</div><div class="desc">xAI 实时信息AI助手</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">AI 绘画</div>
+    <div class="links">
+      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><div class="icon">🖼️</div><div class="text"><div class="name">LiblibAI</div><div class="desc">国内最大AI绘画模型社区</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://d.design/" target="_blank"><div class="icon">🧊</div><div class="text"><div class="name">堆友</div><div class="desc">阿里出品AI绘画与3D素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><div class="icon">🎨</div><div class="text"><div class="name">Midjourney</div><div class="desc">全球顶级AI艺术生成</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">AI 视频</div>
+    <div class="links">
+      <a class="link-card card-video" href="https://klingai.com/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">可灵AI</div><div class="desc">快手出品AI视频生成</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://runwayml.com/" target="_blank"><div class="icon">✈️</div><div class="text"><div class="name">Runway</div><div class="desc">全球AI视频创作平台</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">AI 音乐 / 音频</div>
+    <div class="links">
+      <a class="link-card card-music" href="https://suno.com/" target="_blank"><div class="icon">🎵</div><div class="text"><div class="name">Suno</div><div class="desc">AI音乐歌曲在线生成</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://fish.audio/" target="_blank"><div class="icon">🎙️</div><div class="text"><div class="name">Fish Audio</div><div class="desc">AI语音克隆与合成</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">内容合规检测</div>
+    <div class="links">
+      <a class="link-card card-tool" href="https://www.cizhua.com/" target="_blank"><div class="icon">🛡️</div><div class="text"><div class="name">词爪网</div><div class="desc">违禁词、极限词、敏感词查询检测</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.lingkechaci.com/" target="_blank"><div class="icon">🔍</div><div class="text"><div class="name">零克查词</div><div class="desc">小红书/抖音/B站敏感词检测</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">配色工具</div>
+    <div class="links">
+      <a class="link-card card-design" href="https://www.58pic.com/" target="_blank"><div class="icon">🎨</div><div class="text"><div class="name">千图网</div><div class="desc">配色表与设计素材下载</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.peise.net/" target="_blank"><div class="icon">🌈</div><div class="text"><div class="name">调色盘</div><div class="desc">色彩选择搭配工具</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://coolors.co/" target="_blank"><div class="icon">🎯</div><div class="text"><div class="name">Color Palette Generator</div><div class="desc">在线配色方案生成</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">软件资源库</div>
+    <div class="links">
+      <a class="link-card card-tool" href="https://s7zy.top/" target="_blank"><div class="icon">📦</div><div class="text"><div class="name">s7zy.top</div><div class="desc">专业软件下载站</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.ruancang.net/" target="_blank"><div class="icon">🗄️</div><div class="text"><div class="name">软仓</div><div class="desc">资源软件素材库</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">实用小工具</div>
+    <div class="links">
+      <a class="link-card card-tool" href="https://tinypng.com/" target="_blank"><div class="icon">🐼</div><div class="text"><div class="name">TinyPNG</div><div class="desc">智能PNG/JPEG图片无损压缩</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.remove.bg/" target="_blank"><div class="icon">✂️</div><div class="text"><div class="name">Remove.bg</div><div class="desc">一键AI去除图片背景</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://convertio.co/" target="_blank"><div class="icon">🔄</div><div class="text"><div class="name">Convertio</div><div class="desc">全格式在线文件转换器</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://writing.volcengine.com/" target="_blank"><div class="icon">✍️</div><div class="text"><div class="name">火山写作</div><div class="desc">字节免费AI写作纠错润色</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.processon.com/" target="_blank"><div class="icon">🔀</div><div class="text"><div class="name">ProcessOn</div><div class="desc">在线思维导图与流程图</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">AIGC 导航与资源</div>
+    <div class="links">
+      <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><div class="icon">🧭</div><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://altsociety.ai/" target="_blank"><div class="icon">💬</div><div class="text"><div class="name">AltSociety</div><div class="desc">AI提示词资源社区</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://github.com/putyy/res-downloader" target="_blank"><div class="icon">📥</div><div class="text"><div class="name">Res-Downloader</div><div class="desc">社交媒体素材扒取工具</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">其他实用工具</div>
+    <div class="links">
+      <a class="link-card card-tool" href="https://cli.im/" target="_blank"><div class="icon">📱</div><div class="text"><div class="name">草料二维码</div><div class="desc">在线二维码生成器</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.xiaguo.cn/" target="_blank"><div class="icon">🔗</div><div class="text"><div class="name">虾果</div><div class="desc">短链接生成与管理</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://33.agilestudio.cn/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">33台词</div><div class="desc">通过台词查找影片素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.ilovepdf.com/" target="_blank"><div class="icon">📄</div><div class="text"><div class="name">iLovePDF</div><div class="desc">PDF文件在线处理工具</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+</section>
+
+<p class="no-result" id="noresult" style="display:none">没有找到匹配结果，试试其他关键词</p>
+
+</main>
+
+<footer>Made with ❤️ · 持续更新</footer>
+
+<script>
+// Generate particles
+const container = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  const size = Math.random() * 3 + 1.5;
+  p.style.width = size + 'px';
+  p.style.height = size + 'px';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+  p.style.animationDelay = (Math.random() * 15) + 's';
+  p.style.background = ['rgba(168,85,247,.25)','rgba(240,160,40,.2)','rgba(192,132,252,.2)'][Math.floor(Math.random()*3)];
+  container.appendChild(p);
+}
+
+// Search & filter
+const search = document.getElementById('search');
+const nav = document.getElementById('nav');
+const categories = document.querySelectorAll('.category');
+const subcats = document.querySelectorAll('.subcat');
+const cards = document.querySelectorAll('.link-card');
+const notes = document.querySelectorAll('.note');
+const noResult = document.getElementById('noresult');
+
+function filter() {
+  const keyword = search.value.toLowerCase().trim();
+  const activeCat = nav.querySelector('.active')?.dataset.cat || 'all';
+  let visibleCount = 0;
+
+  categories.forEach(cat => {
+    const cats = (cat.dataset.cats || '').split(' ');
+    cat.classList.toggle('hidden', activeCat !== 'all' && !cats.includes(activeCat));
+  });
+
+  subcats.forEach(sub => {
+    let any = false;
+    sub.querySelectorAll('.link-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      const show = keyword === '' || text.includes(keyword);
+      card.classList.toggle('hidden', !show);
+      if (show) { any = true; visibleCount++; }
+    });
+    const note = sub.querySelector('.note');
+    if (note && keyword && note.textContent.toLowerCase().includes(keyword)) {
+      any = true; note.classList.remove('hidden');
+    }
+    sub.classList.toggle('hidden', !any && keyword !== '');
+  });
+
+  notes.forEach(n => {
+    if (keyword) n.classList.toggle('hidden', !n.textContent.toLowerCase().includes(keyword));
+    else n.classList.remove('hidden');
+  });
+
+  noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+search.addEventListener('input', filter);
+
+nav.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    nav.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+    e.target.classList.add('active');
+    filter();
+  }
+});
+
+// Stagger card animations
+document.querySelectorAll('.links').forEach((grid, gi) => {
+  grid.querySelectorAll('.link-card').forEach((card, ci) => {
+    card.style.animationDelay = (gi * .03 + ci * .025) + 's';
+  });
+});
+</script>
+</body>
+</html>

@@ -35,16 +35,16 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  /* Background image layer */
-  .bg-image {
+  /* Background SVG layer */
+  .bg-svg {
     position: fixed;
     inset: 0;
     z-index: 0;
-    background: url('Gemini_Generated_Image_qudnqwqudnqwqudn.png') center/cover no-repeat;
-    opacity: .6;
+    background: url('bg-long.svg') center top/auto 2400px repeat-y;
+    opacity: .85;
     pointer-events: none;
   }
-  .bg-image::after {
+  .bg-svg::after {
     content: '';
     position: fixed;
     inset: 0;
@@ -208,11 +208,11 @@
   body.intro-active header,
   body.intro-active nav,
   body.intro-active footer { opacity: 0; }
-  body.intro-active .bg-image,
+  body.intro-active .bg-svg,
   body.intro-active .particles { opacity: 0; }
 
   /* smooth fade transitions */
-  .bg-image { transition: opacity 0.8s ease; }
+  .bg-svg { transition: opacity 0.8s ease; }
   .particles { transition: opacity 0.8s ease; }
   header { transition: opacity 0.5s ease; }
   nav { transition: opacity 0.5s ease; }
@@ -506,8 +506,8 @@
 </head>
 <body class="intro-active">
 
-<!-- Background image -->
-<div class="bg-image"></div>
+<!-- Background SVG layer -->
+<div class="bg-svg"></div>
 
 <!-- Intro curtain -->
 <div class="intro-curtain" id="introCurtain">
@@ -1079,11 +1079,11 @@ function initScrollReveal() {
 // ======== 5. Parallax ========
 function initParallax() {
   const particlesEl = document.getElementById('particles');
-  const bgImage = document.querySelector('.bg-image');
-  if (!particlesEl && !bgImage) return;
+  const bgSvg = document.querySelector('.bg-svg');
+  if (!particlesEl && !bgSvg) return;
 
   const setParticleY = particlesEl ? gsap.quickSetter(particlesEl, 'y', 'px') : null;
-  const setBgY = bgImage ? gsap.quickSetter(bgImage, 'y', 'px') : null;
+  const setBgY = bgSvg ? gsap.quickSetter(bgSvg, 'y', 'px') : null;
 
   let ticking = false;
   window.addEventListener('scroll', function() {

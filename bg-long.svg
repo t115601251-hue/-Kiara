@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 2400">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE259" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FFA751" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="goldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFE259" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#FFE259" stop-opacity="0.12"/>
+      <stop offset="70%" stop-color="#FFA751" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#FFA751" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glowPurple1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#700B3F" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#50072D" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#50072D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.12"/>
+      <stop offset="50%" stop-color="#700B3F" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#700B3F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGold" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFA751" stop-opacity="0.10"/>
+      <stop offset="50%" stop-color="#f0a028" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#f0a028" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blurLg">
+      <feGaussianBlur stdDeviation="80"/>
+    </filter>
+    <filter id="blurMd">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+    <filter id="blurSm">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <filter id="glowSoft">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <pattern id="dotGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="30" cy="30" r="0.6" fill="#c084fc" opacity="0.12"/>
+      <circle cx="0" cy="0" r="0.4" fill="#FFA751" opacity="0.06"/>
+    </pattern>
+    <pattern id="hexGrid" x="0" y="0" width="120" height="104" patternUnits="userSpaceOnUse">
+      <path d="M30,0 L90,0 L120,52 L90,104 L30,104 L0,52 Z" fill="none" stroke="#c084fc" stroke-width="0.4" opacity="0.08"/>
+      <path d="M30,104 L90,104 L120,156 L90,208 L30,208 L0,156 Z" fill="none" stroke="#c084fc" stroke-width="0.4" opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  <!-- Base -->
+  <rect width="800" height="2400" fill="#08040f"/>
+
+  <!-- Dot grid overlay -->
+  <rect width="800" height="2400" fill="url(#dotGrid)"/>
+
+  <!-- Hex grid — very subtle -->
+  <rect width="800" height="2400" fill="url(#hexGrid)" opacity="0.5"/>
+
+  <!-- ====== Atmospheric glow blobs ====== -->
+
+  <!-- Top area — purple glow -->
+  <ellipse cx="200" cy="80" rx="400" ry="220" fill="url(#glowPurple1)" filter="url(#blurLg)"/>
+  <ellipse cx="650" cy="180" rx="300" ry="180" fill="url(#glowGold)" filter="url(#blurLg)"/>
+
+  <!-- Section ~300px -->
+  <ellipse cx="600" cy="450" rx="350" ry="200" fill="url(#glowPurple2)" filter="url(#blurLg)"/>
+  <ellipse cx="150" cy="500" rx="250" ry="160" fill="url(#glowGold)" filter="url(#blurMd)"/>
+
+  <!-- Section ~700px -->
+  <ellipse cx="400" cy="750" rx="450" ry="250" fill="url(#glowPurple1)" filter="url(#blurLg)"/>
+  <ellipse cx="700" cy="800" rx="200" ry="140" fill="url(#glowGold)" filter="url(#blurMd)"/>
+
+  <!-- Section ~1050px -->
+  <ellipse cx="200" cy="1100" rx="380" ry="220" fill="url(#glowPurple2)" filter="url(#blurLg)"/>
+  <ellipse cx="550" cy="1150" rx="300" ry="180" fill="url(#glowGold)" filter="url(#blurLg)"/>
+
+  <!-- Section ~1400px -->
+  <ellipse cx="650" cy="1450" rx="350" ry="200" fill="url(#glowPurple1)" filter="url(#blurLg)"/>
+  <ellipse cx="100" cy="1500" rx="280" ry="170" fill="url(#glowGold)" filter="url(#blurMd)"/>
+
+  <!-- Section ~1750px -->
+  <ellipse cx="400" cy="1800" rx="420" ry="240" fill="url(#glowPurple2)" filter="url(#blurLg)"/>
+
+  <!-- Bottom area -->
+  <ellipse cx="700" cy="2150" rx="380" ry="220" fill="url(#glowPurple1)" filter="url(#blurLg)"/>
+  <ellipse cx="200" cy="2300" rx="350" ry="200" fill="url(#glowGold)" filter="url(#blurLg)"/>
+  <ellipse cx="500" cy="2380" rx="400" ry="180" fill="url(#glowPurple2)" filter="url(#blurMd)"/>
+
+  <!-- ====== Decorative golden lines ====== -->
+  <line x1="50" y1="350" x2="300" y2="350" stroke="url(#goldLine)" stroke-width="1"/>
+  <line x1="550" y1="680" x2="780" y2="680" stroke="url(#goldLine)" stroke-width="1"/>
+  <line x1="0" y1="1020" x2="250" y2="1020" stroke="url(#goldLine)" stroke-width="1"/>
+  <line x1="500" y1="1360" x2="750" y2="1360" stroke="url(#goldLine)" stroke-width="1"/>
+  <line x1="80" y1="1700" x2="350" y2="1700" stroke="url(#goldLine)" stroke-width="1"/>
+  <line x1="450" y1="2050" x2="700" y2="2050" stroke="url(#goldLine)" stroke-width="1"/>
+
+  <!-- ====== Geometric accent: small hexagons ====== -->
+  <g opacity="0.15">
+    <!-- Near 380px -->
+    <path d="M320,390 L340,402 L340,426 L320,438 L300,426 L300,402 Z" fill="none" stroke="#FFE259" stroke-width="0.8" filter="url(#glowSoft)"/>
+    <!-- Near 900px -->
+    <path d="M620,910 L640,922 L640,946 L620,958 L600,946 L600,922 Z" fill="none" stroke="#FFE259" stroke-width="0.8" filter="url(#glowSoft)"/>
+    <!-- Near 1300px -->
+    <path d="M180,1320 L200,1332 L200,1356 L180,1368 L160,1356 L160,1332 Z" fill="none" stroke="#FFA751" stroke-width="0.8" filter="url(#glowSoft)"/>
+    <!-- Near 1850px -->
+    <path d="M550,1870 L570,1882 L570,1906 L550,1918 L530,1906 L530,1882 Z" fill="none" stroke="#FFE259" stroke-width="0.8" filter="url(#glowSoft)"/>
+    <!-- Near 2200px -->
+    <path d="M350,2230 L370,2242 L370,2266 L350,2278 L330,2266 L330,2242 Z" fill="none" stroke="#FFA751" stroke-width="0.8" filter="url(#glowSoft)"/>
+  </g>
+
+  <!-- ====== Scattered sparkle dots ====== -->
+  <g filter="url(#glowSoft)">
+    <circle cx="280" cy="420" r="1.2" fill="#FFE259" opacity="0.35"/>
+    <circle cx="450" cy="340" r="0.8" fill="#FFA751" opacity="0.25"/>
+    <circle cx="680" cy="520" r="1.0" fill="#FFE259" opacity="0.3"/>
+    <circle cx="120" cy="620" r="1.5" fill="#FBCFE8" opacity="0.25"/>
+    <circle cx="580" cy="860" r="0.9" fill="#FFE259" opacity="0.3"/>
+    <circle cx="340" cy="980" r="1.3" fill="#FFA751" opacity="0.25"/>
+    <circle cx="720" cy="1080" r="0.7" fill="#FFE259" opacity="0.3"/>
+    <circle cx="160" cy="1180" r="1.1" fill="#FBCFE8" opacity="0.25"/>
+    <circle cx="500" cy="1280" r="1.4" fill="#FFE259" opacity="0.3"/>
+    <circle cx="680" cy="1420" r="0.8" fill="#FFA751" opacity="0.25"/>
+    <circle cx="240" cy="1520" r="1.0" fill="#FFE259" opacity="0.3"/>
+    <circle cx="600" cy="1620" r="1.2" fill="#FBCFE8" opacity="0.25"/>
+    <circle cx="380" cy="1780" r="0.9" fill="#FFE259" opacity="0.3"/>
+    <circle cx="720" cy="1920" r="1.3" fill="#FFA751" opacity="0.25"/>
+    <circle cx="150" cy="1980" r="1.1" fill="#FFE259" opacity="0.3"/>
+    <circle cx="480" cy="2080" r="0.7" fill="#FBCFE8" opacity="0.25"/>
+    <circle cx="300" cy="2180" r="1.4" fill="#FFE259" opacity="0.3"/>
+    <circle cx="620" cy="2280" r="1.0" fill="#FFA751" opacity="0.25"/>
+    <circle cx="430" cy="2360" r="0.8" fill="#FFE259" opacity="0.3"/>
+  </g>
+
+  <!-- ====== Subtle vertical light streak ====== -->
+  <line x1="720" y1="0" x2="720" y2="2400" stroke="#c084fc" stroke-width="0.3" opacity="0.06"/>
+  <line x1="80" y1="0" x2="80" y2="2400" stroke="#FFA751" stroke-width="0.3" opacity="0.04"/>
+</svg>

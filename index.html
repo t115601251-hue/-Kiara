@@ -126,16 +126,8 @@
     flex-wrap: wrap;
     gap: 16px;
   }
-  header h1 {
-    font-size: 26px;
-    font-weight: 900;
-    background: linear-gradient(135deg, #c084fc 0%, #f0a028 50%, #fbbf24 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 2px;
-  }
-  header .sub { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .brand-cn { font-size:13px; font-weight:700; color:#c4b5d0; letter-spacing:2px; }
+  .brand-tag { font-weight:400; color:var(--muted); margin-left:8px; font-size:12px; }
   header input {
     width: 360px; max-width: 50vw;
     padding: 12px 16px 12px 40px;
@@ -195,41 +187,47 @@
     box-shadow: 0 4px 16px rgba(240,160,40,.25);
   }
 
-  /* ---- Page intro overlay ---- */
-  .intro-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    background: var(--bg);
+  /* ---- Intro curtain ---- */
+  .intro-curtain {
+    position: fixed; inset: 0; z-index: 10000;
+    background: #08040f;
     display: flex; align-items: center; justify-content: center;
-    animation: overlayOut .6s ease .3s both;
+    pointer-events: all;
+  }
+  .intro-logo-wrap {
+    position: relative;
+  }
+  .intro-logo {
+    height: 130px; width: auto;
+  }
+  .intro-curtain.fly-away .intro-logo {
     pointer-events: none;
   }
-  .intro-overlay .glow {
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(168,85,247,.8) 0%, rgba(240,160,40,.4) 50%, transparent 70%);
-    animation: introPulse .8s ease both;
-  }
-  @keyframes introPulse {
-    0% { transform: scale(.3); opacity: 0; }
-    50% { transform: scale(1.4); opacity: 1; }
-    100% { transform: scale(2); opacity: 0; }
-  }
-  @keyframes overlayOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
-  }
+
+  /* page hidden during intro */
+  body.intro-active header,
+  body.intro-active nav,
+  body.intro-active footer { opacity: 0; }
+  body.intro-active .bg-image,
+  body.intro-active .particles { opacity: 0; }
+
+  /* smooth fade transitions */
+  .bg-image { transition: opacity 0.8s ease; }
+  .particles { transition: opacity 0.8s ease; }
+  header { transition: opacity 0.5s ease; }
+  nav { transition: opacity 0.5s ease; }
+  footer { transition: opacity 0.5s ease; }
+
+  /* main hidden separately — revealed by GSAP with cards */
+  main.main-hidden { opacity: 0; }
 
   /* ---- Main ---- */
   main {
     max-width: 1500px;
     margin: 0 auto;
     padding: 20px 28px 80px;
-    animation: mainIn .8s ease .5s both;
   }
-  @keyframes mainIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  main { transition: opacity 0.4s ease; }
 
   .category {
     margin-top: 44px;
@@ -237,17 +235,12 @@
     background: rgba(0,0,0,.2);
     border: 1px solid rgba(255,255,255,.05);
     border-radius: 16px;
-    animation: fadeSlideIn .6s ease both;
+    /* GSAP ScrollTrigger handles entrance */
   }
   @keyframes fadeSlideIn {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .category:nth-child(1) { animation-delay: .05s; }
-  .category:nth-child(2) { animation-delay: .1s; }
-  .category:nth-child(3) { animation-delay: .15s; }
-  .category:nth-child(4) { animation-delay: .2s; }
-  .category:nth-child(5) { animation-delay: .25s; }
 
   .cat-title {
     font-size: 26px;
@@ -296,10 +289,8 @@
     border: 1px solid rgba(255,255,255,.1);
     border-radius: 12px;
     text-decoration: none;
-    transition: all .35s cubic-bezier(.4,0,.2,1);
     position: relative;
     overflow: hidden;
-    animation: cardIn .4s ease both;
     box-shadow: 0 2px 8px rgba(0,0,0,.25);
   }
   @keyframes cardIn {
@@ -420,11 +411,84 @@
     color: #8b7d9a;
   }
 
+  /* ---- Brand SVG ---- */
+  .brand { display:flex; flex-direction:column; gap:4px; }
+  .brand-svg { display:block; height:48px; width:auto; }
+
+  /* ---- Nav indicator ---- */
+  .nav-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #a855f7, #f0a028);
+    pointer-events: none;
+    transition: none;
+  }
+  nav { position: relative; padding-bottom: 10px; }
+
+  /* ---- Header compact ---- */
+  header.compact { padding: 12px 28px !important; }
+  header.compact .brand-svg { height: 34px; }
+  header.compact .brand-cn { font-size: 11px; }
+
+  /* ---- Back to top ---- */
+  .back-to-top {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    z-index: 200;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #f0a028);
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0) translateX(20px);
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(168,85,247,.35);
+    transition: none;
+  }
+  .back-to-top.visible { pointer-events: auto; }
+
+  /* ---- Spotlight ---- */
+  .spotlight {
+    position: fixed;
+    z-index: 2;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,132,252,.06) 0%, rgba(168,85,247,.03) 40%, transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+
+  /* ---- Ripple ---- */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    transform: scale(0);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---- No-result ---- */
+  .no-result {
+    text-align: center;
+    padding: 100px 20px;
+    color: var(--muted);
+    font-size: 17px;
+  }
+
   /* ---- Responsive ---- */
   @media (max-width: 768px) {
     body { font-size: 15px; }
     header { padding: 24px 16px 16px; }
-    header h1 { font-size: 20px; }
+    .brand-svg { height: 34px; }
+    .brand-cn { font-size: 11px; letter-spacing: 1px; }
+    .brand-tag { display: block; margin-left: 0; margin-top: 2px; font-size: 11px; }
     header input { max-width: 55vw; font-size: 14px; }
     nav { padding: 10px 16px 4px; gap: 4px; }
     nav a { font-size: 13px; padding: 7px 14px; }
@@ -436,25 +500,90 @@
     .link-card .name { font-size: 15px; }
     .link-card .desc { font-size: 12px; }
     .link-card .icon { width: 36px; height: 36px; font-size: 18px; }
+    .back-to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 16px; }
   }
 </style>
 </head>
-<body>
+<body class="intro-active">
 
 <!-- Background image -->
 <div class="bg-image"></div>
 
-<!-- Intro overlay -->
-<div class="intro-overlay"><div class="glow"></div></div>
+<!-- Intro curtain -->
+<div class="intro-curtain" id="introCurtain">
+  <div class="intro-logo-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 160" class="intro-logo" id="introLogo">
+      <defs>
+        <linearGradient id="introGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFE259"/>
+          <stop offset="100%" stop-color="#FFA751"/>
+        </linearGradient>
+        <filter id="introGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+      </defs>
+      <circle class="intro-glow-circle" cx="100" cy="80" r="70" fill="#700B3F" opacity="0.5" filter="url(#introGlow)"/>
+      <circle class="intro-glow-circle" cx="580" cy="40" r="85" fill="#50072D" opacity="0.4" filter="url(#introGlow)"/>
+      <path class="intro-hex-outer" d="M60,20 L107,47 L107,103 L60,130 L13,103 L13,47 Z" fill="none" stroke="url(#introGoldGrad)" stroke-width="4"/>
+      <path class="intro-hex-inner" d="M60,10 L116,42 L116,108 L60,140 L4,108 L4,42 Z" fill="none" stroke="#9D174D" stroke-width="1.5" opacity="0.6"/>
+      <polygon class="intro-hex-triangle" points="48,55 85,77 48,99" fill="url(#introGoldGrad)" style="transform-origin:60px 77px"/>
+      <g class="intro-brand-text" transform="translate(180, 100)">
+        <text font-family="system-ui, -apple-system, sans-serif" font-size="58" font-weight="900" letter-spacing="2">
+          <tspan fill="#FBCFE8">MEDIA </tspan>
+          <tspan fill="url(#introGoldGrad)">VAULT</tspan>
+        </text>
+        <text class="intro-brand-sub" y="30" x="5" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D946EF" letter-spacing="8">CREATORS ASSET LIBRARY</text>
+      </g>
+      <circle class="intro-sparkle" cx="610" cy="50" r="3" fill="#FFE259" filter="url(#introGlow)"/>
+      <circle class="intro-sparkle" cx="640" cy="30" r="1.5" fill="#FFA751"/>
+      <circle class="intro-sparkle" cx="170" cy="40" r="2" fill="#FFE259"/>
+      <circle class="intro-sparkle" cx="560" cy="130" r="2" fill="#FBCFE8"/>
+    </svg>
+  </div>
+</div>
 
 <!-- Floating particles -->
 <div class="particles" id="particles"></div>
 
 <header>
   <div class="top">
-    <div>
-      <h1>自媒体创作素材库</h1>
-      <div class="sub">资源导航 · 持续更新</div>
+    <div class="brand">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 160" class="brand-svg">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFE259"/>
+            <stop offset="100%" stop-color="#FFA751"/>
+          </linearGradient>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+        </defs>
+        <!-- Glow circles (background) -->
+        <circle class="glow-circle" cx="100" cy="80" r="70" fill="#700B3F" opacity="0.5" filter="url(#glow)"/>
+        <circle class="glow-circle" cx="580" cy="40" r="85" fill="#50072D" opacity="0.4" filter="url(#glow)"/>
+        <!-- Hexagon outer (path for getTotalLength) -->
+        <path class="hex-outer" d="M60,20 L107,47 L107,103 L60,130 L13,103 L13,47 Z" fill="none" stroke="url(#goldGrad)" stroke-width="4"/>
+        <!-- Hexagon inner (path for getTotalLength) -->
+        <path class="hex-inner" d="M60,10 L116,42 L116,108 L60,140 L4,108 L4,42 Z" fill="none" stroke="#9D174D" stroke-width="1.5" opacity="0.6"/>
+        <!-- Center triangle -->
+        <polygon class="hex-triangle" points="48,55 85,77 48,99" fill="url(#goldGrad)" style="transform-origin:60px 77px"/>
+        <!-- Brand text -->
+        <g class="brand-text" transform="translate(180, 100)">
+          <text font-family="system-ui, -apple-system, sans-serif" font-size="58" font-weight="900" letter-spacing="2">
+            <tspan fill="#FBCFE8">MEDIA </tspan>
+            <tspan fill="url(#goldGrad)">VAULT</tspan>
+          </text>
+          <text class="brand-sub" y="30" x="5" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D946EF" letter-spacing="8">CREATORS ASSET LIBRARY</text>
+        </g>
+        <!-- Sparkle dots -->
+        <circle class="sparkle" cx="610" cy="50" r="3" fill="#FFE259" filter="url(#glow)"/>
+        <circle class="sparkle" cx="640" cy="30" r="1.5" fill="#FFA751"/>
+        <circle class="sparkle" cx="170" cy="40" r="2" fill="#FFE259"/>
+        <circle class="sparkle" cx="560" cy="130" r="2" fill="#FBCFE8"/>
+      </svg>
+      <div class="brand-cn">自媒体创作素材库 <span class="brand-tag">资源导航 · 持续更新</span></div>
     </div>
     <div class="search-wrap">
       <input type="text" id="search" placeholder="搜索工具、网站、关键词...">
@@ -462,7 +591,7 @@
   </div>
 </header>
 
-<nav id="nav">
+<nav id="nav"><div class="nav-indicator"></div>
   <a class="active" data-cat="all">全部</a>
   <a data-cat="AI工具">🤖 AI 工具</a>
   <a data-cat="效率工具">⚡ 效率工具</a>
@@ -471,7 +600,7 @@
   <a data-cat="素材资源">🎬 素材资源</a>
 </nav>
 
-<main id="main">
+<main id="main" class="main-hidden">
 
 <!-- ====== 一、自媒体矩阵管理 ====== -->
 <section class="category" data-cats="自媒体">
@@ -514,11 +643,25 @@
     </div>
   </div>
 
+  <div class="subcat"><div class="subcat-title">AIGC 导航与资源</div>
+    <div class="links">
+      <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><div class="icon">🧭</div><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://altsociety.ai/" target="_blank"><div class="icon">💬</div><div class="text"><div class="name">AltSociety</div><div class="desc">AI提示词资源社区</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://github.com/putyy/res-downloader" target="_blank"><div class="icon">📥</div><div class="text"><div class="name">Res-Downloader</div><div class="desc">社交媒体素材扒取工具</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://www.chatexcel.com/" target="_blank"><div class="icon">📊</div><div class="text"><div class="name">ChatExcel</div><div class="desc">AI对话式Excel数据处理</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://prompt123.cn/cursor/" target="_blank"><div class="icon">💻</div><div class="text"><div class="name">Cursor提示词</div><div class="desc">AI编程Cursor提示词资源库</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://paperme.toolooz.com/" target="_blank"><div class="icon">📝</div><div class="text"><div class="name">PaperMe</div><div class="desc">AI学术论文写作辅助工具</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://yinghezhinan.com/" target="_blank"><div class="icon">🧭</div><div class="text"><div class="name">硬核指南</div><div class="desc">硬核工具资源导航站</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://youmind.com/zh-CN/prompts" target="_blank"><div class="icon">📋</div><div class="text"><div class="name">YouMind Prompts</div><div class="desc">AI提示词资源合集</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
   <div class="subcat"><div class="subcat-title">AI 绘画</div>
     <div class="links">
       <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><div class="icon">🖼️</div><div class="text"><div class="name">LiblibAI</div><div class="desc">国内最大AI绘画模型社区</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://d.design/" target="_blank"><div class="icon">🧊</div><div class="text"><div class="name">堆友</div><div class="desc">阿里出品AI绘画与3D素材</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><div class="icon">🎨</div><div class="text"><div class="name">Midjourney</div><div class="desc">全球顶级AI艺术生成</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://www.recraft.ai/ai-image-vectorizer" target="_blank"><div class="icon">🖋️</div><div class="text"><div class="name">Recraft Vectorizer</div><div class="desc">AI图片矢量化转换工具</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
@@ -527,6 +670,7 @@
       <a class="link-card card-video" href="https://klingai.com/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">可灵AI</div><div class="desc">快手出品AI视频生成</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-video" href="https://jianying.com/" target="_blank"><div class="icon">🎞️</div><div class="text"><div class="name">即梦AI</div><div class="desc">字节跳动一站式AI创作平台</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-video" href="https://runwayml.com/" target="_blank"><div class="icon">✈️</div><div class="text"><div class="name">Runway</div><div class="desc">全球AI视频创作平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://fogsight.ai/app" target="_blank"><div class="icon">🌫️</div><div class="text"><div class="name">FogSight 雾象</div><div class="desc">AI动画生成引擎，概念一键生成动画</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
@@ -565,18 +709,6 @@
       <a class="link-card card-tool" href="https://convertio.co/" target="_blank"><div class="icon">🔄</div><div class="text"><div class="name">Convertio</div><div class="desc">全格式在线文件转换器</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-tool" href="https://www.processon.com/" target="_blank"><div class="icon">🔀</div><div class="text"><div class="name">ProcessOn</div><div class="desc">在线思维导图与流程图</div></div><div class="arrow">↗</div></a>
 	      <a class="link-card card-tool" href="https://toolknit.com/" target="_blank"><div class="icon">🧰</div><div class="text"><div class="name">ToolKnit</div><div class="desc">在线实用工具箱</div></div><div class="arrow">↗</div></a>
-    </div>
-  </div>
-
-  <div class="subcat"><div class="subcat-title">AIGC 导航与资源</div>
-    <div class="links">
-      <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><div class="icon">🧭</div><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://altsociety.ai/" target="_blank"><div class="icon">💬</div><div class="text"><div class="name">AltSociety</div><div class="desc">AI提示词资源社区</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://github.com/putyy/res-downloader" target="_blank"><div class="icon">📥</div><div class="text"><div class="name">Res-Downloader</div><div class="desc">社交媒体素材扒取工具</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://www.chatexcel.com/" target="_blank"><div class="icon">📊</div><div class="text"><div class="name">ChatExcel</div><div class="desc">AI对话式Excel数据处理</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://prompt123.cn/cursor/" target="_blank"><div class="icon">💻</div><div class="text"><div class="name">Cursor提示词</div><div class="desc">AI编程Cursor提示词资源库</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://paperme.toolooz.com/" target="_blank"><div class="icon">📝</div><div class="text"><div class="name">PaperMe</div><div class="desc">AI学术论文写作辅助工具</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://yinghezhinan.com/" target="_blank"><div class="icon">🧭</div><div class="text"><div class="name">硬核指南</div><div class="desc">硬核工具资源导航站</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
@@ -742,81 +874,404 @@
 
 </main>
 
+<div class="spotlight" id="spotlight"></div>
+<button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
 <footer>Made with ❤️ · 持续更新</footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+</script>
+
 <script>
-// Generate particles
-const container = document.getElementById('particles');
-for (let i = 0; i < 30; i++) {
-  const p = document.createElement('div');
-  p.classList.add('particle');
-  const size = Math.random() * 3 + 1.5;
-  p.style.width = size + 'px';
-  p.style.height = size + 'px';
-  p.style.left = Math.random() * 100 + '%';
-  p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-  p.style.animationDelay = (Math.random() * 15) + 's';
-  p.style.background = ['rgba(168,85,247,.25)','rgba(240,160,40,.2)','rgba(192,132,252,.2)'][Math.floor(Math.random()*3)];
-  container.appendChild(p);
-}
+gsap.registerPlugin(ScrollTrigger);
 
-// Search & filter
-const search = document.getElementById('search');
-const nav = document.getElementById('nav');
-const categories = document.querySelectorAll('.category');
-const subcats = document.querySelectorAll('.subcat');
-const cards = document.querySelectorAll('.link-card');
-const notes = document.querySelectorAll('.note');
-const noResult = document.getElementById('noresult');
+// ======== Intro sequence hidden flag (skip if revisited) ========
+const HAS_PLAYED_INTRO = sessionStorage.getItem('introPlayed');
 
-function filter() {
-  const keyword = search.value.toLowerCase().trim();
-  const activeCat = nav.querySelector('.active')?.dataset.cat || 'all';
-  let visibleCount = 0;
-
-  categories.forEach(cat => {
-    const cats = (cat.dataset.cats || '').split(' ');
-    cat.classList.toggle('hidden', activeCat !== 'all' && !cats.includes(activeCat));
-  });
-
-  subcats.forEach(sub => {
-    let any = false;
-    sub.querySelectorAll('.link-card').forEach(card => {
-      const text = card.textContent.toLowerCase();
-      const show = keyword === '' || text.includes(keyword);
-      card.classList.toggle('hidden', !show);
-      if (show) { any = true; visibleCount++; }
-    });
-    const note = sub.querySelector('.note');
-    if (note && keyword && note.textContent.toLowerCase().includes(keyword)) {
-      any = true; note.classList.remove('hidden');
-    }
-    sub.classList.toggle('hidden', !any && keyword !== '');
-  });
-
-  notes.forEach(n => {
-    if (keyword) n.classList.toggle('hidden', !n.textContent.toLowerCase().includes(keyword));
-    else n.classList.remove('hidden');
-  });
-
-  noResult.style.display = visibleCount === 0 ? 'block' : 'none';
-}
-
-search.addEventListener('input', filter);
-
-nav.addEventListener('click', e => {
-  if (e.target.tagName === 'A') {
-    nav.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-    e.target.classList.add('active');
-    filter();
+// ======== Particles ========
+(function initParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    const size = Math.random() * 3 + 1.5;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 15) + 's';
+    p.style.background = ['rgba(168,85,247,.25)','rgba(240,160,40,.2)','rgba(192,132,252,.2)'][Math.floor(Math.random()*3)];
+    container.appendChild(p);
   }
-});
+})();
 
-// Stagger card animations
-document.querySelectorAll('.links').forEach((grid, gi) => {
-  grid.querySelectorAll('.link-card').forEach((card, ci) => {
-    card.style.animationDelay = (gi * .03 + ci * .025) + 's';
+// ======== Cinematic Intro ========
+function playIntro() {
+  return new Promise(function(resolve) {
+    const curtain = document.getElementById('introCurtain');
+    const introLogo = document.getElementById('introLogo');
+    const headerLogo = document.querySelector('.brand-svg');
+    const hexOuter = document.querySelector('.intro-hex-outer');
+    const hexInner = document.querySelector('.intro-hex-inner');
+
+    if (!curtain || !hexOuter || !hexInner) { resolve(); return; }
+
+    const outerLen = hexOuter.getTotalLength();
+    const innerLen = hexInner.getTotalLength();
+
+    // Init — hide all stroke elements
+    gsap.set(hexOuter, { strokeDasharray: outerLen, strokeDashoffset: outerLen });
+    gsap.set(hexInner, { strokeDasharray: innerLen, strokeDashoffset: innerLen });
+    gsap.set('.intro-hex-triangle', { scale: 0, transformOrigin: '60px 77px' });
+    gsap.set('.intro-brand-text tspan', { y: 30, opacity: 0 });
+    gsap.set('.intro-brand-sub', { y: 15, opacity: 0 });
+    gsap.set('.intro-sparkle', { opacity: 0 });
+
+    // ---- Stage 1: Draw in center ----
+    const drawTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    drawTl.to(hexOuter, { strokeDashoffset: 0, duration: 1.4 }, 0)
+      .to(hexInner, { strokeDashoffset: 0, duration: 1.1 }, 0.2)
+      .to('.intro-hex-triangle', { scale: 1, duration: 0.7, ease: 'back.out(2.4)' }, 0.6)
+      .to('.intro-brand-text tspan', { y: 0, opacity: 1, stagger: 0.06, duration: 0.8 }, 0.8)
+      .to('.intro-brand-sub', { y: 0, opacity: 1, duration: 0.6 }, 1.1)
+      .to('.intro-sparkle', { opacity: 0.8, stagger: 0.08, duration: 0.5 }, 1.2);
+
+    // ---- Stage 2: Fly to header ----
+    drawTl.add(function() {
+      // Brief glow pulse before flying
+      gsap.to('.intro-glow-circle', { opacity: 0.8, duration: 0.4, yoyo: true, repeat: 1 });
+
+      gsap.to('.intro-sparkle', { opacity: 0, duration: 0.3 });
+
+      // Calculate target position
+      const introWrap = document.querySelector('.intro-logo-wrap');
+      const introWrapRect = introWrap.getBoundingClientRect();
+      const headerRect = headerLogo.getBoundingClientRect();
+
+      const deltaX = headerRect.left - introWrapRect.left;
+      const deltaY = headerRect.top - introWrapRect.top;
+      const scaleRatio = headerRect.height / 130; // 130px = intro logo height
+
+      // Fly to corner + curtain bg fades
+      const flyTl = gsap.timeline({
+        onComplete: function() {
+          sessionStorage.setItem('introPlayed', '1');
+          resolve();
+        }
+      });
+
+      flyTl.to(introWrap, {
+        x: deltaX,
+        y: deltaY,
+        scale: scaleRatio,
+        transformOrigin: 'top left',
+        duration: 0.8,
+        ease: 'power3.inOut'
+      }, 0)
+      .to(curtain, { background: 'rgba(8,4,15,0)', duration: 0.6, ease: 'power2.out' }, 0.3);
+
+    }, '+=0.4');
+
+    // Breathing glow during drawing
+    gsap.to('.intro-glow-circle', {
+      opacity: '+=0.2', duration: 2.8, repeat: -1, yoyo: true,
+      ease: 'sine.inOut', stagger: 0.5
+    });
+    gsap.to('.intro-sparkle', {
+      opacity: 0.3, duration: 2 + Math.random(), repeat: -1, yoyo: true,
+      ease: 'sine.inOut', stagger: { each: 0.3, from: 'random' }
+    });
   });
+}
+
+// ======== 2. Card Interactions ========
+function initCards() {
+  const cards = document.querySelectorAll('.link-card');
+
+  cards.forEach(function(card) {
+    card.addEventListener('mouseenter', function() {
+      gsap.to(this, {
+        y: -6, scale: 1.03, duration: 0.25, ease: 'power2.out',
+        boxShadow: '0 12px 32px rgba(0,0,0,.5)',
+        borderColor: 'rgba(192,132,252,.35)'
+      });
+    });
+
+    card.addEventListener('mouseleave', function() {
+      gsap.to(this, {
+        y: 0, scale: 1, duration: 0.5, ease: 'elastic.out(1, 0.4)',
+        boxShadow: '0 2px 8px rgba(0,0,0,.25)',
+        borderColor: 'rgba(255,255,255,.1)'
+      });
+    });
+
+    card.addEventListener('click', function(e) {
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height) * 2;
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      ripple.style.width = size + 'px';
+      ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      this.appendChild(ripple);
+
+      gsap.fromTo(ripple,
+        { scale: 0, opacity: 0.5 },
+        { scale: 1, opacity: 0, duration: 0.6, ease: 'power2.out',
+          onComplete: function() { ripple.remove(); }
+        }
+      );
+
+      gsap.to(this, {
+        scale: 0.96, duration: 0.1,
+        onComplete: function() {
+          gsap.to(card, { scale: 1, duration: 0.35, ease: 'elastic.out(1,0.3)' });
+        }
+      });
+    });
+  });
+}
+
+// ======== 3. Cards Roll Up From Below (after intro) ========
+function initCardsEntrance() {
+  var sections = document.querySelectorAll('.category:not(.hidden)');
+  var masterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  sections.forEach(function(section, si) {
+    var sectionCards = section.querySelectorAll('.link-card:not(.hidden)');
+    var sectionTitle = section.querySelector('.cat-title');
+    if (sectionCards.length === 0) return;
+
+    var t = si * 0.1;
+
+    if (sectionTitle) {
+      masterTl.to(sectionTitle, { opacity: 1, x: 0, duration: 0.45 }, t);
+    }
+    masterTl.to(sectionCards, {
+      opacity: 1, y: 0, scale: 1,
+      stagger: 0.018,
+      duration: 0.4,
+      force3D: true
+    }, t + 0.06);
+  });
+}
+
+// ======== 4. Scroll Reveal (for any below-fold content) ========
+function initScrollReveal() {
+  ScrollTrigger.batch('.link-card', {
+    onEnter: function(batch) {
+      gsap.fromTo(batch,
+        { opacity: 0, y: 24, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.5, ease: 'power2.out', overwrite: 'auto' }
+      );
+    },
+    start: 'top 92%',
+    once: true
+  });
+}
+
+// ======== 5. Parallax ========
+function initParallax() {
+  const particlesEl = document.getElementById('particles');
+  const bgImage = document.querySelector('.bg-image');
+  if (!particlesEl && !bgImage) return;
+
+  const setParticleY = particlesEl ? gsap.quickSetter(particlesEl, 'y', 'px') : null;
+  const setBgY = bgImage ? gsap.quickSetter(bgImage, 'y', 'px') : null;
+
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        const sy = window.scrollY;
+        if (setParticleY) setParticleY(sy * 0.15);
+        if (setBgY) setBgY(sy * 0.25);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// ======== 6. Nav Animation ========
+function initNav() {
+  const navEl = document.getElementById('nav');
+  const indicator = navEl.querySelector('.nav-indicator');
+  const links = navEl.querySelectorAll('a');
+  if (!indicator || !links.length) return;
+
+  function moveIndicator(target) {
+    gsap.to(indicator, { left: target.offsetLeft, width: target.offsetWidth, duration: 0.35, ease: 'power2.inOut' });
+  }
+
+  const activeLink = navEl.querySelector('.active') || links[0];
+  gsap.set(indicator, { left: activeLink.offsetLeft, width: activeLink.offsetWidth, bottom: 0 });
+
+  links.forEach(function(link) {
+    link.addEventListener('mouseenter', function() { moveIndicator(this); });
+    link.addEventListener('mouseleave', function() {
+      const active = navEl.querySelector('.active') || links[0];
+      moveIndicator(active);
+    });
+    link.addEventListener('focus', function() { moveIndicator(this); });
+  });
+
+  // Header compact on scroll
+  const header = document.querySelector('header');
+  ScrollTrigger.create({
+    trigger: 'body',
+    start: 'top -60',
+    onEnter: function() { header.classList.add('compact'); },
+    onLeaveBack: function() { header.classList.remove('compact'); }
+  });
+}
+
+// ======== 7. Back to Top ========
+function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+
+  ScrollTrigger.create({
+    trigger: 'body',
+    start: 'top -600',
+    onEnter: function() {
+      gsap.to(btn, { opacity: 1, scale: 1, x: 0, duration: 0.5, ease: 'back.out(1.7)' });
+      btn.classList.add('visible');
+    },
+    onLeaveBack: function() {
+      gsap.to(btn, { opacity: 0, scale: 0, x: 20, duration: 0.3, ease: 'power2.in' });
+      btn.classList.remove('visible');
+    }
+  });
+
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ======== 8. Spotlight (desktop only) ========
+function initSpotlight() {
+  const spotlight = document.getElementById('spotlight');
+  if (!spotlight) return;
+
+  const mm = window.matchMedia('(pointer: fine) and (hover: hover)');
+  if (!mm.matches) return;
+
+  const main = document.getElementById('main');
+
+  main.addEventListener('mousemove', function(e) {
+    gsap.to(spotlight, { left: e.clientX, top: e.clientY, opacity: 1, duration: 0.8, ease: 'power2.out' });
+  });
+
+  main.addEventListener('mouseleave', function() {
+    gsap.to(spotlight, { opacity: 0, duration: 0.5 });
+  });
+}
+
+// ======== Search & Filter (with GSAP stagger) ========
+(function initFilter() {
+  const search = document.getElementById('search');
+  const navEl = document.getElementById('nav');
+  const categories = document.querySelectorAll('.category');
+  const subcats = document.querySelectorAll('.subcat');
+  const noResult = document.getElementById('noresult');
+
+  function filter() {
+    const keyword = search.value.toLowerCase().trim();
+    const activeCat = navEl.querySelector('.active')?.dataset.cat || 'all';
+    let visibleCount = 0;
+
+    categories.forEach(function(cat) {
+      const cats = (cat.dataset.cats || '').split(' ');
+      cat.classList.toggle('hidden', activeCat !== 'all' && !cats.includes(activeCat));
+    });
+
+    subcats.forEach(function(sub) {
+      let any = false;
+      const subCards = sub.querySelectorAll('.link-card');
+      subCards.forEach(function(card) {
+        const text = card.textContent.toLowerCase();
+        const show = keyword === '' || text.includes(keyword);
+        card.classList.toggle('hidden', !show);
+        if (show) { any = true; visibleCount++; }
+      });
+      const note = sub.querySelector('.note');
+      if (note && keyword && note.textContent.toLowerCase().includes(keyword)) {
+        any = true; note.classList.remove('hidden');
+      }
+      sub.classList.toggle('hidden', !any && keyword !== '');
+    });
+
+    const visibleCards = document.querySelectorAll('.link-card:not(.hidden)');
+    gsap.fromTo(visibleCards,
+      { opacity: 0, scale: 0.96 },
+      { opacity: 1, scale: 1, stagger: 0.02, duration: 0.25, ease: 'power2.out' }
+    );
+
+    noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  search.addEventListener('input', filter);
+
+  navEl.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') {
+      navEl.querySelectorAll('a').forEach(function(a) { a.classList.remove('active'); });
+      e.target.classList.add('active');
+      filter();
+      const indicator = navEl.querySelector('.nav-indicator');
+      if (indicator) {
+        gsap.to(indicator, { left: e.target.offsetLeft, width: e.target.offsetWidth, duration: 0.35, ease: 'power2.inOut' });
+      }
+    }
+  });
+})();
+
+// ======== Boot Sequence ========
+document.addEventListener('DOMContentLoaded', function() {
+  // Pre-hide cards immediately to prevent flash
+  gsap.set('.link-card', { opacity: 0, y: 60, scale: 0.94 });
+  gsap.set('.cat-title', { opacity: 0, x: -20 });
+
+  function revealAndAnimate() {
+    var curtain = document.getElementById('introCurtain');
+    var main = document.getElementById('main');
+
+    // 1. Remove curtain
+    if (curtain) curtain.style.display = 'none';
+
+    // 2. Remove intro-active → header/nav/bg-image/particles begin CSS fade-in
+    document.body.classList.remove('intro-active');
+
+    // 3. After bg has faded in (~500ms), reveal main + animate cards together
+    setTimeout(function() {
+      if (main) main.classList.remove('main-hidden');
+      initCardsEntrance();
+    }, 500);
+  }
+
+  if (HAS_PLAYED_INTRO) {
+    revealAndAnimate();
+  } else {
+    playIntro().then(function() {
+      // Re-assert hidden state after intro animation
+      gsap.set('.link-card', { opacity: 0, y: 60, scale: 0.94 });
+      gsap.set('.cat-title', { opacity: 0, x: -20 });
+      revealAndAnimate();
+    });
+  }
+
+  initCards();
+  initScrollReveal();
+  initParallax();
+  initNav();
+  initBackToTop();
+  initSpotlight();
 });
 </script>
 </body>

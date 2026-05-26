@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Fogsight | AI Educational Animation Generator - Concept to Video</title>
+    <meta name="title" content="Fogsight | AI Educational Animation Generator - Concept to Video">
+    <meta name="description" content="Generate AI educational animations from any concept or topic. Explain biology, history, math, physics through cinematic AI explainer videos. Free AI animation generator — text to educational video in seconds.">
+    <meta name="keywords" content="Fogsight, 雾象, AI educational animation, AI animation generator, explainer video AI, AI explainer video generator, concept explanation video, text to educational video, AI whiteboard animation, STEM animation AI, AI science explainer, animated explainer generator, free AI animation generator, AI concept visualization, educational video maker AI, AI learning video, AI教育动画生成器, AI概念解释动画, 科普视频AI生成, AI生成教学视频, 知识可视化AI工具, AI讲解视频制作, 教学动画AI制作, Manim alternative AI, AI animation engine, LLM Agent, AIGC, WaytoAGI, text to animation, concept to video, AI storytelling, 动画生成, AI動画生成, アニメーション生成, natural language to animation, AI video generation">
+    <meta name="author" content="Fogsight Team">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="English, Chinese, Japanese">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL (will be updated dynamically by DocumentHead component) -->
+    <link rel="canonical" href="https://fogsight.ai">
+    
+    <!-- Alternate Language Versions (Hreflang) -->
+    <link rel="alternate" hreflang="en" href="https://fogsight.ai?lang=en">
+    <link rel="alternate" hreflang="zh-CN" href="https://fogsight.ai?lang=zh">
+    <link rel="alternate" hreflang="zh-TW" href="https://fogsight.ai?lang=zh">
+    <link rel="alternate" hreflang="ja" href="https://fogsight.ai?lang=jp">
+    <link rel="alternate" hreflang="x-default" href="https://fogsight.ai">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fogsight.ai">
+    <meta property="og:title" content="Fogsight 雾象 | Free AI Educational Animation Generator">
+    <meta property="og:description" content="Generate AI educational animations from any concept. Explain science, history, math through cinematic AI explainer videos with bilingual narration. Free to start — text to educational video in seconds.">
+    <meta property="og:image" content="https://fogsight.ai/favicon.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Fogsight AI Animation Engine">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="og:site_name" content="Fogsight">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://fogsight.ai">
+    <meta name="twitter:title" content="Fogsight 雾象 - Free AI Educational Animation Generator">
+    <meta name="twitter:description" content="Generate AI explainer animations for any topic — biology, history, math, physics. Free AI educational video generator with bilingual narration. 雾象：输入任何概念，即刻生成双语 AI 教育动画。">
+    <meta name="twitter:image" content="https://fogsight.ai/favicon.png">
+    <meta name="twitter:image:alt" content="Fogsight AI Animation Engine">
+    <meta name="twitter:creator" content="@fogsight">
+    <meta name="twitter:site" content="@fogsight">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fogsight">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="application-name" content="Fogsight">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Fogsight",
+      "alternateName": "雾象",
+      "url": "https://fogsight.ai",
+      "description": "AI-powered animation engine that transforms abstract concepts into cinematic visuals with bilingual narration",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "WaytoAGI",
+        "url": "https://waytoagi.fogsight.ai"
+      },
+      "inLanguage": ["en", "zh-CN", "ja"],
+      "featureList": [
+        "AI Educational Animation Generator",
+        "AI Explainer Video Generator",
+        "Text to Educational Video",
+        "Concept Visualization AI",
+        "AI Whiteboard Animation",
+        "Bilingual Narration (English & Chinese)",
+        "STEM Animation AI",
+        "Free AI Animation Generator",
+        "Science Explainer AI",
+        "LLM-Powered Concept to Video"
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Fogsight",
+      "alternateName": "雾象",
+      "url": "https://fogsight.ai",
+      "logo": "https://fogsight.ai/favicon.png",
+      "description": "AI animation engine powered by large language models",
+      "sameAs": [
+        "https://github.com/fogsightai/fogsight",
+        "https://waytoagi.fogsight.ai"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "url": "http://contact.fogsight.ai"
+      }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Google Sign-In Script -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3827011608993295"
+            crossorigin="anonymous"></script>
+    <meta name="ahrefs-site-verification" content="bf1341069d34585b5b6b97fc508370ffa3ee905b535d32ed3fa48444fa0976ae">
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "u73cny7ekp");
+  </script>
+    <script type="module" crossorigin src="/assets/index-C38cEu_E.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-DsxwfJgB.js">
+    <link rel="modulepreload" crossorigin href="/assets/ui-vendor-CkXWOi9I.js">
+    <link rel="modulepreload" crossorigin href="/assets/i18n-vendor-CtPvT7zP.js">
+    <link rel="modulepreload" crossorigin href="/assets/utils-vendor-Dob3nYDb.js">
+    <link rel="modulepreload" crossorigin href="/assets/icons-vendor-cp0l0aWQ.js">
+    <link rel="modulepreload" crossorigin href="/assets/oauth-vendor-BENv6zU_.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CZGgLWSk.css">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <div id="root" class="w-100 h-100"></div>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"e42ad76461fd4bd28f905c0a7762941c","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

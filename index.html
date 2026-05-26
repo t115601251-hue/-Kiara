@@ -1076,22 +1076,18 @@ function initScrollReveal() {
   });
 }
 
-// ======== 5. Parallax ========
+// ======== 5. Parallax (particles only, bg stays fixed) ========
 function initParallax() {
   const particlesEl = document.getElementById('particles');
-  const bgSvg = document.querySelector('.bg-svg');
-  if (!particlesEl && !bgSvg) return;
+  if (!particlesEl) return;
 
-  const setParticleY = particlesEl ? gsap.quickSetter(particlesEl, 'y', 'px') : null;
-  const setBgY = bgSvg ? gsap.quickSetter(bgSvg, 'y', 'px') : null;
+  const setParticleY = gsap.quickSetter(particlesEl, 'y', 'px');
 
   let ticking = false;
   window.addEventListener('scroll', function() {
     if (!ticking) {
       requestAnimationFrame(function() {
-        const sy = window.scrollY;
-        if (setParticleY) setParticleY(sy * 0.15);
-        if (setBgY) setBgY(sy * 0.25);
+        if (setParticleY) setParticleY(window.scrollY * 0.15);
         ticking = false;
       });
       ticking = true;

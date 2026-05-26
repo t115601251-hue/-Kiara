@@ -44,68 +44,6 @@
     opacity: 1;
     pointer-events: none;
   }
-  .bg-svg::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 0%, transparent 75%, rgba(8,4,15,.6) 100%);
-    pointer-events: none;
-  }
-
-  /* Animated background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 15% 5%, rgba(168,85,247,.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 70% at 85% 90%, rgba(240,160,40,.05) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(192,132,252,.03) 0%, transparent 70%);
-    animation: bgPulse 8s ease-in-out infinite alternate;
-    pointer-events: none;
-  }
-  @keyframes bgPulse {
-    0% { opacity: .8; }
-    100% { opacity: 1.2; }
-  }
-
-  /* Grid overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    animation: gridMove 20s linear infinite;
-  }
-  @keyframes gridMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 60px 60px; }
-  }
-
-  /* Floating particles */
-  .particles {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    overflow: hidden;
-  }
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(168,85,247,.25);
-    animation: floatUp linear infinite;
-  }
-  @keyframes floatUp {
-    0% { transform: translateY(100vh) scale(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-  }
-
   /* Everything above background */
   header, nav, main, footer { position: relative; z-index: 1; }
 
@@ -208,8 +146,7 @@
   body.intro-active header,
   body.intro-active nav,
   body.intro-active footer { opacity: 0; }
-  body.intro-active .bg-svg,
-  body.intro-active .particles { opacity: 0; }
+  body.intro-active .bg-svg { opacity: 0; }
 
   /* smooth fade transitions */
   .bg-svg { transition: opacity 0.8s ease; }
@@ -542,9 +479,6 @@
     </svg>
   </div>
 </div>
-
-<!-- Floating particles -->
-<div class="particles" id="particles"></div>
 
 <header>
   <div class="top">
@@ -889,23 +823,6 @@ gsap.registerPlugin(ScrollTrigger);
 // ======== Intro sequence hidden flag (skip if revisited) ========
 const HAS_PLAYED_INTRO = sessionStorage.getItem('introPlayed');
 
-// ======== Particles ========
-(function initParticles() {
-  const container = document.getElementById('particles');
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.classList.add('particle');
-    const size = Math.random() * 3 + 1.5;
-    p.style.width = size + 'px';
-    p.style.height = size + 'px';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-    p.style.animationDelay = (Math.random() * 15) + 's';
-    p.style.background = ['rgba(168,85,247,.25)','rgba(240,160,40,.2)','rgba(192,132,252,.2)'][Math.floor(Math.random()*3)];
-    container.appendChild(p);
-  }
-})();
-
 // ======== Cinematic Intro ========
 function playIntro() {
   return new Promise(function(resolve) {
@@ -1076,26 +993,7 @@ function initScrollReveal() {
   });
 }
 
-// ======== 5. Parallax (particles only, bg stays fixed) ========
-function initParallax() {
-  const particlesEl = document.getElementById('particles');
-  if (!particlesEl) return;
-
-  const setParticleY = gsap.quickSetter(particlesEl, 'y', 'px');
-
-  let ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        if (setParticleY) setParticleY(window.scrollY * 0.15);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-}
-
-// ======== 6. Nav Animation ========
+// ======== 5. Nav Animation ========
 function initNav() {
   const navEl = document.getElementById('nav');
   const indicator = navEl.querySelector('.nav-indicator');
@@ -1128,7 +1026,7 @@ function initNav() {
   });
 }
 
-// ======== 7. Back to Top ========
+// ======== 6. Back to Top ========
 function initBackToTop() {
   const btn = document.getElementById('backToTop');
   if (!btn) return;
@@ -1151,7 +1049,7 @@ function initBackToTop() {
   });
 }
 
-// ======== 8. Spotlight (desktop only) ========
+// ======== 7. Spotlight (desktop only) ========
 function initSpotlight() {
   const spotlight = document.getElementById('spotlight');
   if (!spotlight) return;
@@ -1264,7 +1162,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   initCards();
   initScrollReveal();
-  initParallax();
   initNav();
   initBackToTop();
   initSpotlight();

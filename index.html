@@ -150,7 +150,6 @@
 
   /* smooth fade transitions */
   .bg-svg { transition: opacity 0.8s ease; }
-  .particles { transition: opacity 0.8s ease; }
   header { transition: opacity 0.5s ease; }
   nav { transition: opacity 0.5s ease; }
   footer { transition: opacity 0.5s ease; }
@@ -353,10 +352,6 @@
   }
   nav { position: relative; padding-bottom: 10px; }
 
-  /* ---- Header compact ---- */
-  header.compact { padding: 12px 28px !important; }
-  header.compact .brand-svg { height: 34px; }
-  header.compact .brand-cn { font-size: 11px; }
 
   /* ---- Back to top ---- */
   .back-to-top {
@@ -1005,14 +1000,6 @@ function initNav() {
     link.addEventListener('focus', function() { moveIndicator(this); });
   });
 
-  // Header compact on scroll
-  const header = document.querySelector('header');
-  ScrollTrigger.create({
-    trigger: 'body',
-    start: 'top -60',
-    onEnter: function() { header.classList.add('compact'); },
-    onLeaveBack: function() { header.classList.remove('compact'); }
-  });
 }
 
 // ======== 6. Back to Top ========

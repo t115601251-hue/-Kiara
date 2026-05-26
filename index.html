@@ -173,11 +173,6 @@
     border-radius: 16px;
     /* GSAP ScrollTrigger handles entrance */
   }
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
   .cat-title {
     font-size: 26px;
     font-weight: 900;
@@ -229,11 +224,6 @@
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,.25);
   }
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(10px) scale(.97); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
   .link-card::before {
     content: '';
     position: absolute;
@@ -754,11 +744,6 @@
     </div>
   </div>
 
-  <div class="subcat"><div class="subcat-title">视频创作</div>
-    <div class="links">
-    </div>
-  </div>
-
   <div class="subcat"><div class="subcat-title">词云工具</div>
     <div class="links">
       <a class="link-card card-design" href="https://www.meijici.com/" target="_blank"><img class="icon" src="icons/meijici.svg" alt=""><div class="text"><div class="name">美寄词云</div><div class="desc">在线词云生成器</div></div><div class="arrow">↗</div></a>
@@ -871,19 +856,28 @@ function playIntro() {
         duration: 0.8,
         ease: 'power3.inOut'
       }, 0)
-      .to(curtain, { background: 'rgba(8,4,15,0)', duration: 0.6, ease: 'power2.out' }, 0.3);
+      .to(curtain, { background: 'rgba(8,4,15,0)', duration: 0.6, ease: 'power2.out' }, 0.3)
+      .call(function() {
+        // Kill infinite breathing/sparkle tweens
+        if (drawTl._introCleanup) drawTl._introCleanup();
+      });
 
     }, '+=0.4');
 
-    // Breathing glow during drawing
-    gsap.to('.intro-glow-circle', {
+    const glowTween = gsap.to('.intro-glow-circle', {
       opacity: '+=0.2', duration: 2.8, repeat: -1, yoyo: true,
       ease: 'sine.inOut', stagger: 0.5
     });
-    gsap.to('.intro-sparkle', {
-      opacity: 0.3, duration: 2 + Math.random(), repeat: -1, yoyo: true,
+    const sparkleTween = gsap.to('.intro-sparkle', {
+      opacity: 0.3, duration: 2.5, repeat: -1, yoyo: true,
       ease: 'sine.inOut', stagger: { each: 0.3, from: 'random' }
     });
+
+    // Store for cleanup after intro
+    drawTl._introCleanup = function() {
+      glowTween.kill();
+      sparkleTween.kill();
+    };
   });
 }
 
@@ -963,21 +957,7 @@ function initCardsEntrance() {
   });
 }
 
-// ======== 4. Scroll Reveal (for any below-fold content) ========
-function initScrollReveal() {
-  ScrollTrigger.batch('.link-card', {
-    onEnter: function(batch) {
-      gsap.fromTo(batch,
-        { opacity: 0, y: 24, scale: 0.96 },
-        { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.5, ease: 'power2.out', overwrite: 'auto' }
-      );
-    },
-    start: 'top 92%',
-    once: true
-  });
-}
-
-// ======== 5. Nav Animation ========
+// ======== 4. Nav Animation ========
 function initNav() {
   const navEl = document.getElementById('nav');
   const indicator = navEl.querySelector('.nav-indicator');
@@ -1002,7 +982,7 @@ function initNav() {
 
 }
 
-// ======== 6. Back to Top ========
+// ======== 5. Back to Top ========
 function initBackToTop() {
   const btn = document.getElementById('backToTop');
   if (!btn) return;
@@ -1025,7 +1005,7 @@ function initBackToTop() {
   });
 }
 
-// ======== 7. Spotlight (desktop only) ========
+// ======== 6. Spotlight (desktop only) ========
 function initSpotlight() {
   const spotlight = document.getElementById('spotlight');
   if (!spotlight) return;
@@ -1087,7 +1067,11 @@ function initSpotlight() {
     noResult.style.display = visibleCount === 0 ? 'block' : 'none';
   }
 
-  search.addEventListener('input', filter);
+  let filterTimeout;
+  search.addEventListener('input', function() {
+    clearTimeout(filterTimeout);
+    filterTimeout = setTimeout(filter, 120);
+  });
 
   navEl.addEventListener('click', function(e) {
     if (e.target.tagName === 'A') {
@@ -1137,7 +1121,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   initCards();
-  initScrollReveal();
   initNav();
   initBackToTop();
   initSpotlight();

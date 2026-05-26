@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <rect width="48" height="48" rx="10" fill="#22c55e"/>
+  <g transform="translate(24,24)">
+    <text x="0" y="7" font-family="system-ui,sans-serif" font-size="26" font-weight="900" fill="#fff" text-anchor="middle">A</text>
+  </g>
+</svg>

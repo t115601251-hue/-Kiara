@@ -254,10 +254,6 @@
   .link-card .icon {
     width: 42px; height: 42px;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
     flex-shrink: 0;
     position: relative;
     z-index: 1;
@@ -303,31 +299,24 @@
 
   /* Card variants */
   .card-ai:hover { border-color: rgba(168,85,247,.5); }
-  .card-ai .icon { background: linear-gradient(135deg, #2a1540, #3d1f5c); }
   .card-ai::before { background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(192,132,252,.04)); }
 
   .card-img:hover { border-color: rgba(192,132,252,.45); }
-  .card-img .icon { background: linear-gradient(135deg, #1f1640, #261d4a); }
   .card-img::before { background: linear-gradient(135deg, rgba(147,51,234,.06), rgba(168,85,247,.04)); }
 
   .card-video:hover { border-color: rgba(240,160,40,.45); }
-  .card-video .icon { background: linear-gradient(135deg, #2d1a14, #3a2218); }
   .card-video::before { background: linear-gradient(135deg, rgba(240,160,40,.06), rgba(251,191,36,.04)); }
 
   .card-music:hover { border-color: rgba(168,85,247,.45); }
-  .card-music .icon { background: linear-gradient(135deg, #1a1428, #221a34); }
   .card-music::before { background: linear-gradient(135deg, rgba(147,51,234,.06), rgba(168,85,247,.04)); }
 
   .card-tool:hover { border-color: rgba(240,160,40,.5); }
-  .card-tool .icon { background: linear-gradient(135deg, #2a1c10, #352414); }
   .card-tool::before { background: linear-gradient(135deg, rgba(240,160,40,.08), rgba(251,191,36,.04)); }
 
   .card-data:hover { border-color: rgba(192,132,252,.5); }
-  .card-data .icon { background: linear-gradient(135deg, #1a1430, #241d42); }
   .card-data::before { background: linear-gradient(135deg, rgba(147,51,234,.08), rgba(168,85,247,.04)); }
 
   .card-design:hover { border-color: rgba(240,160,40,.45); }
-  .card-design .icon { background: linear-gradient(135deg, #281840, #322050); }
   .card-design::before { background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(240,160,40,.04)); }
 
   /* ---- Hidden / No result ---- */
@@ -436,7 +425,7 @@
     .link-card { padding: 12px 14px; }
     .link-card .name { font-size: 15px; }
     .link-card .desc { font-size: 12px; }
-    .link-card .icon { width: 36px; height: 36px; font-size: 18px; }
+    .link-card .icon { width: 36px; height: 36px; }
     .back-to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 16px; }
   }
 </style>
@@ -545,12 +534,12 @@
   <div class="subcat">
     <div class="links">
       <a class="link-card card-tool" href="https://www.baoteyun.com/vcat" target="_blank">
-        <div class="icon">🐱</div>
+        <img class="icon" src="icons/vcat.svg" alt="">
         <div class="text"><div class="name">小V猫</div><div class="desc">自媒体多平台矩阵管理（原作者推荐）</div></div>
         <div class="arrow">↗</div>
       </a>
       <a class="link-card card-tool" href="https://www.dazdata.com/" target="_blank">
-        <div class="icon">📱</div>
+        <img class="icon" src="icons/dazdata.svg" alt="">
         <div class="text"><div class="name">达之云®驭影</div><div class="desc">自媒体多平台管理工具</div></div>
         <div class="arrow">↗</div>
       </a>
@@ -566,99 +555,99 @@
 
   <div class="subcat"><div class="subcat-title">AI 大语言模型</div>
     <div class="links">
-      <a class="link-card card-ai" href="https://chatgpt.com/" target="_blank"><div class="icon">🧠</div><div class="text"><div class="name">ChatGPT</div><div class="desc">OpenAI 全球领先AI对话助手</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://claude.ai/" target="_blank"><div class="icon">💡</div><div class="text"><div class="name">Claude</div><div class="desc">Anthropic 深度推理编程写作</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://gemini.google.com/" target="_blank"><div class="icon">🌐</div><div class="text"><div class="name">Gemini</div><div class="desc">Google 多模态免费AI模型</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://chat.deepseek.com/" target="_blank"><div class="icon">🐋</div><div class="text"><div class="name">DeepSeek</div><div class="desc">国产开源推理大模型</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.doubao.com/" target="_blank"><div class="icon">🫘</div><div class="text"><div class="name">豆包</div><div class="desc">字节跳动智能对话助手</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://tongyi.aliyun.com/" target="_blank"><div class="icon">☁️</div><div class="text"><div class="name">通义千问</div><div class="desc">阿里多模态AI助手</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://kimi.moonshot.cn/" target="_blank"><div class="icon">🌙</div><div class="text"><div class="name">Kimi</div><div class="desc">月之暗面超长文本阅读写作</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://grok.com/" target="_blank"><div class="icon">⚡</div><div class="text"><div class="name">Grok</div><div class="desc">xAI 实时信息AI助手</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://chatgpt.com/" target="_blank"><img class="icon" src="icons/chatgpt.svg" alt=""><div class="text"><div class="name">ChatGPT</div><div class="desc">OpenAI 全球领先AI对话助手</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://claude.ai/" target="_blank"><img class="icon" src="icons/claude.svg" alt=""><div class="text"><div class="name">Claude</div><div class="desc">Anthropic 深度推理编程写作</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://gemini.google.com/" target="_blank"><img class="icon" src="icons/gemini.svg" alt=""><div class="text"><div class="name">Gemini</div><div class="desc">Google 多模态免费AI模型</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://chat.deepseek.com/" target="_blank"><img class="icon" src="icons/deepseek.svg" alt=""><div class="text"><div class="name">DeepSeek</div><div class="desc">国产开源推理大模型</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.doubao.com/" target="_blank"><img class="icon" src="icons/doubao.svg" alt=""><div class="text"><div class="name">豆包</div><div class="desc">字节跳动智能对话助手</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://tongyi.aliyun.com/" target="_blank"><img class="icon" src="icons/tongyi.svg" alt=""><div class="text"><div class="name">通义千问</div><div class="desc">阿里多模态AI助手</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://kimi.moonshot.cn/" target="_blank"><img class="icon" src="icons/kimi.svg" alt=""><div class="text"><div class="name">Kimi</div><div class="desc">月之暗面超长文本阅读写作</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://grok.com/" target="_blank"><img class="icon" src="icons/grok.svg" alt=""><div class="text"><div class="name">Grok</div><div class="desc">xAI 实时信息AI助手</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">AIGC 导航与资源</div>
     <div class="links">
-      <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><div class="icon">🧭</div><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://altsociety.ai/" target="_blank"><div class="icon">💬</div><div class="text"><div class="name">AltSociety</div><div class="desc">AI提示词资源社区</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://github.com/putyy/res-downloader" target="_blank"><div class="icon">📥</div><div class="text"><div class="name">Res-Downloader</div><div class="desc">社交媒体素材扒取工具</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://www.chatexcel.com/" target="_blank"><div class="icon">📊</div><div class="text"><div class="name">ChatExcel</div><div class="desc">AI对话式Excel数据处理</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://prompt123.cn/cursor/" target="_blank"><div class="icon">💻</div><div class="text"><div class="name">Cursor提示词</div><div class="desc">AI编程Cursor提示词资源库</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://paperme.toolooz.com/" target="_blank"><div class="icon">📝</div><div class="text"><div class="name">PaperMe</div><div class="desc">AI学术论文写作辅助工具</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://yinghezhinan.com/" target="_blank"><div class="icon">🧭</div><div class="text"><div class="name">硬核指南</div><div class="desc">硬核工具资源导航站</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://youmind.com/zh-CN/prompts" target="_blank"><div class="icon">📋</div><div class="text"><div class="name">YouMind Prompts</div><div class="desc">AI提示词资源合集</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><img class="icon" src="icons/aigc.svg" alt=""><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://altsociety.ai/" target="_blank"><img class="icon" src="icons/altsociety.svg" alt=""><div class="text"><div class="name">AltSociety</div><div class="desc">AI提示词资源社区</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://github.com/putyy/res-downloader" target="_blank"><img class="icon" src="icons/resdownloader.svg" alt=""><div class="text"><div class="name">Res-Downloader</div><div class="desc">社交媒体素材扒取工具</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://www.chatexcel.com/" target="_blank"><img class="icon" src="icons/chatexcel.svg" alt=""><div class="text"><div class="name">ChatExcel</div><div class="desc">AI对话式Excel数据处理</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://prompt123.cn/cursor/" target="_blank"><img class="icon" src="icons/cursor-prompts.svg" alt=""><div class="text"><div class="name">Cursor提示词</div><div class="desc">AI编程Cursor提示词资源库</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://paperme.toolooz.com/" target="_blank"><img class="icon" src="icons/paperme.svg" alt=""><div class="text"><div class="name">PaperMe</div><div class="desc">AI学术论文写作辅助工具</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://yinghezhinan.com/" target="_blank"><img class="icon" src="icons/hardcore-guide.svg" alt=""><div class="text"><div class="name">硬核指南</div><div class="desc">硬核工具资源导航站</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://youmind.com/zh-CN/prompts" target="_blank"><img class="icon" src="icons/youmind.svg" alt=""><div class="text"><div class="name">YouMind Prompts</div><div class="desc">AI提示词资源合集</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">AI 绘画</div>
     <div class="links">
-      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><div class="icon">🖼️</div><div class="text"><div class="name">LiblibAI</div><div class="desc">国内最大AI绘画模型社区</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://d.design/" target="_blank"><div class="icon">🧊</div><div class="text"><div class="name">堆友</div><div class="desc">阿里出品AI绘画与3D素材</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><div class="icon">🎨</div><div class="text"><div class="name">Midjourney</div><div class="desc">全球顶级AI艺术生成</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-ai" href="https://www.recraft.ai/ai-image-vectorizer" target="_blank"><div class="icon">🖋️</div><div class="text"><div class="name">Recraft Vectorizer</div><div class="desc">AI图片矢量化转换工具</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><img class="icon" src="icons/liblibai.svg" alt=""><div class="text"><div class="name">LiblibAI</div><div class="desc">国内最大AI绘画模型社区</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://d.design/" target="_blank"><img class="icon" src="icons/duiyou.svg" alt=""><div class="text"><div class="name">堆友</div><div class="desc">阿里出品AI绘画与3D素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><img class="icon" src="icons/midjourney.svg" alt=""><div class="text"><div class="name">Midjourney</div><div class="desc">全球顶级AI艺术生成</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-ai" href="https://www.recraft.ai/ai-image-vectorizer" target="_blank"><img class="icon" src="icons/recraft.svg" alt=""><div class="text"><div class="name">Recraft Vectorizer</div><div class="desc">AI图片矢量化转换工具</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">AI 视频</div>
     <div class="links">
-      <a class="link-card card-video" href="https://klingai.com/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">可灵AI</div><div class="desc">快手出品AI视频生成</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-video" href="https://jianying.com/" target="_blank"><div class="icon">🎞️</div><div class="text"><div class="name">即梦AI</div><div class="desc">字节跳动一站式AI创作平台</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-video" href="https://runwayml.com/" target="_blank"><div class="icon">✈️</div><div class="text"><div class="name">Runway</div><div class="desc">全球AI视频创作平台</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-video" href="https://fogsight.ai/app" target="_blank"><div class="icon">🌫️</div><div class="text"><div class="name">FogSight 雾象</div><div class="desc">AI动画生成引擎，概念一键生成动画</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://klingai.com/" target="_blank"><img class="icon" src="icons/klingai.svg" alt=""><div class="text"><div class="name">可灵AI</div><div class="desc">快手出品AI视频生成</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://jianying.com/" target="_blank"><img class="icon" src="icons/jianying.svg" alt=""><div class="text"><div class="name">即梦AI</div><div class="desc">字节跳动一站式AI创作平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://runwayml.com/" target="_blank"><img class="icon" src="icons/runway.svg" alt=""><div class="text"><div class="name">Runway</div><div class="desc">全球AI视频创作平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://fogsight.ai/app" target="_blank"><img class="icon" src="icons/fogsight.svg" alt=""><div class="text"><div class="name">FogSight 雾象</div><div class="desc">AI动画生成引擎，概念一键生成动画</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">AI 音乐 / 音频</div>
     <div class="links">
-      <a class="link-card card-music" href="https://suno.com/" target="_blank"><div class="icon">🎵</div><div class="text"><div class="name">Suno</div><div class="desc">AI音乐歌曲在线生成</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-music" href="https://fish.audio/" target="_blank"><div class="icon">🎙️</div><div class="text"><div class="name">Fish Audio</div><div class="desc">AI语音克隆与合成</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://suno.com/" target="_blank"><img class="icon" src="icons/suno.svg" alt=""><div class="text"><div class="name">Suno</div><div class="desc">AI音乐歌曲在线生成</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://fish.audio/" target="_blank"><img class="icon" src="icons/fish-audio.svg" alt=""><div class="text"><div class="name">Fish Audio</div><div class="desc">AI语音克隆与合成</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">内容合规检测</div>
     <div class="links">
-      <a class="link-card card-tool" href="https://www.cizhua.com/" target="_blank"><div class="icon">🛡️</div><div class="text"><div class="name">词爪网</div><div class="desc">违禁词、极限词、敏感词查询检测</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://www.lingkechaci.com/" target="_blank"><div class="icon">🔍</div><div class="text"><div class="name">零克查词</div><div class="desc">小红书/抖音/B站敏感词检测</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.cizhua.com/" target="_blank"><img class="icon" src="icons/cizhua.svg" alt=""><div class="text"><div class="name">词爪网</div><div class="desc">违禁词、极限词、敏感词查询检测</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.lingkechaci.com/" target="_blank"><img class="icon" src="icons/lingke.svg" alt=""><div class="text"><div class="name">零克查词</div><div class="desc">小红书/抖音/B站敏感词检测</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">配色工具</div>
     <div class="links">
-      <a class="link-card card-design" href="https://www.58pic.com/" target="_blank"><div class="icon">🎨</div><div class="text"><div class="name">千图网</div><div class="desc">配色表与设计素材下载</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://coolors.co/" target="_blank"><div class="icon">🎯</div><div class="text"><div class="name">Color Palette Generator</div><div class="desc">在线配色方案生成</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.58pic.com/" target="_blank"><img class="icon" src="icons/qiantu.svg" alt=""><div class="text"><div class="name">千图网</div><div class="desc">配色表与设计素材下载</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://coolors.co/" target="_blank"><img class="icon" src="icons/coolors.svg" alt=""><div class="text"><div class="name">Color Palette Generator</div><div class="desc">在线配色方案生成</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">软件资源库</div>
     <div class="links">
-      <a class="link-card card-tool" href="https://s7zy.top/" target="_blank"><div class="icon">📦</div><div class="text"><div class="name">s7zy.top</div><div class="desc">专业软件下载站</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://www.ruancang.net/" target="_blank"><div class="icon">🗄️</div><div class="text"><div class="name">软仓</div><div class="desc">资源软件素材库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://s7zy.top/" target="_blank"><img class="icon" src="icons/s7zy.svg" alt=""><div class="text"><div class="name">s7zy.top</div><div class="desc">专业软件下载站</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.ruancang.net/" target="_blank"><img class="icon" src="icons/ruancang.svg" alt=""><div class="text"><div class="name">软仓</div><div class="desc">资源软件素材库</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">实用小工具</div>
     <div class="links">
-      <a class="link-card card-tool" href="https://tinypng.com/" target="_blank"><div class="icon">🐼</div><div class="text"><div class="name">TinyPNG</div><div class="desc">智能PNG/JPEG图片无损压缩</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://www.remove.bg/" target="_blank"><div class="icon">✂️</div><div class="text"><div class="name">Remove.bg</div><div class="desc">一键AI去除图片背景</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://convertio.co/" target="_blank"><div class="icon">🔄</div><div class="text"><div class="name">Convertio</div><div class="desc">全格式在线文件转换器</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://www.processon.com/" target="_blank"><div class="icon">🔀</div><div class="text"><div class="name">ProcessOn</div><div class="desc">在线思维导图与流程图</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-tool" href="https://toolknit.com/" target="_blank"><div class="icon">🧰</div><div class="text"><div class="name">ToolKnit</div><div class="desc">在线实用工具箱</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://tinypng.com/" target="_blank"><img class="icon" src="icons/tinypng.svg" alt=""><div class="text"><div class="name">TinyPNG</div><div class="desc">智能PNG/JPEG图片无损压缩</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.remove.bg/" target="_blank"><img class="icon" src="icons/removebg.svg" alt=""><div class="text"><div class="name">Remove.bg</div><div class="desc">一键AI去除图片背景</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://convertio.co/" target="_blank"><img class="icon" src="icons/convertio.svg" alt=""><div class="text"><div class="name">Convertio</div><div class="desc">全格式在线文件转换器</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.processon.com/" target="_blank"><img class="icon" src="icons/processon.svg" alt=""><div class="text"><div class="name">ProcessOn</div><div class="desc">在线思维导图与流程图</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-tool" href="https://toolknit.com/" target="_blank"><img class="icon" src="icons/toolknit.svg" alt=""><div class="text"><div class="name">ToolKnit</div><div class="desc">在线实用工具箱</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">摸鱼</div>
 	    <div class="links">
-	      <a class="link-card card-tool" href="https://liferestart.syaro.io/public/index.html" target="_blank"><div class="icon">🎮</div><div class="text"><div class="name">人生重开模拟器</div><div class="desc">休闲摸鱼人生模拟小游戏</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-tool" href="https://theuselessweb.com/" target="_blank"><div class="icon">🌐</div><div class="text"><div class="name">The Useless Web</div><div class="desc">带你随机探索各种无用但有趣的网站</div></div><div class="arrow">↗</div></a>
-	      <a class="link-card card-tool" href="https://www.yikm.net/" target="_blank"><div class="icon">🕹️</div><div class="text"><div class="name">小霸王合集</div><div class="desc">在线经典FC游戏网页版</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-tool" href="https://liferestart.syaro.io/public/index.html" target="_blank"><img class="icon" src="icons/life-restart.svg" alt=""><div class="text"><div class="name">人生重开模拟器</div><div class="desc">休闲摸鱼人生模拟小游戏</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-tool" href="https://theuselessweb.com/" target="_blank"><img class="icon" src="icons/useless-web.svg" alt=""><div class="text"><div class="name">The Useless Web</div><div class="desc">带你随机探索各种无用但有趣的网站</div></div><div class="arrow">↗</div></a>
+	      <a class="link-card card-tool" href="https://www.yikm.net/" target="_blank"><img class="icon" src="icons/retro-game.svg" alt=""><div class="text"><div class="name">小霸王合集</div><div class="desc">在线经典FC游戏网页版</div></div><div class="arrow">↗</div></a>
 	    </div>
 	  </div>
 
 	  <div class="subcat"><div class="subcat-title">其他实用工具</div>
     <div class="links">
-      <a class="link-card card-tool" href="https://cli.im/" target="_blank"><div class="icon">📱</div><div class="text"><div class="name">草料二维码</div><div class="desc">在线二维码生成器</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://33.agilestudio.cn/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">33台词</div><div class="desc">通过台词查找影片素材</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-tool" href="https://www.ilovepdf.com/" target="_blank"><div class="icon">📄</div><div class="text"><div class="name">iLovePDF</div><div class="desc">PDF文件在线处理工具</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://cli.im/" target="_blank"><img class="icon" src="icons/cli-im.svg" alt=""><div class="text"><div class="name">草料二维码</div><div class="desc">在线二维码生成器</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://33.agilestudio.cn/" target="_blank"><img class="icon" src="icons/33taici.svg" alt=""><div class="text"><div class="name">33台词</div><div class="desc">通过台词查找影片素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://www.ilovepdf.com/" target="_blank"><img class="icon" src="icons/ilovepdf.svg" alt=""><div class="text"><div class="name">iLovePDF</div><div class="desc">PDF文件在线处理工具</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 </section>
@@ -671,22 +660,22 @@
   <div class="subcat">
     <div class="links">
       <a class="link-card card-data" href="https://trendinsight.oceanengine.com/" target="_blank">
-        <div class="icon">🔥</div><div class="text"><div class="name">抖音指数</div><div class="desc">抖音热点趋势查询</div></div><div class="arrow">↗</div>
+        <img class="icon" src="icons/douyin-index.svg" alt=""><div class="text"><div class="name">抖音指数</div><div class="desc">抖音热点趋势查询</div></div><div class="arrow">↗</div>
       </a>
       <a class="link-card card-data" href="https://top.baidu.com/" target="_blank">
-        <div class="icon">🔴</div><div class="text"><div class="name">百度热搜</div><div class="desc">百度实时热点榜单</div></div><div class="arrow">↗</div>
+        <img class="icon" src="icons/baidu-hot.svg" alt=""><div class="text"><div class="name">百度热搜</div><div class="desc">百度实时热点榜单</div></div><div class="arrow">↗</div>
       </a>
       <a class="link-card card-data" href="https://weibo.com/hot/mine" target="_blank">
-        <div class="icon">🟠</div><div class="text"><div class="name">微博热搜</div><div class="desc">微博实时热搜榜单</div></div><div class="arrow">↗</div>
+        <img class="icon" src="icons/weibo-hot.svg" alt=""><div class="text"><div class="name">微博热搜</div><div class="desc">微博实时热搜榜单</div></div><div class="arrow">↗</div>
       </a>
       <a class="link-card card-data" href="https://trendinsight.oceanengine.com/" target="_blank">
-        <div class="icon">📈</div><div class="text"><div class="name">巨量算数</div><div class="desc">抖音官方数据洞察平台</div></div><div class="arrow">↗</div>
+        <img class="icon" src="icons/oceanengine.svg" alt=""><div class="text"><div class="name">巨量算数</div><div class="desc">抖音官方数据洞察平台</div></div><div class="arrow">↗</div>
       </a>
       <a class="link-card card-data" href="https://www.feigua.cn/" target="_blank">
-        <div class="icon">🎯</div><div class="text"><div class="name">飞瓜数据</div><div class="desc">抖音第三方数据分析平台</div></div><div class="arrow">↗</div>
+        <img class="icon" src="icons/feigua.svg" alt=""><div class="text"><div class="name">飞瓜数据</div><div class="desc">抖音第三方数据分析平台</div></div><div class="arrow">↗</div>
       </a>
       <a class="link-card card-data" href="https://www.xhdata.com/" target="_blank">
-        <div class="icon">📕</div><div class="text"><div class="name">新红数据</div><div class="desc">小红书专业数据分析</div></div><div class="arrow">↗</div>
+        <img class="icon" src="icons/xinhong.svg" alt=""><div class="text"><div class="name">新红数据</div><div class="desc">小红书专业数据分析</div></div><div class="arrow">↗</div>
       </a>
     </div>
   </div>
@@ -701,53 +690,53 @@
 
   <div class="subcat"><div class="subcat-title">图片素材</div>
     <div class="links">
-      <a class="link-card card-img" href="https://www.pexels.com/" target="_blank"><div class="icon">📷</div><div class="text"><div class="name">Pexels</div><div class="desc">免费高质量摄影图片</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-img" href="https://unsplash.com/" target="_blank"><div class="icon">🖼️</div><div class="text"><div class="name">Unsplash</div><div class="desc">免费高清摄影图库</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-img" href="https://pixabay.com/" target="_blank"><div class="icon">🌄</div><div class="text"><div class="name">Pixabay</div><div class="desc">免费图片视频素材库</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-img" href="https://pxhere.com/" target="_blank"><div class="icon">🏞️</div><div class="text"><div class="name">PxHere</div><div class="desc">免费摄影图片库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://www.pexels.com/" target="_blank"><img class="icon" src="icons/pexels.svg" alt=""><div class="text"><div class="name">Pexels</div><div class="desc">免费高质量摄影图片</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://unsplash.com/" target="_blank"><img class="icon" src="icons/unsplash.svg" alt=""><div class="text"><div class="name">Unsplash</div><div class="desc">免费高清摄影图库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://pixabay.com/" target="_blank"><img class="icon" src="icons/pixabay.svg" alt=""><div class="text"><div class="name">Pixabay</div><div class="desc">免费图片视频素材库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://pxhere.com/" target="_blank"><img class="icon" src="icons/pxhere.svg" alt=""><div class="text"><div class="name">PxHere</div><div class="desc">免费摄影图片库</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">动图 GIF</div>
     <div class="links">
-      <a class="link-card card-img" href="https://giphy.com/" target="_blank"><div class="icon">🎞️</div><div class="text"><div class="name">GIPHY</div><div class="desc">全球最大GIF动图平台</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-img" href="https://alphacoders.com/" target="_blank"><div class="icon">🖥️</div><div class="text"><div class="name">Alpha Coders</div><div class="desc">高清壁纸与动图资源</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-img" href="https://www.soogif.com/" target="_blank"><div class="icon">✨</div><div class="text"><div class="name">闪萌</div><div class="desc">中文GIF搜索引擎</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://giphy.com/" target="_blank"><img class="icon" src="icons/giphy.svg" alt=""><div class="text"><div class="name">GIPHY</div><div class="desc">全球最大GIF动图平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://alphacoders.com/" target="_blank"><img class="icon" src="icons/alphacoders.svg" alt=""><div class="text"><div class="name">Alpha Coders</div><div class="desc">高清壁纸与动图资源</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-img" href="https://www.soogif.com/" target="_blank"><img class="icon" src="icons/shanmeng.svg" alt=""><div class="text"><div class="name">闪萌</div><div class="desc">中文GIF搜索引擎</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">视频素材</div>
     <div class="links">
-      <a class="link-card card-video" href="https://coverr.co/" target="_blank"><div class="icon">📹</div><div class="text"><div class="name">Coverr</div><div class="desc">免费高清视频背景素材</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-video" href="https://mixkit.co/" target="_blank"><div class="icon">📽️</div><div class="text"><div class="name">Mixkit</div><div class="desc">免费高清视频与音效素材</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-video" href="https://www.pexels.com/zh-cn/video/" target="_blank"><div class="icon">🎬</div><div class="text"><div class="name">Pexels 视频</div><div class="desc">免费高清视频素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://coverr.co/" target="_blank"><img class="icon" src="icons/coverr.svg" alt=""><div class="text"><div class="name">Coverr</div><div class="desc">免费高清视频背景素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://mixkit.co/" target="_blank"><img class="icon" src="icons/mixkit.svg" alt=""><div class="text"><div class="name">Mixkit</div><div class="desc">免费高清视频与音效素材</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-video" href="https://www.pexels.com/zh-cn/video/" target="_blank"><img class="icon" src="icons/pexels-video.svg" alt=""><div class="text"><div class="name">Pexels 视频</div><div class="desc">免费高清视频素材</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">音频素材</div>
     <div class="links">
-      <a class="link-card card-music" href="https://www.aigei.com/" target="_blank"><div class="icon">🎵</div><div class="text"><div class="name">爱给网</div><div class="desc">音效配乐素材库</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-music" href="https://mixkit.co/free-sound-effects/" target="_blank"><div class="icon">🎧</div><div class="text"><div class="name">Mixkit 音效</div><div class="desc">免费音效与背景音乐</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://www.aigei.com/" target="_blank"><img class="icon" src="icons/aigei.svg" alt=""><div class="text"><div class="name">爱给网</div><div class="desc">音效配乐素材库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://mixkit.co/free-sound-effects/" target="_blank"><img class="icon" src="icons/mixkit-sfx.svg" alt=""><div class="text"><div class="name">Mixkit 音效</div><div class="desc">免费音效与背景音乐</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">字体文字</div>
     <div class="links">
-      <a class="link-card card-design" href="https://www.100font.com/" target="_blank"><div class="icon">✍️</div><div class="text"><div class="name">100font</div><div class="desc">免费商用字体下载</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://ziyouziti.com/" target="_blank"><div class="icon">🔤</div><div class="text"><div class="name">自由字体</div><div class="desc">免费可商用字体库</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://www.pinterest.com/pin/633387441287210/" target="_blank"><div class="icon">📌</div><div class="text"><div class="name">浩哥推荐字体</div><div class="desc">Pinterest 精选好看字体合集</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.100font.com/" target="_blank"><img class="icon" src="icons/100font.svg" alt=""><div class="text"><div class="name">100font</div><div class="desc">免费商用字体下载</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://ziyouziti.com/" target="_blank"><img class="icon" src="icons/ziyouziti.svg" alt=""><div class="text"><div class="name">自由字体</div><div class="desc">免费可商用字体库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.pinterest.com/pin/633387441287210/" target="_blank"><img class="icon" src="icons/haogefont.svg" alt=""><div class="text"><div class="name">浩哥推荐字体</div><div class="desc">Pinterest 精选好看字体合集</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">PPT 模板</div>
     <div class="links">
-      <a class="link-card card-design" href="https://www.officeplus.cn/" target="_blank"><div class="icon">📊</div><div class="text"><div class="name">微软官方PPT模板</div><div class="desc">OfficePlus 精品模板</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.officeplus.cn/" target="_blank"><img class="icon" src="icons/officeplus.svg" alt=""><div class="text"><div class="name">微软官方PPT模板</div><div class="desc">OfficePlus 精品模板</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">图标资源</div>
     <div class="links">
-      <a class="link-card card-design" href="https://www.flaticon.com/" target="_blank"><div class="icon">🔣</div><div class="text"><div class="name">Flaticon</div><div class="desc">全球最大免费图标库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.flaticon.com/" target="_blank"><img class="icon" src="icons/flaticon.svg" alt=""><div class="text"><div class="name">Flaticon</div><div class="desc">全球最大免费图标库</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
@@ -762,11 +751,11 @@
 
   <div class="subcat"><div class="subcat-title">图片设计</div>
     <div class="links">
-      <a class="link-card card-design" href="https://www.canva.cn/" target="_blank"><div class="icon">🎨</div><div class="text"><div class="name">Canva可画</div><div class="desc">在线设计全能工具</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://www.gaoding.com/" target="_blank"><div class="icon">🖌️</div><div class="text"><div class="name">稿定设计</div><div class="desc">智能在线设计平台</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://www.chuangkit.com/" target="_blank"><div class="icon">✂️</div><div class="text"><div class="name">创客贴</div><div class="desc">广告设计印刷一站式</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://www.iconfont.cn/" target="_blank"><div class="icon">🔷</div><div class="text"><div class="name">Iconfont</div><div class="desc">阿里巴巴矢量图标库</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://js.design/" target="_blank"><div class="icon">💎</div><div class="text"><div class="name">即时设计</div><div class="desc">国产免费在线设计协作平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.canva.cn/" target="_blank"><img class="icon" src="icons/canva.svg" alt=""><div class="text"><div class="name">Canva可画</div><div class="desc">在线设计全能工具</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.gaoding.com/" target="_blank"><img class="icon" src="icons/gaoding.svg" alt=""><div class="text"><div class="name">稿定设计</div><div class="desc">智能在线设计平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.chuangkit.com/" target="_blank"><img class="icon" src="icons/chuangkit.svg" alt=""><div class="text"><div class="name">创客贴</div><div class="desc">广告设计印刷一站式</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.iconfont.cn/" target="_blank"><img class="icon" src="icons/iconfont.svg" alt=""><div class="text"><div class="name">Iconfont</div><div class="desc">阿里巴巴矢量图标库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://js.design/" target="_blank"><img class="icon" src="icons/js-design.svg" alt=""><div class="text"><div class="name">即时设计</div><div class="desc">国产免费在线设计协作平台</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
@@ -777,27 +766,27 @@
 
   <div class="subcat"><div class="subcat-title">词云工具</div>
     <div class="links">
-      <a class="link-card card-design" href="https://www.meijici.com/" target="_blank"><div class="icon">☁️</div><div class="text"><div class="name">美寄词云</div><div class="desc">在线词云生成器</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://www.ciyuntu.com/" target="_blank"><div class="icon">🌥️</div><div class="text"><div class="name">AI词云生成器</div><div class="desc">智能词云制作</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-design" href="https://www.ciyuntu.com/" target="_blank"><div class="icon">💬</div><div class="text"><div class="name">词云图在线生成器</div><div class="desc">免费词云设计</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.meijici.com/" target="_blank"><img class="icon" src="icons/meijici.svg" alt=""><div class="text"><div class="name">美寄词云</div><div class="desc">在线词云生成器</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.ciyuntu.com/" target="_blank"><img class="icon" src="icons/ciyuntu.svg" alt=""><div class="text"><div class="name">AI词云生成器</div><div class="desc">智能词云制作</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.ciyuntu.com/" target="_blank"><img class="icon" src="icons/ciyuntu2.svg" alt=""><div class="text"><div class="name">词云图在线生成器</div><div class="desc">免费词云设计</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">AI 声音</div>
     <div class="links">
-      <a class="link-card card-music" href="https://fish.audio/" target="_blank"><div class="icon">🐟</div><div class="text"><div class="name">Fish Audio</div><div class="desc">AI语音克隆与合成</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-music" href="https://fish.audio/" target="_blank"><img class="icon" src="icons/fish-audio2.svg" alt=""><div class="text"><div class="name">Fish Audio</div><div class="desc">AI语音克隆与合成</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">工作流图</div>
     <div class="links">
-      <a class="link-card card-tool" href="https://boardmix.cn/" target="_blank"><div class="icon">🧩</div><div class="text"><div class="name">BoardMix</div><div class="desc">在线协作白板与流程图</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://boardmix.cn/" target="_blank"><img class="icon" src="icons/boardmix.svg" alt=""><div class="text"><div class="name">BoardMix</div><div class="desc">在线协作白板与流程图</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
   <div class="subcat"><div class="subcat-title">表单工具</div>
     <div class="links">
-      <a class="link-card card-tool" href="https://jinshuju.net/" target="_blank"><div class="icon">📋</div><div class="text"><div class="name">金数据</div><div class="desc">在线表单制作与数据收集</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://jinshuju.net/" target="_blank"><img class="icon" src="icons/jinshuju.svg" alt=""><div class="text"><div class="name">金数据</div><div class="desc">在线表单制作与数据收集</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 </section>

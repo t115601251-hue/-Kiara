@@ -35,6 +35,21 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
+
+  @keyframes bgDrift {
+    0%, 100% { background-position: center top; filter: saturate(1); }
+    50% { background-position: center -42px; filter: saturate(1.12); }
+  }
+  @keyframes chromeSheen {
+    0%, 42% { transform: translateX(-120%); opacity: 0; }
+    52% { opacity: 1; }
+    72%, 100% { transform: translateX(120%); opacity: 0; }
+  }
+  @keyframes barPulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(168,85,247,.3); filter: saturate(1); }
+    50% { box-shadow: 0 0 24px rgba(240,160,40,.5); filter: saturate(1.2); }
+  }
+
   /* Background SVG layer */
   .bg-svg {
     position: fixed;
@@ -43,6 +58,7 @@
     background: url('bg-long.svg') center top/auto 3000px repeat-y;
     opacity: 1;
     pointer-events: none;
+    animation: bgDrift 30s ease-in-out infinite;
   }
   /* Everything above background */
   header, .quick-access, nav, main, footer { position: relative; z-index: 1; }
@@ -111,6 +127,16 @@
     box-shadow: 0 10px 28px rgba(0,0,0,.26);
     backdrop-filter: blur(16px);
     overflow: hidden;
+    position: relative;
+  }
+  .quick-access-shell::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,.06) 45%, rgba(240,160,40,.1) 50%, transparent 58%);
+    transform: translateX(-120%);
+    animation: chromeSheen 7s ease-in-out infinite;
   }
   .quick-access-label {
     flex: 0 0 auto;
@@ -144,21 +170,36 @@
     border: 1px solid rgba(255,255,255,.1);
     border-radius: 999px;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
-    transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+    position: relative;
+    overflow: hidden;
+    transition: transform .26s cubic-bezier(.2,.8,.2,1), border-color .22s ease, background .22s ease, box-shadow .22s ease;
+  }
+  .quick-chip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,.16) 45%, transparent 68%);
+    transform: translateX(-120%);
+    transition: transform .55s ease;
   }
   .quick-chip:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.025);
     border-color: rgba(45,212,191,.38);
     background: linear-gradient(135deg, rgba(43,30,68,.98), rgba(18,52,61,.9));
-    box-shadow: 0 8px 22px rgba(0,0,0,.28);
+    box-shadow: 0 12px 28px rgba(0,0,0,.34), 0 0 18px rgba(45,212,191,.1);
   }
+  .quick-chip:hover::after { transform: translateX(120%); }
   .quick-chip img {
     width: 22px;
     height: 22px;
     border-radius: 7px;
     flex: 0 0 auto;
     object-fit: cover;
+    position: relative;
+    z-index: 1;
+    transition: transform .26s ease;
   }
+  .quick-chip:hover img { transform: rotate(-5deg) scale(1.08); }
   .quick-chip span {
     min-width: 0;
     overflow: hidden;
@@ -166,6 +207,8 @@
     white-space: nowrap;
     font-size: 13px;
     font-weight: 800;
+    position: relative;
+    z-index: 1;
   }
   .quick-access-mode {
     flex: 0 0 auto;
@@ -277,6 +320,7 @@
     border-radius: 3px;
     flex-shrink: 0;
     box-shadow: 0 0 12px rgba(168,85,247,.3);
+    animation: barPulse 3.4s ease-in-out infinite;
   }
 
   .subcat { margin-top: 28px; }
@@ -313,7 +357,7 @@
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,.25);
     transform: translateZ(0);
-    transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .24s ease, background .24s ease, box-shadow .24s ease;
     will-change: transform;
   }
   .link-card::before {
@@ -324,13 +368,28 @@
     transition: opacity .35s;
     border-radius: 12px;
   }
+  .link-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(112deg, transparent 0%, transparent 38%, rgba(255,255,255,.12) 48%, transparent 58%, transparent 100%);
+    opacity: 0;
+    transform: translateX(-120%);
+    transition: transform .55s ease, opacity .25s ease;
+    border-radius: 12px;
+    pointer-events: none;
+  }
   .link-card:hover {
     border-color: var(--border-hover);
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 10px 24px rgba(0,0,0,.38);
+    transform: translateY(-5px) scale(1.025);
+    box-shadow: 0 16px 36px rgba(0,0,0,.48), 0 0 24px rgba(168,85,247,.12);
     z-index: 2;
   }
   .link-card:hover::before { opacity: 1; }
+  .link-card:hover::after {
+    opacity: 1;
+    transform: translateX(120%);
+  }
 
   .link-card .icon {
     width: 42px; height: 42px;
@@ -338,9 +397,9 @@
     flex-shrink: 0;
     position: relative;
     z-index: 1;
-    transition: transform .2s ease;
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .24s ease;
   }
-  .link-card:hover .icon { transform: scale(1.06) rotate(-2deg); }
+  .link-card:hover .icon { transform: scale(1.12) rotate(-4deg); box-shadow: 0 8px 20px rgba(0,0,0,.24); }
 
   .link-card .text { position: relative; z-index: 1; min-width: 0; }
   .link-card .name {
@@ -367,7 +426,7 @@
   }
   .link-card:hover .arrow {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(3px);
   }
 
   .note {
@@ -459,9 +518,9 @@
   .spotlight {
     position: fixed;
     z-index: 0;
-    width: 360px; height: 360px;
+    width: 420px; height: 420px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(192,132,252,.035) 0%, rgba(168,85,247,.018) 42%, transparent 72%);
+    background: radial-gradient(circle, rgba(192,132,252,.07) 0%, rgba(168,85,247,.035) 40%, rgba(240,160,40,.018) 56%, transparent 74%);
     pointer-events: none;
     transform: translate(-50%, -50%);
     opacity: 0;
@@ -1067,18 +1126,19 @@ function revealCategorySection(section) {
   if (sectionCards.length === 0) return;
 
   section.dataset.motionReady = '1';
-  var tl = gsap.timeline({ defaults: { ease: 'power2.out', overwrite: 'auto' } });
+  var tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
 
   if (sectionTitle) {
-    tl.to(sectionTitle, { opacity: 1, x: 0, duration: 0.32 }, 0);
+    tl.to(sectionTitle, { opacity: 1, x: 0, duration: 0.44 }, 0);
   }
   tl.to(sectionCards, {
     opacity: 1, y: 0, scale: 1,
-    stagger: { each: 0.012, from: 'start' },
-    duration: 0.32,
+    stagger: { each: 0.02, from: 'start' },
+    duration: 0.42,
+    ease: 'back.out(1.22)',
     force3D: true,
     clearProps: 'transform,opacity'
-  }, 0.04);
+  }, 0.08);
 }
 
 function revealVisibleSections() {
@@ -1135,6 +1195,13 @@ function initNav() {
     });
     link.addEventListener('focus', function() { moveIndicator(this); });
   });
+
+  if (!REDUCE_MOTION) {
+    gsap.fromTo(links,
+      { opacity: 0, y: -8, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, stagger: 0.035, duration: 0.4, ease: 'back.out(1.4)', clearProps: 'transform,opacity' }
+    );
+  }
 
 }
 
@@ -1294,6 +1361,13 @@ function renderQuickAccess() {
   links.forEach(function(link) {
     track.appendChild(createQuickChip(link));
   });
+
+  if (!REDUCE_MOTION) {
+    gsap.fromTo(track.querySelectorAll('.quick-chip'),
+      { opacity: 0, y: -8, scale: 0.92 },
+      { opacity: 1, y: 0, scale: 1, stagger: 0.035, duration: 0.36, ease: 'back.out(1.6)', clearProps: 'transform,opacity' }
+    );
+  }
 }
 
 function initQuickAccess() {
@@ -1351,8 +1425,8 @@ function initQuickAccess() {
         card.classList.toggle('hidden', !show);
         if (show && wasHidden && !REDUCE_MOTION) {
           gsap.fromTo(card,
-            { opacity: 0.72, y: 6, scale: 0.99 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.18, ease: 'power1.out', overwrite: true, clearProps: 'transform,opacity' }
+            { opacity: 0.45, y: 14, scale: 0.96 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'back.out(1.35)', overwrite: true, clearProps: 'transform,opacity' }
           );
         }
         if (show) {
@@ -1382,6 +1456,12 @@ function initQuickAccess() {
     });
 
     noResult.style.display = visibleCount === 0 ? 'block' : 'none';
+    if (!REDUCE_MOTION) {
+      gsap.fromTo(document.querySelectorAll('.category:not(.hidden)'),
+        { opacity: 0.88, y: 10 },
+        { opacity: 1, y: 0, duration: 0.28, stagger: 0.04, ease: 'power2.out', overwrite: true, clearProps: 'transform,opacity' }
+      );
+    }
     revealVisibleSections();
     ScrollTrigger.refresh();
   }
@@ -1412,8 +1492,8 @@ document.addEventListener('DOMContentLoaded', function() {
     gsap.set('.link-card', { opacity: 1, y: 0, scale: 1 });
     gsap.set('.cat-title', { opacity: 1, x: 0 });
   } else {
-    gsap.set('.link-card', { opacity: 0, y: 28, scale: 0.98 });
-    gsap.set('.cat-title', { opacity: 0, x: -12 });
+    gsap.set('.link-card', { opacity: 0, y: 38, scale: 0.96 });
+    gsap.set('.cat-title', { opacity: 0, x: -24 });
   }
 
   function revealAndAnimate() {
@@ -1426,12 +1506,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. Remove intro-active → header/nav/bg-image/particles begin CSS fade-in
     document.body.classList.remove('intro-active');
 
+    if (!REDUCE_MOTION) {
+      gsap.fromTo(['header', '.quick-access', 'nav'],
+        { opacity: 0, y: -18, scale: 0.99 },
+        { opacity: 1, y: 0, scale: 1, stagger: 0.08, duration: 0.55, ease: 'power3.out', clearProps: 'transform,opacity' }
+      );
+    }
+
     // 3. Reveal main after the chrome settles, then let sections animate as they enter.
     setTimeout(function() {
       if (main) main.classList.remove('main-hidden');
       initCardsEntrance();
       ScrollTrigger.refresh();
-    }, REDUCE_MOTION ? 0 : 120);
+    }, REDUCE_MOTION ? 0 : 180);
   }
 
   if (HAS_PLAYED_INTRO) {
@@ -1439,8 +1526,8 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     playIntro().then(function() {
       // Re-assert hidden state after intro animation
-      gsap.set('.link-card', { opacity: 0, y: 60, scale: 0.94 });
-      gsap.set('.cat-title', { opacity: 0, x: -20 });
+      gsap.set('.link-card', { opacity: 0, y: 38, scale: 0.96 });
+      gsap.set('.cat-title', { opacity: 0, x: -24 });
       revealAndAnimate();
     });
   }

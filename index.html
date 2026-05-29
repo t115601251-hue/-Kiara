@@ -45,7 +45,7 @@
     pointer-events: none;
   }
   /* Everything above background */
-  header, nav, main, footer { position: relative; z-index: 1; }
+  header, .quick-access, nav, main, footer { position: relative; z-index: 1; }
 
   /* ---- Header ---- */
   header {
@@ -90,6 +90,93 @@
     transform: translateY(-50%);
     font-size: 16px;
     pointer-events: none;
+  }
+
+  /* ---- Quick access ---- */
+  .quick-access {
+    max-width: 1500px;
+    margin: 12px auto 0;
+    padding: 0 28px;
+    transition: opacity 0.5s ease;
+  }
+  .quick-access-shell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 58px;
+    padding: 10px 12px;
+    background: rgba(16,11,26,.68);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.26);
+    backdrop-filter: blur(16px);
+    overflow: hidden;
+  }
+  .quick-access-label {
+    flex: 0 0 auto;
+    padding: 0 4px 0 2px;
+    font-size: 13px;
+    font-weight: 900;
+    color: #ffe0a3;
+    letter-spacing: 1px;
+  }
+  .quick-access-track {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .quick-access-track::-webkit-scrollbar { display: none; }
+  .quick-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    max-width: 172px;
+    min-height: 36px;
+    padding: 7px 11px;
+    color: var(--text);
+    text-decoration: none;
+    background: linear-gradient(135deg, rgba(31,23,51,.94), rgba(19,30,43,.88));
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 999px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+  }
+  .quick-chip:hover {
+    transform: translateY(-2px);
+    border-color: rgba(45,212,191,.38);
+    background: linear-gradient(135deg, rgba(43,30,68,.98), rgba(18,52,61,.9));
+    box-shadow: 0 8px 22px rgba(0,0,0,.28);
+  }
+  .quick-chip img {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+  .quick-chip span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .quick-access-mode {
+    flex: 0 0 auto;
+    margin-left: auto;
+    padding: 5px 9px;
+    color: #a7f3d0;
+    font-size: 12px;
+    font-weight: 800;
+    border: 1px solid rgba(45,212,191,.22);
+    border-radius: 999px;
+    background: rgba(45,212,191,.08);
   }
 
   /* ---- Nav ---- */
@@ -144,6 +231,7 @@
 
   /* page hidden during intro */
   body.intro-active header,
+  body.intro-active .quick-access,
   body.intro-active nav,
   body.intro-active footer { opacity: 0; }
   body.intro-active .bg-svg { opacity: 0; }
@@ -151,6 +239,7 @@
   /* smooth fade transitions */
   .bg-svg { transition: opacity 0.8s ease; }
   header { transition: opacity 0.5s ease; }
+  .quick-access { transition: opacity 0.5s ease; }
   nav { transition: opacity 0.5s ease; }
   footer { transition: opacity 0.5s ease; }
 
@@ -401,6 +490,13 @@
     .brand-cn { font-size: 11px; letter-spacing: 1px; }
     .brand-tag { display: block; margin-left: 0; margin-top: 2px; font-size: 11px; }
     header input { max-width: 55vw; font-size: 14px; }
+    .quick-access { padding: 0 16px; margin-top: 10px; }
+    .quick-access-shell { min-height: 52px; padding: 8px; gap: 8px; }
+    .quick-access-label { font-size: 12px; letter-spacing: 0; }
+    .quick-chip { max-width: 136px; min-height: 34px; padding: 6px 9px; }
+    .quick-chip span { font-size: 12px; }
+    .quick-chip img { width: 20px; height: 20px; }
+    .quick-access-mode { display: none; }
     nav { padding: 10px 16px 4px; gap: 4px; }
     nav a { font-size: 13px; padding: 7px 14px; }
     main { padding: 8px 14px 60px; }
@@ -498,6 +594,14 @@
     </div>
   </div>
 </header>
+
+<section class="quick-access" id="quickAccess" aria-label="快速访问">
+  <div class="quick-access-shell">
+    <div class="quick-access-label">快速访问</div>
+    <div class="quick-access-track" id="quickAccessTrack"></div>
+    <div class="quick-access-mode" id="quickAccessMode">常用推荐</div>
+  </div>
+</section>
 
 <nav id="nav"><div class="nav-indicator"></div>
   <a class="active" data-cat="all">全部</a>
@@ -741,6 +845,13 @@
       <a class="link-card card-design" href="https://www.chuangkit.com/" target="_blank"><img class="icon" src="icons/chuangkit.ico" alt=""><div class="text"><div class="name">创客贴</div><div class="desc">广告设计印刷一站式</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-design" href="https://www.iconfont.cn/" target="_blank"><img class="icon" src="icons/iconfont.png" alt=""><div class="text"><div class="name">Iconfont</div><div class="desc">阿里巴巴矢量图标库</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-design" href="https://js.design/" target="_blank"><img class="icon" src="icons/js-design.png" alt=""><div class="text"><div class="name">即时设计</div><div class="desc">国产免费在线设计协作平台</div></div><div class="arrow">↗</div></a>
+    </div>
+  </div>
+
+  <div class="subcat"><div class="subcat-title">网页设计灵感</div>
+    <div class="links">
+      <a class="link-card card-design" href="https://www.awwwards.com/" target="_blank"><img class="icon" src="icons/awwwards.svg" alt=""><div class="text"><div class="name">Awwwards</div><div class="desc">全球优秀网页设计作品库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://onepagelove.com/page/3" target="_blank"><img class="icon" src="icons/onepagelove.svg" alt=""><div class="text"><div class="name">One Page Love</div><div class="desc">单页网站设计灵感合集</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
@@ -1024,6 +1135,139 @@ function initSpotlight() {
   });
 }
 
+// ======== Quick Access (recent clicks + defaults) ========
+const RECENT_LINKS_KEY = 'mediaVault.recentLinks.v1';
+const MAX_RECENT_LINKS = 10;
+const DEFAULT_QUICK_NAMES = ['ChatGPT', 'Claude', 'DeepSeek', '豆包', '即梦AI', 'Midjourney', 'LiblibAI', 'Pexels'];
+
+function isValidQuickLink(link) {
+  return !!(link && link.name && link.href && typeof link.name === 'string' && typeof link.href === 'string');
+}
+
+function loadRecentLinks() {
+  try {
+    const raw = localStorage.getItem(RECENT_LINKS_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(isValidQuickLink).slice(0, MAX_RECENT_LINKS);
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveRecentLinks(links) {
+  try {
+    localStorage.setItem(RECENT_LINKS_KEY, JSON.stringify(links.slice(0, MAX_RECENT_LINKS)));
+  } catch (error) {
+    // Storage can be blocked in strict privacy modes; the quick bar still works with defaults.
+  }
+}
+
+function getQuickLinkFromCard(card) {
+  if (!card) return null;
+  const name = card.querySelector('.name')?.textContent.trim();
+  const href = card.getAttribute('href');
+  const icon = card.querySelector('img')?.getAttribute('src') || '';
+  const category = card.closest('.category')?.dataset.cats || '';
+  if (!name || !href) return null;
+  return { name: name, href: href, icon: icon, category: category };
+}
+
+function recordQuickAccessLink(link, options) {
+  if (!isValidQuickLink(link)) return;
+  const nextLink = {
+    name: link.name,
+    href: link.href,
+    icon: link.icon || '',
+    category: link.category || '',
+    openedAt: Date.now()
+  };
+  const recent = loadRecentLinks().filter(function(item) {
+    return item.href !== nextLink.href;
+  });
+  saveRecentLinks([nextLink].concat(recent));
+  if (options && options.deferRender) {
+    setTimeout(renderQuickAccess, 0);
+  } else {
+    renderQuickAccess();
+  }
+}
+
+function getDefaultQuickLinks() {
+  const cards = Array.from(document.querySelectorAll('.link-card'));
+  return DEFAULT_QUICK_NAMES.map(function(name) {
+    return cards.find(function(card) {
+      return card.querySelector('.name')?.textContent.trim() === name;
+    });
+  }).filter(Boolean).map(getQuickLinkFromCard).filter(Boolean);
+}
+
+function createQuickChip(link) {
+  const chip = document.createElement('a');
+  chip.className = 'quick-chip';
+  chip.href = link.href;
+  chip.target = '_blank';
+  chip.rel = 'noopener noreferrer';
+  chip.dataset.name = link.name;
+  chip.dataset.href = link.href;
+  chip.dataset.icon = link.icon || '';
+  chip.dataset.category = link.category || '';
+
+  const icon = document.createElement('img');
+  icon.src = link.icon || 'icons/aigc.png';
+  icon.alt = '';
+  icon.loading = 'lazy';
+
+  const name = document.createElement('span');
+  name.textContent = link.name;
+
+  chip.appendChild(icon);
+  chip.appendChild(name);
+  return chip;
+}
+
+function renderQuickAccess() {
+  const root = document.getElementById('quickAccess');
+  const track = document.getElementById('quickAccessTrack');
+  const mode = document.getElementById('quickAccessMode');
+  if (!root || !track) return;
+
+  const recent = loadRecentLinks();
+  const links = recent.length ? recent : getDefaultQuickLinks();
+  root.hidden = links.length === 0;
+  root.classList.toggle('is-default', recent.length === 0);
+  if (mode) mode.textContent = recent.length ? '最近打开' : '常用推荐';
+
+  track.replaceChildren();
+  links.forEach(function(link) {
+    track.appendChild(createQuickChip(link));
+  });
+}
+
+function initQuickAccess() {
+  const track = document.getElementById('quickAccessTrack');
+  if (!track) return;
+
+  renderQuickAccess();
+
+  document.querySelectorAll('.link-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      recordQuickAccessLink(getQuickLinkFromCard(card));
+    });
+  });
+
+  track.addEventListener('click', function(e) {
+    const chip = e.target.closest('.quick-chip');
+    if (!chip) return;
+    recordQuickAccessLink({
+      name: chip.dataset.name,
+      href: chip.dataset.href,
+      icon: chip.dataset.icon,
+      category: chip.dataset.category
+    }, { deferRender: true });
+  });
+}
+
 // ======== Search & Filter (with GSAP stagger) ========
 (function initFilter() {
   const search = document.getElementById('search');
@@ -1120,6 +1364,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  initQuickAccess();
   initCards();
   initNav();
   initBackToTop();

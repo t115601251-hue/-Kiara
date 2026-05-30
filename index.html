@@ -6,22 +6,36 @@
 <title>自媒体创作素材库</title>
 <style>
   :root {
-    --bg: #08040f;
-    --surface: #100b1a;
-    --card: #1f1733;
-    --card-hover: #281e42;
-    --text: #f5f0e8;
-    --sub: #c4b5d0;
-    --muted: #8b7d9a;
-    --purple: #a855f7;
-    --purple-light: #c084fc;
+    --bg: #030712;
+    --glass: rgba(24,18,48,.58);
+    --glass-soft: rgba(255,255,255,.055);
+    --glass-strong: rgba(255,255,255,.085);
+    --text: #f8fafc;
+    --sub: #cbd5e1;
+    --muted: #8794a8;
+    --violet: #7A22FF;
+    --blue-violet: #5B4DFF;
+    --nebula: #B45CFF;
+    --amethyst: #D747FF;
     --gold: #f0a028;
-    --gold-light: #fbbf24;
-    --rose: #e11d48;
-    --border: rgba(255,255,255,.06);
-    --border-hover: rgba(192,132,252,.3);
-    --glow-purple: rgba(168,85,247,.15);
-    --glow-gold: rgba(240,160,40,.1);
+    --ember: #F06D42;
+    --gold-soft: rgba(240,160,40,.14);
+    --pearl: #FFFFFF;
+    --steel: #9CA3AF;
+    --border: rgba(255,255,255,.08);
+    --border-glow: rgba(160,112,255,.34);
+    --aura-violet: rgba(122,34,255,.16);
+    --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @property --mx {
+    syntax: '<percentage>';
+    inherits: true;
+    initial-value: 50%;
+  }
+  @property --my {
+    syntax: '<percentage>';
+    inherits: true;
+    initial-value: 50%;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
@@ -34,11 +48,21 @@
     font-size: 17px;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    min-height: 100vh;
+    isolation: isolate;
   }
 
-  @keyframes bgDrift {
-    0%, 100% { background-position: center top; filter: saturate(1); }
-    50% { background-position: center -42px; filter: saturate(1.12); }
+  @keyframes meshDrift {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      background-position: 16% 18%, 82% 10%, 48% 82%, 88% 70%, 44% 45%, center;
+      filter: saturate(1.04) brightness(.78);
+    }
+    50% {
+      transform: translate3d(-20px, -28px, 0) scale(1.04);
+      background-position: 12% 24%, 86% 16%, 54% 76%, 80% 78%, 48% 39%, center;
+      filter: saturate(1.12) brightness(.86);
+    }
   }
   @keyframes chromeSheen {
     0%, 42% { transform: translateX(-120%); opacity: 0; }
@@ -46,30 +70,135 @@
     72%, 100% { transform: translateX(120%); opacity: 0; }
   }
   @keyframes barPulse {
-    0%, 100% { box-shadow: 0 0 12px rgba(168,85,247,.3); filter: saturate(1); }
-    50% { box-shadow: 0 0 24px rgba(240,160,40,.5); filter: saturate(1.2); }
+    0%, 100% { box-shadow: 0 0 14px rgba(180,92,255,.32), 0 0 20px rgba(91,77,255,.18); filter: saturate(1); }
+    50% { box-shadow: 0 0 26px rgba(215,71,255,.38), 0 0 22px rgba(240,109,66,.24); filter: saturate(1.25); }
+  }
+  @keyframes meteorDrift {
+    0%, 64% {
+      opacity: 0;
+      transform: translate3d(-18vw, 0, 0) rotate(-18deg);
+    }
+    68% { opacity: .78; }
+    76% {
+      opacity: 0;
+      transform: translate3d(118vw, 46vh, 0) rotate(-18deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(118vw, 46vh, 0) rotate(-18deg);
+    }
   }
 
-  /* Background SVG layer */
+  /* Holographic mesh background */
   .bg-svg {
     position: fixed;
-    inset: 0;
+    inset: -12%;
     z-index: 0;
-    background: url('bg-long.svg') center top/auto 3000px repeat-y;
+    background:
+      radial-gradient(circle at 16% 18%, rgba(122,34,255,.10) 0%, rgba(122,34,255,.055) 12%, transparent 34%),
+      radial-gradient(circle at 82% 10%, rgba(91,77,255,.10) 0%, rgba(91,77,255,.055) 14%, transparent 36%),
+      radial-gradient(circle at 48% 82%, rgba(180,92,255,.08) 0%, rgba(180,92,255,.04) 16%, transparent 40%),
+      radial-gradient(circle at 88% 70%, rgba(215,71,255,.08) 0%, rgba(122,34,255,.04) 18%, transparent 42%),
+      radial-gradient(circle at 44% 45%, rgba(255,255,255,.025) 0%, transparent 30%),
+      url('背景.png') center center / cover no-repeat;
     opacity: 1;
     pointer-events: none;
-    animation: bgDrift 30s ease-in-out infinite;
+    animation: meshDrift 28s var(--ease-lux) infinite;
+  }
+  .bg-svg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(31deg, transparent 47%, rgba(210,198,255,.16) 49%, rgba(210,198,255,.16) 51%, transparent 53%) 9% 16%/250px 120px no-repeat,
+      linear-gradient(-24deg, transparent 48%, rgba(210,198,255,.14) 49%, rgba(210,198,255,.14) 51%, transparent 52%) 68% 12%/260px 130px no-repeat,
+      linear-gradient(18deg, transparent 48%, rgba(180,160,255,.13) 49%, rgba(180,160,255,.13) 51%, transparent 52%) 58% 68%/310px 150px no-repeat,
+      radial-gradient(circle at 12% 18%, rgba(255,255,255,.82) 0 1px, transparent 2px),
+      radial-gradient(circle at 19% 29%, rgba(209,196,255,.70) 0 1px, transparent 2px),
+      radial-gradient(circle at 28% 22%, rgba(255,255,255,.60) 0 1px, transparent 2px),
+      radial-gradient(circle at 68% 16%, rgba(255,255,255,.78) 0 1px, transparent 2px),
+      radial-gradient(circle at 75% 25%, rgba(204,194,255,.66) 0 1px, transparent 2px),
+      radial-gradient(circle at 87% 18%, rgba(255,255,255,.58) 0 1px, transparent 2px),
+      radial-gradient(circle at 62% 74%, rgba(255,255,255,.72) 0 1px, transparent 2px),
+      radial-gradient(circle at 76% 80%, rgba(203,190,255,.62) 0 1px, transparent 2px),
+      radial-gradient(circle at 42% 64%, rgba(255,255,255,.45) 0 1px, transparent 2px),
+      radial-gradient(circle at 34% 11%, rgba(255,255,255,.42) 0 1px, transparent 2px),
+      radial-gradient(circle at 53% 34%, rgba(255,255,255,.38) 0 1px, transparent 2px);
+    opacity: .08;
+    filter: drop-shadow(0 0 5px rgba(180,92,255,.22)) contrast(1.08);
+    pointer-events: none;
+    transition: filter .8s var(--ease-lux);
+  }
+  .bg-svg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,255,255,.045) 0%, transparent 32%),
+      radial-gradient(circle at 50% 100%, rgba(0,0,0,.72) 0%, transparent 52%);
+    opacity: .46;
+    pointer-events: none;
+    transition: opacity .8s var(--ease-lux);
+  }
+  .shooting-star {
+    position: fixed;
+    top: 13vh;
+    left: 0;
+    z-index: 1;
+    width: 180px;
+    height: 1px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.92) 18%, rgba(190,126,255,.72) 48%, rgba(91,77,255,.22) 74%, transparent 100%);
+    box-shadow: 0 0 10px rgba(190,126,255,.36), 0 0 24px rgba(91,77,255,.18);
+    pointer-events: none;
+    opacity: 0;
+    transform-origin: right center;
+    animation: meteorDrift 9.5s ease-in-out infinite;
+    animation-delay: 2.2s;
+  }
+  .shooting-star::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 0 12px rgba(255,255,255,.70), 0 0 20px rgba(190,126,255,.46);
+  }
+  .grain-texture {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: .04;
+    mix-blend-mode: overlay;
   }
   /* Everything above background */
-  header, .quick-access, nav, main, footer { position: relative; z-index: 1; }
+  header, .quick-access, nav, main, footer { position: relative; z-index: 2; }
 
   /* ---- Header ---- */
   header {
     padding: 36px 28px 22px;
     position: sticky; top:0; z-index:100;
-    background: rgba(10,8,18,.5);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(180,92,255,.14), transparent 34%),
+      rgba(24,18,48,.68);
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    border-bottom: 0;
+    box-shadow: 0 22px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.10);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(180,92,255,.36), rgba(91,77,255,.25), rgba(240,109,66,.18), transparent);
+    pointer-events: none;
   }
   header .top {
     display: flex;
@@ -80,31 +209,44 @@
     flex-wrap: wrap;
     gap: 16px;
   }
-  .brand-cn { font-size:13px; font-weight:700; color:#c4b5d0; letter-spacing:2px; }
+  .brand-cn {
+    font-size:13px;
+    font-weight:700;
+    color:#d8e5f6;
+    letter-spacing:2px;
+    text-shadow: 0 0 18px rgba(180,92,255,.16);
+  }
   .brand-tag { font-weight:400; color:var(--muted); margin-left:8px; font-size:12px; }
   header input {
     width: 360px; max-width: 50vw;
     padding: 12px 16px 12px 40px;
-    border: 1.5px solid var(--border);
+    border: 1px solid rgba(255,255,255,.09);
     border-radius: 24px;
     font-size: 16px;
-    background: var(--surface);
+    background:
+      radial-gradient(circle at var(--mx, 28%) var(--my, 50%), rgba(180,92,255,.16), transparent 36%),
+      rgba(255,255,255,.07);
     color: var(--text);
     outline: none;
-    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 -18px 36px rgba(91,77,255,.08), 0 12px 40px rgba(0,0,0,.28);
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    transition: all .6s var(--ease-lux);
   }
   header input:focus {
-    border-color: var(--purple);
-    box-shadow: 0 0 0 4px rgba(168,85,247,.12);
+    border-color: rgba(180,92,255,.36);
+    box-shadow: 0 0 0 4px rgba(180,92,255,.10), 0 18px 54px rgba(91,77,255,.16);
   }
   header input::placeholder { color: var(--muted); font-size: 15px; }
   .search-wrap { position: relative; display: inline-block; }
   .search-wrap::before {
-    content: '🔍';
+    content: '⌕';
     position: absolute;
     left: 14px; top: 50%;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 18px;
+    color: rgba(190,150,255,.82);
+    text-shadow: 0 0 14px rgba(180,92,255,.30);
     pointer-events: none;
   }
 
@@ -121,11 +263,14 @@
     gap: 12px;
     min-height: 58px;
     padding: 10px 12px;
-    background: rgba(16,11,26,.68);
-    border: 1px solid rgba(255,255,255,.08);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(180,92,255,.12), transparent 38%),
+      rgba(24,18,48,.66);
+    border: 1px solid transparent;
     border-radius: 16px;
-    box-shadow: 0 10px 28px rgba(0,0,0,.26);
-    backdrop-filter: blur(16px);
+    box-shadow: 0 24px 74px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.14), inset 0 -24px 46px rgba(91,77,255,.10);
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
     overflow: hidden;
     position: relative;
   }
@@ -134,7 +279,21 @@
     position: absolute;
     inset: -1px;
     pointer-events: none;
-    background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,.06) 45%, rgba(240,160,40,.1) 50%, transparent 58%);
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(120deg, transparent, rgba(180,92,255,.42), rgba(91,77,255,.30), rgba(240,109,66,.18), transparent);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .quick-access-shell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 40%, rgba(180,92,255,.13), transparent 34%),
+      linear-gradient(105deg, transparent 0%, rgba(255,255,255,.09) 45%, rgba(240,109,66,.10) 50%, transparent 58%);
     transform: translateX(-120%);
     animation: chromeSheen 7s ease-in-out infinite;
   }
@@ -143,7 +302,9 @@
     padding: 0 4px 0 2px;
     font-size: 13px;
     font-weight: 900;
-    color: #ffe0a3;
+    background: linear-gradient(180deg, #fff, #f7dca8 46%, #9CA3AF);
+    -webkit-background-clip: text;
+    color: transparent;
     letter-spacing: 1px;
   }
   .quick-access-track {
@@ -166,13 +327,15 @@
     padding: 7px 11px;
     color: var(--text);
     text-decoration: none;
-    background: linear-gradient(135deg, rgba(31,23,51,.94), rgba(19,30,43,.88));
-    border: 1px solid rgba(255,255,255,.1);
+    background:
+      radial-gradient(circle at var(--mx, 28%) var(--my, 50%), rgba(180,92,255,.14), transparent 42%),
+      rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
     border-radius: 999px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 -12px 24px rgba(91,77,255,.10), 0 12px 34px rgba(0,0,0,.26);
     position: relative;
     overflow: hidden;
-    transition: transform .26s cubic-bezier(.2,.8,.2,1), border-color .22s ease, background .22s ease, box-shadow .22s ease;
+    transition: all .6s var(--ease-lux);
   }
   .quick-chip::after {
     content: '';
@@ -184,9 +347,11 @@
   }
   .quick-chip:hover {
     transform: translateY(-4px) scale(1.025);
-    border-color: rgba(45,212,191,.38);
-    background: linear-gradient(135deg, rgba(43,30,68,.98), rgba(18,52,61,.9));
-    box-shadow: 0 12px 28px rgba(0,0,0,.34), 0 0 18px rgba(45,212,191,.1);
+    border-color: rgba(180,92,255,.38);
+    background:
+      radial-gradient(circle at var(--mx, 35%) var(--my, 45%), rgba(122,34,255,.13), transparent 46%),
+      rgba(255,255,255,.10);
+    box-shadow: 0 18px 42px rgba(0,0,0,.34), 0 0 26px rgba(180,92,255,.18);
   }
   .quick-chip:hover::after { transform: translateX(120%); }
   .quick-chip img {
@@ -214,12 +379,12 @@
     flex: 0 0 auto;
     margin-left: auto;
     padding: 5px 9px;
-    color: #a7f3d0;
+    color: #ded7ff;
     font-size: 12px;
     font-weight: 800;
-    border: 1px solid rgba(45,212,191,.22);
+    border: 1px solid rgba(180,92,255,.28);
     border-radius: 999px;
-    background: rgba(45,212,191,.08);
+    background: rgba(180,92,255,.10);
   }
 
   /* ---- Nav ---- */
@@ -238,38 +403,104 @@
     font-weight: 600;
     text-decoration: none;
     color: var(--sub);
-    background: var(--surface);
-    border: 1px solid transparent;
-    transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+    background: rgba(24,18,48,.56);
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 10px 28px rgba(0,0,0,.20);
+    transition: all .6s var(--ease-lux);
     cursor: pointer;
   }
   nav a:hover {
     color: #fff;
-    border-color: var(--border-hover);
-    transform: translateY(-1px);
+    border-color: rgba(180,92,255,.34);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(0,0,0,.30), 0 0 22px rgba(180,92,255,.16);
   }
   nav a.active {
     color: #fff;
-    background: linear-gradient(135deg, #9333ea, #f0a028);
-    border-color: transparent;
-    box-shadow: 0 4px 16px rgba(240,160,40,.25);
+    background:
+      radial-gradient(circle at 18% 20%, rgba(180,92,255,.20), transparent 46%),
+      radial-gradient(circle at 88% 82%, rgba(240,160,40,.13), transparent 42%),
+      rgba(255,255,255,.10);
+    border-color: rgba(180,92,255,.38);
+    box-shadow: 0 16px 42px rgba(0,0,0,.34), 0 0 24px rgba(180,92,255,.18);
   }
 
   /* ---- Intro curtain ---- */
   .intro-curtain {
     position: fixed; inset: 0; z-index: 10000;
-    background: #08040f;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(180,92,255,.15), transparent 34%),
+      radial-gradient(circle at 84% 18%, rgba(122,34,255,.16), transparent 38%),
+      radial-gradient(circle at 50% 88%, rgba(240,160,40,.08), transparent 42%),
+      #030712;
     display: flex; align-items: center; justify-content: center;
     pointer-events: all;
   }
   .intro-logo-wrap {
     position: relative;
+    display: block;
+    width: clamp(260px, 44vw, 560px);
+    aspect-ratio: 800 / 250;
+    padding: 0;
+    border: 0;
+    border-radius: 24px;
+    background: transparent;
+    cursor: pointer;
+    transform-origin: top left;
+    filter: drop-shadow(0 24px 70px rgba(0,0,0,.42)) drop-shadow(0 0 30px rgba(180,92,255,.18));
+  }
+  .intro-logo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -22px;
+    border-radius: 34px;
+    background:
+      radial-gradient(circle at 18% 50%, rgba(240,109,66,.22), transparent 24%),
+      radial-gradient(circle at 52% 50%, rgba(180,92,255,.18), transparent 36%),
+      radial-gradient(circle at 84% 50%, rgba(91,77,255,.16), transparent 30%);
+    opacity: .8;
+    filter: blur(18px);
+    pointer-events: none;
+    transition: opacity .6s var(--ease-lux), transform .6s var(--ease-lux);
+  }
+  .intro-logo-wrap:hover::before {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  .intro-logo-wrap:focus-visible {
+    outline: 2px solid rgba(180,92,255,.54);
+    outline-offset: 10px;
   }
   .intro-logo {
-    height: 130px; width: auto;
-  }
-  .intro-curtain.fly-away .intro-logo {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    user-select: none;
     pointer-events: none;
+    clip-path: inset(0 66% 0 0 round 24px);
+  }
+  .intro-click-hint {
+    position: absolute;
+    left: 0;
+    right: 66%;
+    bottom: -42px;
+    z-index: 2;
+    color: rgba(232,226,255,.72);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 0 18px rgba(180,92,255,.34);
+    pointer-events: none;
+  }
+  .intro-curtain.is-launching .intro-click-hint {
+    opacity: 0;
   }
 
   /* page hidden during intro */
@@ -278,6 +509,10 @@
   body.intro-active nav,
   body.intro-active footer { opacity: 0; }
   body.intro-active .bg-svg { opacity: 0; }
+  body.intro-active .shooting-star {
+    opacity: 0;
+    animation-play-state: paused;
+  }
 
   /* smooth fade transitions */
   .bg-svg { transition: opacity 0.8s ease; }
@@ -300,10 +535,45 @@
   .category {
     margin-top: 44px;
     padding: 28px 28px 16px;
-    background: rgba(0,0,0,.2);
-    border: 1px solid rgba(255,255,255,.05);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(180,92,255,.11), transparent 42%),
+      rgba(24,18,48,.62);
+    border: 1px solid transparent;
     border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 96px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.14), inset 0 -34px 70px rgba(91,77,255,.10);
+    backdrop-filter: blur(32px) saturate(195%);
+    -webkit-backdrop-filter: blur(32px) saturate(195%);
     /* GSAP ScrollTrigger handles entrance */
+  }
+  .category::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(120deg, transparent 5%, rgba(180,92,255,.42) 34%, rgba(91,77,255,.30) 58%, rgba(240,109,66,.14) 72%, transparent 96%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .category::after {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(circle at 12% 14%, rgba(180,92,255,.11), transparent 28%),
+      radial-gradient(circle at 86% 18%, rgba(240,160,40,.055), transparent 24%),
+      radial-gradient(circle at 76% 92%, rgba(122,34,255,.075), transparent 34%);
+    opacity: .75;
+    pointer-events: none;
+    transition: all .6s var(--ease-lux);
+  }
+  .category:hover::after {
+    transform: translate3d(10px, -8px, 0) scale(1.03);
+    opacity: 1;
   }
   .cat-title {
     font-size: 26px;
@@ -312,7 +582,11 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    color: var(--text);
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(180deg, #FFFFFF 6%, #dce6f4 48%, #9CA3AF 100%);
+    -webkit-background-clip: text;
+    color: transparent;
     letter-spacing: 1px;
   }
   .cat-title .gradient-bar {
@@ -321,20 +595,23 @@
     flex-shrink: 0;
     box-shadow: 0 0 12px rgba(168,85,247,.3);
     animation: barPulse 3.4s ease-in-out infinite;
+    background: linear-gradient(180deg, #a640ff 0%, #7557ff 22%, #f06d42 45%, #d747ff 68%, #4d67ff 100%) !important;
   }
 
-  .subcat { margin-top: 28px; }
+  .subcat { margin-top: 28px; position: relative; z-index: 1; }
   .subcat-title {
     font-size: 15px;
     font-weight: 700;
-    color: #e0d4e8;
+    color: #dbeafe;
     margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 3px;
     padding: 6px 0 6px 14px;
-    border-left: 3px solid rgba(240,160,40,.5);
-    transition: color .3s, border-color .3s;
-    background: linear-gradient(90deg, rgba(240,160,40,.06), transparent);
+    border-left: 3px solid rgba(180,92,255,.42);
+    transition: all .6s var(--ease-lux);
+    background:
+      radial-gradient(circle at 0% 50%, rgba(180,92,255,.13), transparent 38%),
+      radial-gradient(circle at 18% 50%, rgba(240,160,40,.045), transparent 42%);
     border-radius: 0 4px 4px 0;
   }
 
@@ -345,50 +622,66 @@
     gap: 10px;
   }
   .link-card {
+    --accent: var(--nebula);
+    --accent-soft: rgba(180,92,255,.14);
+    --accent-border: rgba(180,92,255,.28);
+    --mx: 50%;
+    --my: 50%;
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 14px 16px;
-    background: var(--card);
-    border: 1px solid rgba(255,255,255,.1);
+    background:
+      radial-gradient(circle at var(--mx) var(--my), var(--accent-soft), transparent 40%),
+      rgba(255,255,255,.075);
+    border: 1px solid transparent;
     border-radius: 12px;
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    box-shadow: 0 20px 52px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.17), inset 0 -20px 42px rgba(91,77,255,.10);
+    backdrop-filter: blur(32px) saturate(195%);
+    -webkit-backdrop-filter: blur(32px) saturate(195%);
     transform: translateZ(0);
-    transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .24s ease, background .24s ease, box-shadow .24s ease;
+    transition: all .6s var(--ease-lux);
     will-change: transform;
   }
   .link-card::before {
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0;
-    transition: opacity .35s;
-    border-radius: 12px;
+    border-radius: inherit;
+    padding: 1px;
+    opacity: .82;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.20) 18%, var(--accent-border) 46%, rgba(240,109,66,.16) 64%, transparent 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: all .6s var(--ease-lux);
   }
   .link-card::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(112deg, transparent 0%, transparent 38%, rgba(255,255,255,.12) 48%, transparent 58%, transparent 100%);
+    inset: -20%;
+    background:
+      radial-gradient(circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 20%, transparent), transparent 28%),
+      linear-gradient(112deg, transparent 0%, transparent 40%, rgba(255,255,255,.11) 49%, transparent 58%, transparent 100%);
     opacity: 0;
-    transform: translateX(-120%);
-    transition: transform .55s ease, opacity .25s ease;
-    border-radius: 12px;
+    transform: translateX(-18px);
+    transition: all .6s var(--ease-lux);
+    border-radius: inherit;
     pointer-events: none;
   }
   .link-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-5px) scale(1.025);
-    box-shadow: 0 16px 36px rgba(0,0,0,.48), 0 0 24px rgba(168,85,247,.12);
+    transform: translateY(-7px) scale(1.018);
+    box-shadow: 0 30px 74px rgba(0,0,0,.46), 0 0 38px color-mix(in srgb, var(--accent) 22%, transparent), inset 0 1px 0 rgba(255,255,255,.20);
     z-index: 2;
   }
   .link-card:hover::before { opacity: 1; }
   .link-card:hover::after {
     opacity: 1;
-    transform: translateX(120%);
+    transform: translateX(10px);
   }
 
   .link-card .icon {
@@ -397,18 +690,22 @@
     flex-shrink: 0;
     position: relative;
     z-index: 1;
-    transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .24s ease;
+    background: rgba(255,255,255,.06);
+    box-shadow: 0 10px 30px rgba(0,0,0,.22), 0 0 0 1px rgba(255,255,255,.08);
+    transition: all .6s var(--ease-lux);
   }
-  .link-card:hover .icon { transform: scale(1.12) rotate(-4deg); box-shadow: 0 8px 20px rgba(0,0,0,.24); }
+  .link-card:hover .icon { transform: scale(1.12) rotate(-4deg); box-shadow: 0 16px 34px rgba(0,0,0,.3), 0 0 22px color-mix(in srgb, var(--accent) 18%, transparent); }
 
   .link-card .text { position: relative; z-index: 1; min-width: 0; }
   .link-card .name {
     font-size: 16px; font-weight: 700;
-    color: var(--text);
+    background: linear-gradient(180deg, #FFFFFF 6%, #dfe7f3 58%, #9CA3AF 100%);
+    -webkit-background-clip: text;
+    color: transparent;
     line-height: 1.4;
   }
   .link-card .desc {
-    font-size: 13px; color: #d4c9de;
+    font-size: 13px; color: #b9c3d2;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     margin-top: 3px;
     font-weight: 500;
@@ -422,11 +719,13 @@
     z-index: 1;
     opacity: 0;
     transform: translateX(-8px);
-    transition: opacity .22s ease, transform .22s ease;
+    transition: all .6s var(--ease-lux);
   }
   .link-card:hover .arrow {
     opacity: 1;
     transform: translateX(3px);
+    color: rgba(200,170,255,.90);
+    text-shadow: 0 0 18px rgba(180,92,255,.30);
   }
 
   .note {
@@ -437,27 +736,34 @@
   .note a { color: var(--muted); text-decoration: none; }
   .note a:hover { color: var(--sub); }
 
-  /* Card variants */
-  .card-ai:hover { border-color: rgba(168,85,247,.5); }
-  .card-ai::before { background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(192,132,252,.04)); }
-
-  .card-img:hover { border-color: rgba(192,132,252,.45); }
-  .card-img::before { background: linear-gradient(135deg, rgba(147,51,234,.06), rgba(168,85,247,.04)); }
-
-  .card-video:hover { border-color: rgba(240,160,40,.45); }
-  .card-video::before { background: linear-gradient(135deg, rgba(240,160,40,.06), rgba(251,191,36,.04)); }
-
-  .card-music:hover { border-color: rgba(168,85,247,.45); }
-  .card-music::before { background: linear-gradient(135deg, rgba(147,51,234,.06), rgba(168,85,247,.04)); }
-
-  .card-tool:hover { border-color: rgba(240,160,40,.5); }
-  .card-tool::before { background: linear-gradient(135deg, rgba(240,160,40,.08), rgba(251,191,36,.04)); }
-
-  .card-data:hover { border-color: rgba(192,132,252,.5); }
-  .card-data::before { background: linear-gradient(135deg, rgba(147,51,234,.08), rgba(168,85,247,.04)); }
-
-  .card-design:hover { border-color: rgba(240,160,40,.45); }
-  .card-design::before { background: linear-gradient(135deg, rgba(168,85,247,.08), rgba(240,160,40,.04)); }
+  /* Card variants keep the original purple-gold personality as restrained accents. */
+  .card-ai {
+    --accent: #7A22FF;
+    --accent-soft: rgba(122,34,255,.13);
+    --accent-border: rgba(122,34,255,.2);
+  }
+  .card-img {
+    --accent: #c084fc;
+    --accent-soft: rgba(192,132,252,.11);
+    --accent-border: rgba(192,132,252,.2);
+  }
+  .card-video,
+  .card-tool,
+  .card-design {
+    --accent: #f0a028;
+    --accent-soft: rgba(240,160,40,.12);
+    --accent-border: rgba(240,160,40,.18);
+  }
+  .card-music {
+    --accent: #6D5DFF;
+    --accent-soft: rgba(109,93,255,.13);
+    --accent-border: rgba(109,93,255,.28);
+  }
+  .card-data {
+    --accent: #8b5cf6;
+    --accent-soft: rgba(139,92,246,.12);
+    --accent-border: rgba(139,92,246,.2);
+  }
 
   /* ---- Hidden / No result ---- */
   .hidden { display: none !important; }
@@ -466,6 +772,9 @@
     padding: 100px 20px;
     color: var(--muted);
     font-size: 17px;
+    background: linear-gradient(180deg, #FFFFFF 6%, #cbd5e1 52%, #9CA3AF 100%);
+    -webkit-background-clip: text;
+    color: transparent;
   }
 
   /* ---- Footer ---- */
@@ -474,12 +783,17 @@
     text-align: center;
     padding: 50px 20px;
     font-size: 13px;
-    color: #8b7d9a;
+    color: #8fa0b8;
   }
 
   /* ---- Brand SVG ---- */
   .brand { display:flex; flex-direction:column; gap:4px; }
-  .brand-svg { display:block; height:48px; width:auto; }
+  .brand-svg {
+    display:block;
+    height:64px;
+    width:auto;
+    filter: drop-shadow(0 14px 28px rgba(180,92,255,.12)) drop-shadow(0 0 18px rgba(240,109,66,.08));
+  }
 
   /* ---- Nav indicator ---- */
   .nav-indicator {
@@ -487,7 +801,12 @@
     bottom: 0;
     height: 3px;
     border-radius: 3px;
-    background: linear-gradient(90deg, #a855f7, #f0a028);
+    background:
+      radial-gradient(circle at 15% 50%, rgba(255,255,255,.95), transparent 24%),
+      radial-gradient(circle at 42% 50%, rgba(180,92,255,.95), transparent 42%),
+      radial-gradient(circle at 78% 50%, rgba(240,109,66,.78), transparent 42%),
+      rgba(122,34,255,.72);
+    box-shadow: 0 0 18px rgba(180,92,255,.28), 0 0 18px rgba(240,109,66,.12);
     pointer-events: none;
     transition: none;
   }
@@ -501,37 +820,34 @@
     z-index: 200;
     width: 48px; height: 48px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #a855f7, #f0a028);
-    border: none;
+    background:
+      radial-gradient(circle at 28% 20%, rgba(255,255,255,.7), transparent 24%),
+      radial-gradient(circle at 58% 42%, rgba(180,92,255,.48), transparent 44%),
+      radial-gradient(circle at 74% 78%, rgba(240,160,40,.38), transparent 46%),
+      rgba(255,255,255,.09);
+    border: 1px solid rgba(180,92,255,.30);
     color: #fff;
     font-size: 20px;
     cursor: pointer;
     opacity: 0;
     transform: scale(0) translateX(20px);
     pointer-events: none;
-    box-shadow: 0 4px 20px rgba(168,85,247,.35);
-    transition: none;
+    box-shadow: 0 18px 46px rgba(0,0,0,.36), 0 0 26px rgba(180,92,255,.18);
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    transition: all .6s var(--ease-lux);
   }
   .back-to-top.visible { pointer-events: auto; }
-
-  /* ---- Spotlight ---- */
-  .spotlight {
-    position: fixed;
-    z-index: 0;
-    width: 420px; height: 420px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(192,132,252,.07) 0%, rgba(168,85,247,.035) 40%, rgba(240,160,40,.018) 56%, transparent 74%);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    filter: blur(1px);
+  .back-to-top:hover {
+    transform: scale(1.06) translateY(-3px);
+    border-color: rgba(240,160,40,.26);
   }
 
   /* ---- Ripple ---- */
   .ripple {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255,255,255,.12);
+    background: rgba(180,92,255,.18);
     transform: scale(0);
     pointer-events: none;
     z-index: 0;
@@ -541,7 +857,9 @@
   .no-result {
     text-align: center;
     padding: 100px 20px;
-    color: var(--muted);
+    background: linear-gradient(180deg, #FFFFFF 6%, #cbd5e1 52%, #9CA3AF 100%);
+    -webkit-background-clip: text;
+    color: transparent;
     font-size: 17px;
   }
 
@@ -549,7 +867,7 @@
   @media (max-width: 768px) {
     body { font-size: 15px; }
     header { padding: 24px 16px 16px; }
-    .brand-svg { height: 34px; }
+    .brand-svg { height: 40px; }
     .brand-cn { font-size: 11px; letter-spacing: 1px; }
     .brand-tag { display: block; margin-left: 0; margin-top: 2px; font-size: 11px; }
     header input { max-width: 55vw; font-size: 14px; }
@@ -581,7 +899,6 @@
       scroll-behavior: auto !important;
       transition-duration: .001ms !important;
     }
-    .spotlight { display: none; }
   }
 </style>
 </head>
@@ -589,78 +906,26 @@
 
 <!-- Background SVG layer -->
 <div class="bg-svg"></div>
+<svg class="grain-texture" aria-hidden="true" focusable="false">
+  <filter id="noiseFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="4" stitchTiles="stitch"/>
+  </filter>
+  <rect width="100%" height="100%" fill="#ffffff" filter="url(#noiseFilter)"></rect>
+</svg>
+<div class="shooting-star" aria-hidden="true"></div>
 
 <!-- Intro curtain -->
 <div class="intro-curtain" id="introCurtain">
-  <div class="intro-logo-wrap">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 160" class="intro-logo" id="introLogo">
-      <defs>
-        <linearGradient id="introGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FFE259"/>
-          <stop offset="100%" stop-color="#FFA751"/>
-        </linearGradient>
-        <filter id="introGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="6" result="blur"/>
-          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-        </filter>
-      </defs>
-      <circle class="intro-glow-circle" cx="100" cy="80" r="70" fill="#700B3F" opacity="0.5" filter="url(#introGlow)"/>
-      <circle class="intro-glow-circle" cx="580" cy="40" r="85" fill="#50072D" opacity="0.4" filter="url(#introGlow)"/>
-      <path class="intro-hex-outer" d="M60,20 L107,47 L107,103 L60,130 L13,103 L13,47 Z" fill="none" stroke="url(#introGoldGrad)" stroke-width="4"/>
-      <path class="intro-hex-inner" d="M60,10 L116,42 L116,108 L60,140 L4,108 L4,42 Z" fill="none" stroke="#9D174D" stroke-width="1.5" opacity="0.6"/>
-      <polygon class="intro-hex-triangle" points="48,55 85,77 48,99" fill="url(#introGoldGrad)" style="transform-origin:60px 77px"/>
-      <g class="intro-brand-text" transform="translate(180, 100)">
-        <text font-family="system-ui, -apple-system, sans-serif" font-size="58" font-weight="900" letter-spacing="2">
-          <tspan fill="#FBCFE8">MEDIA </tspan>
-          <tspan fill="url(#introGoldGrad)">VAULT</tspan>
-        </text>
-        <text class="intro-brand-sub" y="30" x="5" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D946EF" letter-spacing="8">CREATORS ASSET LIBRARY</text>
-      </g>
-      <circle class="intro-sparkle" cx="610" cy="50" r="3" fill="#FFE259" filter="url(#introGlow)"/>
-      <circle class="intro-sparkle" cx="640" cy="30" r="1.5" fill="#FFA751"/>
-      <circle class="intro-sparkle" cx="170" cy="40" r="2" fill="#FFE259"/>
-      <circle class="intro-sparkle" cx="560" cy="130" r="2" fill="#FBCFE8"/>
-    </svg>
-  </div>
+  <button class="intro-logo-wrap" id="introLogoWrap" type="button" aria-label="点击进入素材库">
+    <img class="intro-logo" id="introLogo" src="loge.svg" alt="一个网站">
+    <span class="intro-click-hint">点击进入</span>
+  </button>
 </div>
 
 <header>
   <div class="top">
     <div class="brand">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 160" class="brand-svg">
-        <defs>
-          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#FFE259"/>
-            <stop offset="100%" stop-color="#FFA751"/>
-          </linearGradient>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="6" result="blur"/>
-            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-          </filter>
-        </defs>
-        <!-- Glow circles (background) -->
-        <circle class="glow-circle" cx="100" cy="80" r="70" fill="#700B3F" opacity="0.5" filter="url(#glow)"/>
-        <circle class="glow-circle" cx="580" cy="40" r="85" fill="#50072D" opacity="0.4" filter="url(#glow)"/>
-        <!-- Hexagon outer (path for getTotalLength) -->
-        <path class="hex-outer" d="M60,20 L107,47 L107,103 L60,130 L13,103 L13,47 Z" fill="none" stroke="url(#goldGrad)" stroke-width="4"/>
-        <!-- Hexagon inner (path for getTotalLength) -->
-        <path class="hex-inner" d="M60,10 L116,42 L116,108 L60,140 L4,108 L4,42 Z" fill="none" stroke="#9D174D" stroke-width="1.5" opacity="0.6"/>
-        <!-- Center triangle -->
-        <polygon class="hex-triangle" points="48,55 85,77 48,99" fill="url(#goldGrad)" style="transform-origin:60px 77px"/>
-        <!-- Brand text -->
-        <g class="brand-text" transform="translate(180, 100)">
-          <text font-family="system-ui, -apple-system, sans-serif" font-size="58" font-weight="900" letter-spacing="2">
-            <tspan fill="#FBCFE8">MEDIA </tspan>
-            <tspan fill="url(#goldGrad)">VAULT</tspan>
-          </text>
-          <text class="brand-sub" y="30" x="5" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D946EF" letter-spacing="8">CREATORS ASSET LIBRARY</text>
-        </g>
-        <!-- Sparkle dots -->
-        <circle class="sparkle" cx="610" cy="50" r="3" fill="#FFE259" filter="url(#glow)"/>
-        <circle class="sparkle" cx="640" cy="30" r="1.5" fill="#FFA751"/>
-        <circle class="sparkle" cx="170" cy="40" r="2" fill="#FFE259"/>
-        <circle class="sparkle" cx="560" cy="130" r="2" fill="#FBCFE8"/>
-      </svg>
+      <img class="brand-svg" src="loge.svg" alt="一个网站">
       <div class="brand-cn">自媒体创作素材库 <span class="brand-tag">资源导航 · 持续更新</span></div>
     </div>
     <div class="search-wrap">
@@ -693,7 +958,7 @@
 <!-- ====== 一、常用 AI ====== -->
 <section class="category" data-cats="常用AI">
   <div class="cat-title">
-    <div class="gradient-bar" style="background:linear-gradient(180deg,#f0a028,#a855f7)"></div>
+    <div class="gradient-bar"></div>
     常用 AI
   </div>
   <div class="subcat"><div class="subcat-title">高频 AI 入口</div>
@@ -704,6 +969,8 @@
       <a class="link-card card-ai" href="https://www.doubao.com/" target="_blank"><img class="icon" src="icons/doubao.png" alt=""><div class="text"><div class="name">豆包</div><div class="desc">字节跳动智能对话助手</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-video" href="https://jianying.com/" target="_blank"><img class="icon" src="icons/jimeng.png" alt=""><div class="text"><div class="name">即梦AI</div><div class="desc">字节跳动一站式AI创作平台</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-video" href="https://runwayml.com/" target="_blank"><img class="icon" src="icons/runway.png" alt=""><div class="text"><div class="name">Runway</div><div class="desc">全球AI视频创作平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><img class="icon" src="icons/midjourney.png" alt=""><div class="text"><div class="name">Midjourney</div><div class="desc">顶级AI图像生成与视觉探索平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><img class="icon" src="icons/liblibai.ico" alt=""><div class="text"><div class="name">LiblibAI</div><div class="desc">哩布哩布AI绘画模型与创作社区</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><img class="icon" src="icons/aigc.png" alt=""><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://youmind.com/zh-CN/prompts" target="_blank"><img class="icon" src="icons/youmind.ico" alt=""><div class="text"><div class="name">YouMind Prompts</div><div class="desc">AI提示词资源合集</div></div><div class="arrow">↗</div></a>
     </div>
@@ -713,7 +980,7 @@
 <!-- ====== 二、AI 应用 ====== -->
 <section class="category" data-cats="AI应用">
   <div class="cat-title">
-    <div class="gradient-bar" style="background:linear-gradient(180deg,#a855f7,#2dd4bf)"></div>
+    <div class="gradient-bar"></div>
     AI 应用
   </div>
   <div class="subcat"><div class="subcat-title">AI 对话模型</div>
@@ -744,11 +1011,13 @@
 <!-- ====== 三、AI 创作 ====== -->
 <section class="category" data-cats="AI创作">
   <div class="cat-title">
-    <div class="gradient-bar" style="background:linear-gradient(180deg,#f0a028,#f59e0b)"></div>
+    <div class="gradient-bar"></div>
     AI 创作
   </div>
   <div class="subcat"><div class="subcat-title">AI 绘画</div>
     <div class="links">
+      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><img class="icon" src="icons/midjourney.png" alt=""><div class="text"><div class="name">Midjourney</div><div class="desc">顶级AI图像生成与视觉探索平台</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><img class="icon" src="icons/liblibai.ico" alt=""><div class="text"><div class="name">LiblibAI</div><div class="desc">哩布哩布AI绘画模型与创作社区</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://d.design/" target="_blank"><img class="icon" src="icons/duiyou.png" alt=""><div class="text"><div class="name">堆友</div><div class="desc">阿里出品AI绘画与3D素材</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://www.recraft.ai/ai-image-vectorizer" target="_blank"><img class="icon" src="icons/recraft.png" alt=""><div class="text"><div class="name">Recraft Vectorizer</div><div class="desc">AI图片矢量化转换工具</div></div><div class="arrow">↗</div></a>
     </div>
@@ -772,7 +1041,7 @@
 <!-- ====== 四、AI 素材 / 灵感 ====== -->
 <section class="category" data-cats="AI素材">
   <div class="cat-title">
-    <div class="gradient-bar" style="background:linear-gradient(180deg,#2dd4bf,#a855f7)"></div>
+    <div class="gradient-bar"></div>
     AI 素材 / 灵感
   </div>
   <div class="subcat"><div class="subcat-title">AIGC 导航与提示词</div>
@@ -811,7 +1080,7 @@
 <!-- ====== 五、素材资源 ====== -->
 <section class="category" data-cats="素材库">
   <div class="cat-title">
-    <div class="gradient-bar" style="background:linear-gradient(180deg,#c084fc,#a855f7)"></div>
+    <div class="gradient-bar"></div>
     素材资源
   </div>
 
@@ -872,7 +1141,7 @@
 <!-- ====== 六、自媒体运营 ====== -->
 <section class="category" data-cats="运营">
   <div class="cat-title">
-    <div class="gradient-bar" style="background:linear-gradient(180deg,#f0a028,#f59e0b)"></div>
+    <div class="gradient-bar"></div>
     自媒体运营
   </div>
   <div class="subcat"><div class="subcat-title">矩阵管理</div>
@@ -902,7 +1171,7 @@
 <!-- ====== 七、工具箱 ====== -->
 <section class="category" data-cats="工具箱">
   <div class="cat-title">
-    <div class="gradient-bar" style="background:linear-gradient(180deg,#94a3b8,#f0a028)"></div>
+    <div class="gradient-bar"></div>
     工具箱
   </div>
   <div class="subcat"><div class="subcat-title">图片处理</div>
@@ -962,7 +1231,6 @@
 
 </main>
 
-<div class="spotlight" id="spotlight"></div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
 <footer>Made with ❤️ · 持续更新</footer>
 
@@ -988,88 +1256,75 @@ function playIntro() {
     }
 
     const curtain = document.getElementById('introCurtain');
+    const introWrap = document.getElementById('introLogoWrap');
     const introLogo = document.getElementById('introLogo');
     const headerLogo = document.querySelector('.brand-svg');
-    const hexOuter = document.querySelector('.intro-hex-outer');
-    const hexInner = document.querySelector('.intro-hex-inner');
+    const hint = document.querySelector('.intro-click-hint');
 
-    if (!curtain || !hexOuter || !hexInner) { resolve(); return; }
+    if (!curtain || !introWrap || !introLogo || !headerLogo) { resolve(); return; }
 
-    const outerLen = hexOuter.getTotalLength();
-    const innerLen = hexInner.getTotalLength();
+    let launched = false;
+    gsap.set(introWrap, {
+      opacity: 0,
+      scale: 0.84,
+      y: 18
+    });
+    gsap.set(introLogo, { clipPath: 'inset(0 66% 0 0 round 24px)' });
+    gsap.set(hint, { opacity: 0, y: 10 });
 
-    // Init — hide all stroke elements
-    gsap.set(hexOuter, { strokeDasharray: outerLen, strokeDashoffset: outerLen });
-    gsap.set(hexInner, { strokeDasharray: innerLen, strokeDashoffset: innerLen });
-    gsap.set('.intro-hex-triangle', { scale: 0, transformOrigin: '60px 77px' });
-    gsap.set('.intro-brand-text tspan', { y: 30, opacity: 0 });
-    gsap.set('.intro-brand-sub', { y: 15, opacity: 0 });
-    gsap.set('.intro-sparkle', { opacity: 0 });
+    const idleTween = gsap.to(introWrap, {
+      y: '-=8',
+      duration: 2.4,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      delay: .5
+    });
 
-    // ---- Stage 1: Draw in center ----
-    const drawTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .to(introWrap, { opacity: 1, scale: 1, y: 0, duration: .62 })
+      .to(hint, { opacity: 1, y: 0, duration: .28 }, '-=.12');
 
-    drawTl.to(hexOuter, { strokeDashoffset: 0, duration: 0.58 }, 0)
-      .to(hexInner, { strokeDashoffset: 0, duration: 0.46 }, 0.1)
-      .to('.intro-hex-triangle', { scale: 1, duration: 0.32, ease: 'back.out(2)' }, 0.24)
-      .to('.intro-brand-text tspan', { y: 0, opacity: 1, stagger: 0.035, duration: 0.34 }, 0.34)
-      .to('.intro-brand-sub', { y: 0, opacity: 1, duration: 0.25 }, 0.48)
-      .to('.intro-sparkle', { opacity: 0.75, stagger: 0.04, duration: 0.2 }, 0.55);
+    function launchIntro() {
+      if (launched) return;
+      launched = true;
+      idleTween.kill();
+      curtain.classList.add('is-launching');
+      introWrap.disabled = true;
+      introWrap.style.cursor = 'default';
 
-    // ---- Stage 2: Fly to header ----
-    drawTl.add(function() {
-      // Brief glow pulse before flying
-      gsap.to('.intro-glow-circle', { opacity: 0.8, duration: 0.4, yoyo: true, repeat: 1 });
-
-      gsap.to('.intro-sparkle', { opacity: 0, duration: 0.3 });
-
-      // Calculate target position
-      const introWrap = document.querySelector('.intro-logo-wrap');
       const introWrapRect = introWrap.getBoundingClientRect();
       const headerRect = headerLogo.getBoundingClientRect();
-
       const deltaX = headerRect.left - introWrapRect.left;
       const deltaY = headerRect.top - introWrapRect.top;
-      const scaleRatio = headerRect.height / 130; // 130px = intro logo height
+      const scaleRatio = headerRect.width / introWrapRect.width;
 
-      // Fly to corner + curtain bg fades
-      const flyTl = gsap.timeline({
+      gsap.timeline({
+        defaults: { ease: 'power3.inOut' },
         onComplete: function() {
           sessionStorage.setItem('introPlayed', '1');
           resolve();
         }
-      });
+      })
+        .to(hint, { opacity: 0, y: -8, duration: .18, ease: 'power2.out' }, 0)
+        .to(introLogo, { clipPath: 'inset(0 0% 0 0 round 24px)', duration: .58, ease: 'power3.out' }, .04)
+        .to(introWrap, { scale: 1.045, duration: .18, ease: 'power2.out', yoyo: true, repeat: 1 }, .46)
+        .to(introWrap, {
+          x: deltaX,
+          y: deltaY,
+          scale: scaleRatio,
+          transformOrigin: 'top left',
+          duration: .62
+        }, .72)
+        .to(curtain, { background: 'rgba(3,7,18,0)', duration: .42, ease: 'power2.out' }, .88);
+    }
 
-      flyTl.to(introWrap, {
-        x: deltaX,
-        y: deltaY,
-        scale: scaleRatio,
-        transformOrigin: 'top left',
-        duration: 0.42,
-        ease: 'power3.inOut'
-      }, 0)
-      .to(curtain, { background: 'rgba(8,4,15,0)', duration: 0.3, ease: 'power2.out' }, 0.16)
-      .call(function() {
-        // Kill infinite breathing/sparkle tweens
-        if (drawTl._introCleanup) drawTl._introCleanup();
-      });
-
-    }, '+=0.08');
-
-    const glowTween = gsap.to('.intro-glow-circle', {
-      opacity: '+=0.2', duration: 2.8, repeat: -1, yoyo: true,
-      ease: 'sine.inOut', stagger: 0.5
+    introWrap.addEventListener('click', launchIntro, { once: true });
+    introWrap.addEventListener('keydown', function(event) {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      launchIntro();
     });
-    const sparkleTween = gsap.to('.intro-sparkle', {
-      opacity: 0.3, duration: 2.5, repeat: -1, yoyo: true,
-      ease: 'sine.inOut', stagger: { each: 0.3, from: 'random' }
-    });
-
-    // Store for cleanup after intro
-    drawTl._introCleanup = function() {
-      glowTween.kill();
-      sparkleTween.kill();
-    };
   });
 }
 
@@ -1226,36 +1481,35 @@ function initBackToTop() {
   });
 }
 
-// ======== 6. Spotlight (desktop only) ========
-function initSpotlight() {
-  const spotlight = document.getElementById('spotlight');
-  if (!spotlight || REDUCE_MOTION) return;
+// ======== 6. Fluid hover highlights ========
+function initFluidHover() {
+  if (REDUCE_MOTION) return;
 
   const mm = window.matchMedia('(pointer: fine) and (hover: hover)');
   if (!mm.matches) return;
 
-  const main = document.getElementById('main');
-  if (!main) return;
-
-  const moveX = gsap.quickTo(spotlight, 'left', { duration: 0.45, ease: 'power3.out' });
-  const moveY = gsap.quickTo(spotlight, 'top', { duration: 0.45, ease: 'power3.out' });
-  const fade = gsap.quickTo(spotlight, 'opacity', { duration: 0.35, ease: 'power2.out' });
-
-  main.addEventListener('mousemove', function(e) {
-    moveX(e.clientX);
-    moveY(e.clientY);
-    fade(1);
+  document.addEventListener('pointermove', function(e) {
+    const el = e.target.closest('.link-card, .quick-chip, header input');
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty('--mx', x.toFixed(2) + '%');
+    el.style.setProperty('--my', y.toFixed(2) + '%');
   });
 
-  main.addEventListener('mouseleave', function() {
-    fade(0);
+  document.addEventListener('pointerout', function(e) {
+    const el = e.target.closest('.link-card, .quick-chip, header input');
+    if (!el || el.contains(e.relatedTarget)) return;
+    el.style.setProperty('--mx', '50%');
+    el.style.setProperty('--my', '50%');
   });
 }
 
 // ======== Quick Access (recent clicks + defaults) ========
 const RECENT_LINKS_KEY = 'mediaVault.recentLinks.v1';
 const MAX_RECENT_LINKS = 10;
-const DEFAULT_QUICK_NAMES = ['ChatGPT', 'Claude', 'DeepSeek', '豆包', '即梦AI', 'Pexels'];
+const DEFAULT_QUICK_NAMES = ['ChatGPT', 'Claude', 'DeepSeek', '豆包', '即梦AI', 'Midjourney', 'LiblibAI', 'Pexels'];
 
 function isValidQuickLink(link) {
   return !!(link && link.name && link.href && typeof link.name === 'string' && typeof link.href === 'string');
@@ -1534,7 +1788,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initCards();
   initNav();
   initBackToTop();
-  initSpotlight();
+  initFluidHover();
 });
 </script>
 </body>

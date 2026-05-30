@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="neon-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffea79" />
+      <stop offset="60%" stop-color="#ffa234" />
+      <stop offset="100%" stop-color="#ff4b72" />
+    </linearGradient>
+
+    <linearGradient id="aurora-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="50%" stop-color="#9b51e0" />
+      <stop offset="100%" stop-color="#ff2a85" />
+    </linearGradient>
+
+    <linearGradient id="text-metallic" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#cfc7e8" />
+    </linearGradient>
+
+    <filter id="neon-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="ambient-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+    </filter>
+  </defs>
+
+  <circle cx="140" cy="125" r="80" fill="#9b51e0" opacity="0.2" filter="url(#ambient-blur)" />
+  <circle cx="450" cy="125" r="100" fill="#ff2a85" opacity="0.08" filter="url(#ambient-blur)" />
+
+  <g transform="translate(140, 125)">
+    <circle r="68" fill="#170c2b" fill-opacity="0.5" stroke="#361b5c" stroke-width="1.5" />
+    <circle r="74" fill="none" stroke="url(#aurora-grad)" stroke-width="1" opacity="0.4" stroke-dasharray="6 4" />
+    
+    <polygon points="0,-48 41.57,-24 41.57,24 0,48 -41.57,24 -41.57,-24" 
+             fill="none" stroke="url(#neon-gold)" stroke-width="3.5" stroke-linejoin="round" filter="url(#neon-glow)" />
+             
+    <polygon points="0,-39 33.77,-19.5 33.77,19.5 0,39 -33.77,19.5 -33.77,-19.5" 
+             fill="none" stroke="url(#neon-gold)" stroke-width="1" opacity="0.6" stroke-linejoin="round" />
+
+    <g transform="translate(-8, -14)">
+      <path d="M 0,0 L 0,28 L 8,21 L 14.5,33 L 19,30.5 L 12.5,19 L 21,19 Z" 
+            fill="url(#neon-gold)" filter="url(#neon-glow)" />
+      <path d="M 2,3 L 2,24 L 7.5,19 L 14,31 L 16.5,29.5 L 10.5,17.5 L 17,17.5 Z" 
+            fill="#ffffff" opacity="0.95" />
+    </g>
+  </g>
+
+  <g transform="translate(255, 132)">
+    <text x="0" y="0" 
+          font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif" 
+          font-size="62" 
+          font-weight="900" 
+          fill="url(#text-metallic)" 
+          letter-spacing="6" 
+          filter="drop-shadow(0px 4px 15px rgba(155, 81, 224, 0.3))">一个网站</text>
+    
+    <path d="M 6,18 L 265,18 L 278,30" fill="none" stroke="url(#aurora-grad)" stroke-width="3.5" stroke-linecap="round" filter="url(#neon-glow)" />
+    <rect x="6" y="16" width="6" height="4" fill="#ffffff" filter="url(#neon-glow)" />
+
+    <text x="8" y="52" 
+          font-family="'Segoe UI', system-ui, Roboto, Helvetica, sans-serif" 
+          font-size="13" 
+          font-weight="800" 
+          fill="#a855f7" 
+          letter-spacing="7.5" 
+          opacity="0.95">INTELLIGENT PORTAL HUB</text>
+  </g>
+</svg>

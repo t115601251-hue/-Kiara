@@ -52,18 +52,6 @@
     isolation: isolate;
   }
 
-  @keyframes meshDrift {
-    0%, 100% {
-      transform: translate3d(0, 0, 0) scale(1);
-      background-position: 16% 18%, 82% 10%, 48% 82%, 88% 70%, 44% 45%, center;
-      filter: saturate(1.04) brightness(.78);
-    }
-    50% {
-      transform: translate3d(-20px, -28px, 0) scale(1.04);
-      background-position: 12% 24%, 86% 16%, 54% 76%, 80% 78%, 48% 39%, center;
-      filter: saturate(1.12) brightness(.86);
-    }
-  }
   @keyframes chromeSheen {
     0%, 42% { transform: translateX(-120%); opacity: 0; }
     52% { opacity: 1; }
@@ -74,60 +62,30 @@
     50% { box-shadow: 0 0 26px rgba(215,71,255,.38), 0 0 22px rgba(240,109,66,.24); filter: saturate(1.25); }
   }
   @keyframes meteorDrift {
-    0%, 64% {
+    0%, 72% {
       opacity: 0;
-      transform: translate3d(-18vw, 0, 0) rotate(-18deg);
+      transform: translate3d(-18vw, -6vh, 0) rotate(-18deg);
     }
-    68% { opacity: .78; }
-    76% {
+    76% { opacity: .82; }
+    84% {
       opacity: 0;
-      transform: translate3d(118vw, 46vh, 0) rotate(-18deg);
+      transform: translate3d(112vw, 42vh, 0) rotate(-18deg);
     }
     100% {
       opacity: 0;
-      transform: translate3d(118vw, 46vh, 0) rotate(-18deg);
+      transform: translate3d(112vw, 42vh, 0) rotate(-18deg);
     }
   }
-
-  /* Holographic mesh background */
+  /* Static background */
   .bg-svg {
     position: fixed;
-    inset: -12%;
+    inset: 0;
     z-index: 0;
     background:
-      radial-gradient(circle at 16% 18%, rgba(122,34,255,.10) 0%, rgba(122,34,255,.055) 12%, transparent 34%),
-      radial-gradient(circle at 82% 10%, rgba(91,77,255,.10) 0%, rgba(91,77,255,.055) 14%, transparent 36%),
-      radial-gradient(circle at 48% 82%, rgba(180,92,255,.08) 0%, rgba(180,92,255,.04) 16%, transparent 40%),
-      radial-gradient(circle at 88% 70%, rgba(215,71,255,.08) 0%, rgba(122,34,255,.04) 18%, transparent 42%),
-      radial-gradient(circle at 44% 45%, rgba(255,255,255,.025) 0%, transparent 30%),
-      url('背景.png') center center / cover no-repeat;
+      linear-gradient(180deg, rgba(3,7,18,.18), rgba(3,7,18,.82)),
+      url('background-nebula.webp') center center / cover no-repeat;
     opacity: 1;
     pointer-events: none;
-    animation: meshDrift 28s var(--ease-lux) infinite;
-  }
-  .bg-svg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(31deg, transparent 47%, rgba(210,198,255,.16) 49%, rgba(210,198,255,.16) 51%, transparent 53%) 9% 16%/250px 120px no-repeat,
-      linear-gradient(-24deg, transparent 48%, rgba(210,198,255,.14) 49%, rgba(210,198,255,.14) 51%, transparent 52%) 68% 12%/260px 130px no-repeat,
-      linear-gradient(18deg, transparent 48%, rgba(180,160,255,.13) 49%, rgba(180,160,255,.13) 51%, transparent 52%) 58% 68%/310px 150px no-repeat,
-      radial-gradient(circle at 12% 18%, rgba(255,255,255,.82) 0 1px, transparent 2px),
-      radial-gradient(circle at 19% 29%, rgba(209,196,255,.70) 0 1px, transparent 2px),
-      radial-gradient(circle at 28% 22%, rgba(255,255,255,.60) 0 1px, transparent 2px),
-      radial-gradient(circle at 68% 16%, rgba(255,255,255,.78) 0 1px, transparent 2px),
-      radial-gradient(circle at 75% 25%, rgba(204,194,255,.66) 0 1px, transparent 2px),
-      radial-gradient(circle at 87% 18%, rgba(255,255,255,.58) 0 1px, transparent 2px),
-      radial-gradient(circle at 62% 74%, rgba(255,255,255,.72) 0 1px, transparent 2px),
-      radial-gradient(circle at 76% 80%, rgba(203,190,255,.62) 0 1px, transparent 2px),
-      radial-gradient(circle at 42% 64%, rgba(255,255,255,.45) 0 1px, transparent 2px),
-      radial-gradient(circle at 34% 11%, rgba(255,255,255,.42) 0 1px, transparent 2px),
-      radial-gradient(circle at 53% 34%, rgba(255,255,255,.38) 0 1px, transparent 2px);
-    opacity: .08;
-    filter: drop-shadow(0 0 5px rgba(180,92,255,.22)) contrast(1.08);
-    pointer-events: none;
-    transition: filter .8s var(--ease-lux);
   }
   .bg-svg::after {
     content: '';
@@ -138,23 +96,22 @@
       radial-gradient(circle at 50% 100%, rgba(0,0,0,.72) 0%, transparent 52%);
     opacity: .46;
     pointer-events: none;
-    transition: opacity .8s var(--ease-lux);
   }
   .shooting-star {
     position: fixed;
-    top: 13vh;
+    top: 14vh;
     left: 0;
     z-index: 1;
-    width: 180px;
+    width: 150px;
     height: 1px;
     border-radius: 999px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.92) 18%, rgba(190,126,255,.72) 48%, rgba(91,77,255,.22) 74%, transparent 100%);
-    box-shadow: 0 0 10px rgba(190,126,255,.36), 0 0 24px rgba(91,77,255,.18);
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.9) 18%, rgba(190,126,255,.72) 48%, rgba(91,77,255,.18) 76%, transparent 100%);
+    box-shadow: 0 0 10px rgba(190,126,255,.32), 0 0 20px rgba(91,77,255,.14);
     pointer-events: none;
     opacity: 0;
     transform-origin: right center;
-    animation: meteorDrift 9.5s ease-in-out infinite;
-    animation-delay: 2.2s;
+    animation: meteorDrift 13.5s ease-in-out infinite;
+    animation-delay: 2.8s;
   }
   .shooting-star::after {
     content: '';
@@ -164,18 +121,8 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: rgba(255,255,255,.96);
-    box-shadow: 0 0 12px rgba(255,255,255,.70), 0 0 20px rgba(190,126,255,.46);
-  }
-  .grain-texture {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    opacity: .04;
-    mix-blend-mode: overlay;
+    background: rgba(255,255,255,.95);
+    box-shadow: 0 0 12px rgba(255,255,255,.62), 0 0 18px rgba(190,126,255,.38);
   }
   /* Everything above background */
   header, .quick-access, nav, main, footer { position: relative; z-index: 2; }
@@ -441,40 +388,23 @@
   .intro-logo-wrap {
     position: relative;
     display: block;
-    width: clamp(260px, 44vw, 560px);
+    width: clamp(340px, 56vw, 720px);
     aspect-ratio: 800 / 250;
     padding: 0;
     border: 0;
     border-radius: 24px;
     background: transparent;
-    cursor: pointer;
+    cursor: default;
     transform-origin: top left;
-    filter: drop-shadow(0 24px 70px rgba(0,0,0,.42)) drop-shadow(0 0 30px rgba(180,92,255,.18));
-  }
-  .intro-logo-wrap::before {
-    content: '';
-    position: absolute;
-    inset: -22px;
-    border-radius: 34px;
-    background:
-      radial-gradient(circle at 18% 50%, rgba(240,109,66,.22), transparent 24%),
-      radial-gradient(circle at 52% 50%, rgba(180,92,255,.18), transparent 36%),
-      radial-gradient(circle at 84% 50%, rgba(91,77,255,.16), transparent 30%);
-    opacity: .8;
-    filter: blur(18px);
-    pointer-events: none;
-    transition: opacity .6s var(--ease-lux), transform .6s var(--ease-lux);
-  }
-  .intro-logo-wrap:hover::before {
-    opacity: 1;
-    transform: scale(1.04);
+    filter: drop-shadow(0 26px 76px rgba(0,0,0,.46)) drop-shadow(0 0 24px rgba(180,92,255,.18));
   }
   .intro-logo-wrap:focus-visible {
     outline: 2px solid rgba(180,92,255,.54);
     outline-offset: 10px;
   }
   .intro-logo {
-    position: relative;
+    position: absolute;
+    inset: 0;
     z-index: 1;
     display: block;
     width: 100%;
@@ -482,33 +412,42 @@
     object-fit: contain;
     user-select: none;
     pointer-events: none;
-    clip-path: inset(0 66% 0 0 round 24px);
   }
-  .intro-click-hint {
-    position: absolute;
-    left: 0;
-    right: 66%;
-    bottom: -42px;
-    z-index: 2;
-    color: rgba(232,226,255,.72);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 6px;
-    text-align: center;
-    text-transform: uppercase;
-    text-shadow: 0 0 18px rgba(180,92,255,.34);
-    pointer-events: none;
+  .intro-logo-text {
+    clip-path: inset(0 0 0 28%);
   }
-  .intro-curtain.is-launching .intro-click-hint {
+  .intro-logo-complete {
     opacity: 0;
   }
-
+  .intro-logo-draw {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 0 18px rgba(255,162,52,.22)) drop-shadow(0 0 22px rgba(180,92,255,.18));
+  }
+  .intro-draw-line {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .intro-draw-arrow {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
   /* page hidden during intro */
   body.intro-active header,
   body.intro-active .quick-access,
   body.intro-active nav,
   body.intro-active footer { opacity: 0; }
   body.intro-active .bg-svg { opacity: 0; }
+  body.intro-active.intro-revealing .bg-svg { opacity: 1; }
   body.intro-active .shooting-star {
     opacity: 0;
     animation-play-state: paused;
@@ -780,17 +719,28 @@
   /* ---- Footer ---- */
   footer {
     position: relative; z-index: 1;
-    text-align: center;
-    padding: 50px 20px;
-    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 48px 20px;
+    font-size: 22px;
+    font-weight: 900;
     color: #8fa0b8;
+    letter-spacing: 1px;
+  }
+  .footer-mambo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 22px rgba(0,0,0,.28)) drop-shadow(0 0 18px rgba(180,92,255,.16));
   }
 
   /* ---- Brand SVG ---- */
   .brand { display:flex; flex-direction:column; gap:4px; }
   .brand-svg {
     display:block;
-    height:64px;
+    height:126px;
     width:auto;
     filter: drop-shadow(0 14px 28px rgba(180,92,255,.12)) drop-shadow(0 0 18px rgba(240,109,66,.08));
   }
@@ -867,7 +817,7 @@
   @media (max-width: 768px) {
     body { font-size: 15px; }
     header { padding: 24px 16px 16px; }
-    .brand-svg { height: 40px; }
+    .brand-svg { height: 84px; }
     .brand-cn { font-size: 11px; letter-spacing: 1px; }
     .brand-tag { display: block; margin-left: 0; margin-top: 2px; font-size: 11px; }
     header input { max-width: 55vw; font-size: 14px; }
@@ -906,20 +856,39 @@
 
 <!-- Background SVG layer -->
 <div class="bg-svg"></div>
-<svg class="grain-texture" aria-hidden="true" focusable="false">
-  <filter id="noiseFilter">
-    <feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="4" stitchTiles="stitch"/>
-  </filter>
-  <rect width="100%" height="100%" fill="#ffffff" filter="url(#noiseFilter)"></rect>
-</svg>
 <div class="shooting-star" aria-hidden="true"></div>
 
 <!-- Intro curtain -->
 <div class="intro-curtain" id="introCurtain">
-  <button class="intro-logo-wrap" id="introLogoWrap" type="button" aria-label="点击进入素材库">
-    <img class="intro-logo" id="introLogo" src="loge.svg" alt="一个网站">
-    <span class="intro-click-hint">点击进入</span>
-  </button>
+  <div class="intro-logo-wrap" id="introLogoWrap" aria-label="素材库开场标识">
+    <img class="intro-logo intro-logo-text" id="introLogoText" src="loge.svg" alt="一个网站">
+    <img class="intro-logo intro-logo-complete" id="introLogoComplete" src="loge.svg" alt="">
+    <svg class="intro-logo-draw" id="introLogoDraw" viewBox="0 0 800 250" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="introDrawGold" x1="18%" y1="8%" x2="82%" y2="92%">
+          <stop offset="0%" stop-color="#ffea79"/>
+          <stop offset="62%" stop-color="#ffa234"/>
+          <stop offset="100%" stop-color="#ff4b72"/>
+        </linearGradient>
+        <linearGradient id="introDrawAurora" x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stop-color="#00f2fe"/>
+          <stop offset="54%" stop-color="#9b51e0"/>
+          <stop offset="100%" stop-color="#ff2a85"/>
+        </linearGradient>
+        <filter id="introDrawGlow" x="-35%" y="-35%" width="170%" height="170%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <circle class="intro-draw-line intro-draw-ring" cx="140" cy="125" r="74" pathLength="1" stroke="url(#introDrawAurora)" stroke-width="1.2" opacity=".55"/>
+      <circle class="intro-draw-line intro-draw-ring" cx="140" cy="125" r="68" pathLength="1" stroke="#361b5c" stroke-width="1.5" opacity=".7"/>
+      <path class="intro-draw-line intro-draw-hex" pathLength="1" d="M140 77 L181.57 101 L181.57 149 L140 173 L98.43 149 L98.43 101 Z" stroke="url(#introDrawGold)" stroke-width="3.5" filter="url(#introDrawGlow)"/>
+      <path class="intro-draw-arrow" d="M132 111 L132 139 L140 132 L146.5 144 L151 141.5 L144.5 130 L153 130 Z" fill="url(#introDrawGold)" filter="url(#introDrawGlow)"/>
+    </svg>
+  </div>
 </div>
 
 <header>
@@ -944,7 +913,6 @@
 
 <nav id="nav"><div class="nav-indicator"></div>
   <a class="active" data-cat="all">全部</a>
-  <a data-cat="常用AI">⭐ 常用 AI</a>
   <a data-cat="AI应用">🤖 AI 应用</a>
   <a data-cat="AI创作">🎨 AI 创作</a>
   <a data-cat="AI素材">💡 AI 素材</a>
@@ -954,28 +922,6 @@
 </nav>
 
 <main id="main" class="main-hidden">
-
-<!-- ====== 一、常用 AI ====== -->
-<section class="category" data-cats="常用AI">
-  <div class="cat-title">
-    <div class="gradient-bar"></div>
-    常用 AI
-  </div>
-  <div class="subcat"><div class="subcat-title">高频 AI 入口</div>
-    <div class="links">
-      <a class="link-card card-ai" href="https://chatgpt.com/" target="_blank"><img class="icon" src="icons/chatgpt.ico" alt=""><div class="text"><div class="name">ChatGPT</div><div class="desc">OpenAI 全球领先AI对话助手</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://claude.ai/" target="_blank"><img class="icon" src="icons/claude.ico" alt=""><div class="text"><div class="name">Claude</div><div class="desc">Anthropic 深度推理编程写作</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://chat.deepseek.com/" target="_blank"><img class="icon" src="icons/deepseek.png" alt=""><div class="text"><div class="name">DeepSeek</div><div class="desc">国产开源推理大模型</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.doubao.com/" target="_blank"><img class="icon" src="icons/doubao.png" alt=""><div class="text"><div class="name">豆包</div><div class="desc">字节跳动智能对话助手</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-video" href="https://jianying.com/" target="_blank"><img class="icon" src="icons/jimeng.png" alt=""><div class="text"><div class="name">即梦AI</div><div class="desc">字节跳动一站式AI创作平台</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-video" href="https://runwayml.com/" target="_blank"><img class="icon" src="icons/runway.png" alt=""><div class="text"><div class="name">Runway</div><div class="desc">全球AI视频创作平台</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><img class="icon" src="icons/midjourney.png" alt=""><div class="text"><div class="name">Midjourney</div><div class="desc">顶级AI图像生成与视觉探索平台</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><img class="icon" src="icons/liblibai.ico" alt=""><div class="text"><div class="name">LiblibAI</div><div class="desc">哩布哩布AI绘画模型与创作社区</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><img class="icon" src="icons/aigc.png" alt=""><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://youmind.com/zh-CN/prompts" target="_blank"><img class="icon" src="icons/youmind.ico" alt=""><div class="text"><div class="name">YouMind Prompts</div><div class="desc">AI提示词资源合集</div></div><div class="arrow">↗</div></a>
-    </div>
-  </div>
-</section>
 
 <!-- ====== 二、AI 应用 ====== -->
 <section class="category" data-cats="AI应用">
@@ -1232,7 +1178,10 @@
 </main>
 
 <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
-<footer>Made with ❤️ · 持续更新</footer>
+<footer>
+  <img class="footer-mambo" src="曼波.png" alt="">
+  <span>曼波到此一游</span>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
 </script>
@@ -1257,74 +1206,62 @@ function playIntro() {
 
     const curtain = document.getElementById('introCurtain');
     const introWrap = document.getElementById('introLogoWrap');
-    const introLogo = document.getElementById('introLogo');
+    const introLogoText = document.getElementById('introLogoText');
+    const introLogoComplete = document.getElementById('introLogoComplete');
+    const introDraw = document.getElementById('introLogoDraw');
+    const drawLines = introDraw ? introDraw.querySelectorAll('.intro-draw-line') : [];
+    const drawArrow = introDraw ? introDraw.querySelector('.intro-draw-arrow') : null;
     const headerLogo = document.querySelector('.brand-svg');
-    const hint = document.querySelector('.intro-click-hint');
 
-    if (!curtain || !introWrap || !introLogo || !headerLogo) { resolve(); return; }
+    if (!curtain || !introWrap || !introLogoText || !introLogoComplete || !headerLogo) { resolve(); return; }
 
-    let launched = false;
     gsap.set(introWrap, {
       opacity: 0,
-      scale: 0.84,
+      scale: 1,
       y: 18
     });
-    gsap.set(introLogo, { clipPath: 'inset(0 66% 0 0 round 24px)' });
-    gsap.set(hint, { opacity: 0, y: 10 });
+    gsap.set(introLogoText, { opacity: 0 });
+    gsap.set(introLogoComplete, { opacity: 0 });
+    gsap.set(introDraw, { opacity: 0 });
+    gsap.set(drawLines, { strokeDashoffset: 1 });
+    gsap.set(drawArrow, { opacity: 0, x: -38, y: -16, scale: .82, rotate: -8 });
 
-    const idleTween = gsap.to(introWrap, {
-      y: '-=8',
-      duration: 2.4,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      delay: .5
-    });
+    const introTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    gsap.timeline({ defaults: { ease: 'power3.out' } })
-      .to(introWrap, { opacity: 1, scale: 1, y: 0, duration: .62 })
-      .to(hint, { opacity: 1, y: 0, duration: .28 }, '-=.12');
+    introTl
+      .to(introWrap, { opacity: 1, y: 0, duration: .32 }, 0)
+      .to(introDraw, { opacity: 1, duration: .18 }, .08)
+      .to(drawLines, { strokeDashoffset: 0, duration: .74, stagger: .08, ease: 'power2.inOut' }, .12)
+      .to(drawArrow, { opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, duration: .46, ease: 'back.out(1.7)' }, .56)
+      .to(introLogoText, { opacity: 1, duration: .32, ease: 'power2.out' }, .78)
+      .set(introLogoComplete, { opacity: 1 }, 1.1)
+      .set([introLogoText, introDraw], { opacity: 0 }, 1.1)
+      .add(function() {
+        curtain.classList.add('is-launching');
+        document.body.classList.add('intro-revealing');
 
-    function launchIntro() {
-      if (launched) return;
-      launched = true;
-      idleTween.kill();
-      curtain.classList.add('is-launching');
-      introWrap.disabled = true;
-      introWrap.style.cursor = 'default';
+        const introWrapRect = introWrap.getBoundingClientRect();
+        const headerRect = headerLogo.getBoundingClientRect();
+        const deltaX = headerRect.left - introWrapRect.left;
+        const deltaY = headerRect.top - introWrapRect.top;
+        const scaleRatio = headerRect.width / introWrapRect.width;
 
-      const introWrapRect = introWrap.getBoundingClientRect();
-      const headerRect = headerLogo.getBoundingClientRect();
-      const deltaX = headerRect.left - introWrapRect.left;
-      const deltaY = headerRect.top - introWrapRect.top;
-      const scaleRatio = headerRect.width / introWrapRect.width;
-
-      gsap.timeline({
-        defaults: { ease: 'power3.inOut' },
-        onComplete: function() {
-          sessionStorage.setItem('introPlayed', '1');
-          resolve();
-        }
-      })
-        .to(hint, { opacity: 0, y: -8, duration: .18, ease: 'power2.out' }, 0)
-        .to(introLogo, { clipPath: 'inset(0 0% 0 0 round 24px)', duration: .58, ease: 'power3.out' }, .04)
-        .to(introWrap, { scale: 1.045, duration: .18, ease: 'power2.out', yoyo: true, repeat: 1 }, .46)
-        .to(introWrap, {
-          x: deltaX,
-          y: deltaY,
-          scale: scaleRatio,
-          transformOrigin: 'top left',
-          duration: .62
-        }, .72)
-        .to(curtain, { background: 'rgba(3,7,18,0)', duration: .42, ease: 'power2.out' }, .88);
-    }
-
-    introWrap.addEventListener('click', launchIntro, { once: true });
-    introWrap.addEventListener('keydown', function(event) {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
-      event.preventDefault();
-      launchIntro();
-    });
+        gsap.timeline({
+          defaults: { ease: 'power3.inOut' },
+          onComplete: function() {
+            sessionStorage.setItem('introPlayed', '1');
+            resolve();
+          }
+        })
+          .to(introWrap, {
+            x: deltaX,
+            y: deltaY,
+            scale: scaleRatio,
+            transformOrigin: 'top left',
+            duration: .46
+          }, 0)
+          .to(curtain, { background: 'rgba(3,7,18,0)', duration: .3, ease: 'power2.out' }, .16);
+      }, '+=.08');
   });
 }
 
@@ -1488,19 +1425,34 @@ function initFluidHover() {
   const mm = window.matchMedia('(pointer: fine) and (hover: hover)');
   if (!mm.matches) return;
 
+  let hoverTarget = null;
+  let nextX = '50%';
+  let nextY = '50%';
+  let hoverFrame = 0;
+
+  function flushHoverPosition() {
+    hoverFrame = 0;
+    if (!hoverTarget) return;
+    hoverTarget.style.setProperty('--mx', nextX);
+    hoverTarget.style.setProperty('--my', nextY);
+  }
+
   document.addEventListener('pointermove', function(e) {
     const el = e.target.closest('.link-card, .quick-chip, header input');
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
-    el.style.setProperty('--mx', x.toFixed(2) + '%');
-    el.style.setProperty('--my', y.toFixed(2) + '%');
+    hoverTarget = el;
+    nextX = x.toFixed(2) + '%';
+    nextY = y.toFixed(2) + '%';
+    if (!hoverFrame) hoverFrame = requestAnimationFrame(flushHoverPosition);
   });
 
   document.addEventListener('pointerout', function(e) {
     const el = e.target.closest('.link-card, .quick-chip, header input');
     if (!el || el.contains(e.relatedTarget)) return;
+    if (hoverTarget === el) hoverTarget = null;
     el.style.setProperty('--mx', '50%');
     el.style.setProperty('--my', '50%');
   });
@@ -1752,11 +1704,22 @@ document.addEventListener('DOMContentLoaded', function() {
     var curtain = document.getElementById('introCurtain');
     var main = document.getElementById('main');
 
-    // 1. Remove curtain
-    if (curtain) curtain.style.display = 'none';
-
-    // 2. Remove intro-active → header/nav/bg-image/particles begin CSS fade-in
+    // 1. Reveal the page behind the curtain before removing the curtain layer.
     document.body.classList.remove('intro-active');
+    document.body.classList.remove('intro-revealing');
+
+    // 2. Remove curtain after the real page is already visible underneath.
+    if (curtain) {
+      curtain.style.pointerEvents = 'none';
+      gsap.to(curtain, {
+        opacity: 0,
+        duration: REDUCE_MOTION ? 0 : 0.18,
+        ease: 'power2.out',
+        onComplete: function() {
+          curtain.style.display = 'none';
+        }
+      });
+    }
 
     if (!REDUCE_MOTION) {
       gsap.fromTo(['header', '.quick-access', 'nav'],

@@ -114,14 +114,14 @@ class AIFirstCategoryTests(unittest.TestCase):
         site = parsed_site()
         self.assertEqual(
             [item["cat"] for item in site.nav],
-            ["all", "常用AI", "AI应用", "AI创作", "AI素材", "素材库", "运营", "工具箱"],
+            ["all", "AI应用", "AI创作", "AI素材", "素材库", "运营", "工具箱"],
         )
 
     def test_sections_are_ordered_for_daily_ai_use(self):
         site = parsed_site()
         self.assertEqual(
             [section["title"] for section in site.sections],
-            ["常用 AI", "AI 应用", "AI 创作", "AI 素材 / 灵感", "素材资源", "自媒体运营", "工具箱"],
+            ["AI 应用", "AI 创作", "AI 素材 / 灵感", "素材资源", "自媒体运营", "工具箱"],
         )
 
     def test_key_sites_are_in_expected_sections(self):
@@ -130,10 +130,8 @@ class AIFirstCategoryTests(unittest.TestCase):
         for card in site.cards:
             locations_by_name.setdefault(card["name"], set()).add((card["section_title"], card["subcat"]))
         expected = [
-            ("ChatGPT", ("常用 AI", "高频 AI 入口")),
             ("ChatGPT", ("AI 应用", "AI 对话模型")),
             ("ChatExcel", ("AI 应用", "AI 办公与写作")),
-            ("Midjourney", ("常用 AI", "高频 AI 入口")),
             ("Midjourney", ("AI 创作", "AI 绘画")),
             ("即梦AI", ("AI 创作", "AI 视频")),
             ("Awwwards", ("AI 素材 / 灵感", "设计灵感")),

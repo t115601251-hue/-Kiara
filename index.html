@@ -702,8 +702,6 @@
       <a class="link-card card-ai" href="https://claude.ai/" target="_blank"><img class="icon" src="icons/claude.ico" alt=""><div class="text"><div class="name">Claude</div><div class="desc">Anthropic 深度推理编程写作</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://chat.deepseek.com/" target="_blank"><img class="icon" src="icons/deepseek.png" alt=""><div class="text"><div class="name">DeepSeek</div><div class="desc">国产开源推理大模型</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://www.doubao.com/" target="_blank"><img class="icon" src="icons/doubao.png" alt=""><div class="text"><div class="name">豆包</div><div class="desc">字节跳动智能对话助手</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><img class="icon" src="icons/midjourney.png" alt=""><div class="text"><div class="name">Midjourney</div><div class="desc">全球顶级AI艺术生成</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><img class="icon" src="icons/liblibai.ico" alt=""><div class="text"><div class="name">LiblibAI</div><div class="desc">国内最大AI绘画模型社区</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-video" href="https://jianying.com/" target="_blank"><img class="icon" src="icons/jimeng.png" alt=""><div class="text"><div class="name">即梦AI</div><div class="desc">字节跳动一站式AI创作平台</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-video" href="https://runwayml.com/" target="_blank"><img class="icon" src="icons/runway.png" alt=""><div class="text"><div class="name">Runway</div><div class="desc">全球AI视频创作平台</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://www.aigc.cn/" target="_blank"><img class="icon" src="icons/aigc.png" alt=""><div class="text"><div class="name">AIGC工具导航</div><div class="desc">生成式AI工具大全</div></div><div class="arrow">↗</div></a>
@@ -751,8 +749,6 @@
   </div>
   <div class="subcat"><div class="subcat-title">AI 绘画</div>
     <div class="links">
-      <a class="link-card card-ai" href="https://www.midjourney.com/" target="_blank"><img class="icon" src="icons/midjourney.png" alt=""><div class="text"><div class="name">Midjourney</div><div class="desc">全球顶级AI艺术生成</div></div><div class="arrow">↗</div></a>
-      <a class="link-card card-ai" href="https://www.liblib.art/" target="_blank"><img class="icon" src="icons/liblibai.ico" alt=""><div class="text"><div class="name">LiblibAI</div><div class="desc">国内最大AI绘画模型社区</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://d.design/" target="_blank"><img class="icon" src="icons/duiyou.png" alt=""><div class="text"><div class="name">堆友</div><div class="desc">阿里出品AI绘画与3D素材</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://www.recraft.ai/ai-image-vectorizer" target="_blank"><img class="icon" src="icons/recraft.png" alt=""><div class="text"><div class="name">Recraft Vectorizer</div><div class="desc">AI图片矢量化转换工具</div></div><div class="arrow">↗</div></a>
     </div>
@@ -1259,7 +1255,7 @@ function initSpotlight() {
 // ======== Quick Access (recent clicks + defaults) ========
 const RECENT_LINKS_KEY = 'mediaVault.recentLinks.v1';
 const MAX_RECENT_LINKS = 10;
-const DEFAULT_QUICK_NAMES = ['ChatGPT', 'Claude', 'DeepSeek', '豆包', '即梦AI', 'Midjourney', 'LiblibAI', 'Pexels'];
+const DEFAULT_QUICK_NAMES = ['ChatGPT', 'Claude', 'DeepSeek', '豆包', '即梦AI', 'Pexels'];
 
 function isValidQuickLink(link) {
   return !!(link && link.name && link.href && typeof link.name === 'string' && typeof link.href === 'string');

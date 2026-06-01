@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="tinywow-bg" x1="10%" y1="10%" x2="90%" y2="90%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="56%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="tinywow-play" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#111827"/>
+  <rect x="7" y="7" width="50" height="50" rx="13" fill="url(#tinywow-bg)"/>
+  <path d="M22 21.5c0-2.2 2.4-3.6 4.3-2.5l19 10.5c2 1.1 2 3.9 0 5l-19 10.5c-1.9 1.1-4.3-.3-4.3-2.5v-21z" fill="url(#tinywow-play)"/>
+  <path d="M15 15h9M15 23h5M15 41h5M15 49h9" stroke="#bfdbfe" stroke-width="3" stroke-linecap="round" opacity=".72"/>
+</svg>

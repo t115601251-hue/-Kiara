@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="picell-bg" x1="10%" y1="8%" x2="90%" y2="92%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="48%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="picell-cut" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fee2e2"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#111827"/>
+  <rect x="7" y="7" width="50" height="50" rx="13" fill="url(#picell-bg)"/>
+  <path d="M18 22.5A4.5 4.5 0 0 1 22.5 18h19A4.5 4.5 0 0 1 46 22.5v19a4.5 4.5 0 0 1-4.5 4.5h-19A4.5 4.5 0 0 1 18 41.5v-19Z" fill="rgba(17,24,39,.24)" stroke="rgba(255,255,255,.7)" stroke-width="2"/>
+  <path d="M18 32h28M32 18v28" stroke="url(#picell-cut)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="24" cy="25" r="3.5" fill="#fff7ed"/>
+  <path d="M22 43l8-9 5 5 4-4 7 8H22Z" fill="#ffffff" opacity=".9"/>
+</svg>

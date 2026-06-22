@@ -114,14 +114,14 @@ class AIFirstCategoryTests(unittest.TestCase):
         site = parsed_site()
         self.assertEqual(
             [item["cat"] for item in site.nav],
-            ["all", "AI应用", "AI创作", "AI素材", "素材库", "运营", "工具箱"],
+            ["all", "AI应用", "AI创作", "AI素材", "网页设计", "素材库", "运营", "工具箱"],
         )
 
     def test_sections_are_ordered_for_daily_ai_use(self):
         site = parsed_site()
         self.assertEqual(
             [section["title"] for section in site.sections],
-            ["AI 应用", "AI 创作", "AI 素材 / 灵感", "素材资源", "自媒体运营", "工具箱"],
+            ["AI 应用", "AI 创作", "AI 素材 / 灵感", "网页设计", "素材资源", "自媒体运营", "工具箱"],
         )
 
     def test_key_sites_are_in_expected_sections(self):
@@ -134,7 +134,10 @@ class AIFirstCategoryTests(unittest.TestCase):
             ("ChatExcel", ("AI 应用", "AI 办公与写作")),
             ("Midjourney", ("AI 创作", "AI 绘画")),
             ("即梦AI", ("AI 创作", "AI 视频")),
-            ("Awwwards", ("AI 素材 / 灵感", "设计灵感")),
+            ("Awwwards", ("网页设计", "网页灵感与案例")),
+            ("UIverse", ("网页设计", "UI 组件与代码")),
+            ("Spline", ("网页设计", "动效、3D 与视觉特效")),
+            ("Recent Design", ("网页设计", "网页灵感与案例")),
             ("Pexels", ("素材资源", "图片素材")),
             ("抖音指数", ("自媒体运营", "数据热点")),
             ("TinyPNG", ("工具箱", "图片处理")),

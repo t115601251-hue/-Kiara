@@ -1243,14 +1243,14 @@
       <div class="task-guide-sub">不知道网站名时，直接从要完成的事开始</div>
     </div>
     <div class="task-grid">
-      <button class="task-chip" type="button" data-cat="AI应用" data-query="文案 脚本 写作 对话 提示词"><span class="task-chip-icon">✍️</span><span class="task-chip-text"><strong>写文案脚本</strong><span>对话、长文、提示词</span></span></button>
-      <button class="task-chip" type="button" data-cat="网页设计" data-query="网页设计 UI组件 组件 动效 3D 灵感 Figma"><span class="task-chip-icon">🧩</span><span class="task-chip-text"><strong>做网页界面</strong><span>组件、动效、设计参考</span></span></button>
-      <button class="task-chip" type="button" data-cat="AI创作" data-query="AI绘画 图片生成 视频生成 动画 矢量化"><span class="task-chip-icon">🎨</span><span class="task-chip-text"><strong>生成图片视频</strong><span>绘图、视频、动画</span></span></button>
-      <button class="task-chip" type="button" data-cat="网页设计" data-query="封面 海报 社媒设计 广告图 电商图"><span class="task-chip-icon">🖼️</span><span class="task-chip-text"><strong>做封面海报</strong><span>模板、广告图、运营图</span></span></button>
-      <button class="task-chip" type="button" data-cat="素材库" data-query="图片素材 视频素材 摄影 免费 素材 音效 字体"><span class="task-chip-icon">🎬</span><span class="task-chip-text"><strong>找素材资源</strong><span>图片、视频、音效、字体</span></span></button>
-      <button class="task-chip" type="button" data-cat="运营" data-query="热点 数据 抖音 小红书 微博 百度 指数 敏感词"><span class="task-chip-icon">📊</span><span class="task-chip-text"><strong>查热点运营</strong><span>热搜、指数、敏感词</span></span></button>
-      <button class="task-chip" type="button" data-cat="工具箱" data-query="压缩 转换 PDF 抠图 去背景 二维码 文件处理"><span class="task-chip-icon">🧰</span><span class="task-chip-text"><strong>处理文件图片</strong><span>压缩、转换、抠图</span></span></button>
-      <button class="task-chip" type="button" data-cat="工具箱" data-query="摸鱼 游戏 休闲 随机 有趣"><span class="task-chip-icon">🐟</span><span class="task-chip-text"><strong>休息摸鱼</strong><span>小游戏、有趣网站</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="写文案脚本"><span class="task-chip-icon">✍️</span><span class="task-chip-text"><strong>写文案脚本</strong><span>对话、长文、提示词</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="做网页界面"><span class="task-chip-icon">🧩</span><span class="task-chip-text"><strong>做网页界面</strong><span>组件、动效、设计参考</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="生成图片视频"><span class="task-chip-icon">🎨</span><span class="task-chip-text"><strong>生成图片视频</strong><span>绘图、视频、动画</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="做封面海报"><span class="task-chip-icon">🖼️</span><span class="task-chip-text"><strong>做封面海报</strong><span>模板、广告图、运营图</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="找素材资源"><span class="task-chip-icon">🎬</span><span class="task-chip-text"><strong>找素材资源</strong><span>图片、视频、音效、字体</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="查热点运营"><span class="task-chip-icon">📊</span><span class="task-chip-text"><strong>查热点运营</strong><span>热搜、指数、敏感词</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="处理文件图片"><span class="task-chip-icon">🧰</span><span class="task-chip-text"><strong>处理文件图片</strong><span>压缩、转换、抠图</span></span></button>
+      <button class="task-chip" type="button" data-cat="all" data-query="休息摸鱼"><span class="task-chip-icon">🐟</span><span class="task-chip-text"><strong>休息摸鱼</strong><span>小游戏、有趣网站</span></span></button>
     </div>
   </div>
 </section>
@@ -1601,6 +1601,205 @@ const SEARCH_SYNONYMS = {
   '摸鱼': ['小游戏', '休闲', '随机网站', '人生重开', '小霸王']
 };
 
+const TASK_WORDS = {
+  copywriting: '写文案脚本 文案 脚本 写作 长文 标题 提示词 prompt 对话 论文 编程 办公 表格',
+  webDesign: '做网页界面 网页设计 UI组件 前端组件 落地页 官网 Hero 交互 动效 Figma React Tailwind 3D',
+  visualCreation: '生成图片视频 AI绘画 图片生成 视频生成 动画 矢量化 3D 广告图 拆图 配音 音乐',
+  posterDesign: '做封面海报 封面 海报 社媒设计 运营图 广告图 电商图 模板 图标 配色 PPT',
+  assets: '找素材资源 素材 图片素材 视频素材 音效 字体 图标 壁纸 GIF 免费 商用 摄影',
+  operations: '查热点运营 热点 热搜 指数 数据 运营 矩阵管理 敏感词 违禁词 小红书 抖音 微博 百度',
+  fileTools: '处理文件图片 文件处理 图片压缩 视频压缩 格式转换 PDF 抠图 去背景 二维码 表单 流程图 词云',
+  fun: '休息摸鱼 摸鱼 休闲 游戏 小游戏 随机 有趣 FC 红白机 人生模拟'
+};
+
+const TASK_ALIAS_TO_KEY = {
+  '写文案脚本': 'copywriting',
+  '做网页界面': 'webDesign',
+  '生成图片视频': 'visualCreation',
+  '做封面海报': 'posterDesign',
+  '找素材资源': 'assets',
+  '查热点运营': 'operations',
+  '处理文件图片': 'fileTools',
+  '休息摸鱼': 'fun'
+};
+
+const CATEGORY_META = {
+  'AI 应用': {
+    tags: ['AI', '效率', '对话'],
+    tasks: ['copywriting'],
+    keywords: 'AI助手 大模型 问答 改写 总结 翻译 头脑风暴 文案 办公 学习 编程'
+  },
+  'AI 创作': {
+    tags: ['AI创作', '生成', '素材'],
+    tasks: ['visualCreation'],
+    keywords: 'AI生成 AIGC 创意生成 图片 视频 音频 动画 视觉 内容创作'
+  },
+  'AI 素材 / 灵感': {
+    tags: ['灵感', '提示词', '导航'],
+    tasks: ['copywriting', 'assets'],
+    keywords: 'AIGC导航 工具合集 提示词 灵感 案例 素材发现 资源站'
+  },
+  '网页设计': {
+    tags: ['设计', '网页', 'UI'],
+    tasks: ['webDesign'],
+    keywords: '网页设计 UI设计 前端设计 交互 动效 组件 设计灵感 落地页 官网'
+  },
+  '素材资源': {
+    tags: ['素材', '资源', '下载'],
+    tasks: ['assets'],
+    keywords: '素材库 免费素材 商用素材 下载 图片 视频 音频 字体 图标 PPT'
+  },
+  '自媒体运营': {
+    tags: ['运营', '数据', '自媒体'],
+    tasks: ['operations'],
+    keywords: '账号运营 内容运营 平台数据 热点趋势 多平台 矩阵 敏感词 检测'
+  },
+  '工具箱': {
+    tags: ['工具', '处理', '效率'],
+    tasks: ['fileTools'],
+    keywords: '在线工具 文件处理 图片处理 PDF 转换 压缩 二维码 流程图 词云'
+  }
+};
+
+const SUBCAT_META = {
+  'AI 对话模型': { tags: ['对话', '写作', '问答'], tasks: ['copywriting'], keywords: '聊天 问答 文案 脚本 改写 总结 翻译 头脑风暴 AI助手' },
+  'AI 办公与写作': { tags: ['办公', '写作', '效率'], tasks: ['copywriting'], keywords: '论文 表格 Excel 办公 学术 写作 文档 数据处理' },
+  'AI 编程辅助': { tags: ['编程', '提示词', 'Cursor'], tasks: ['copywriting', 'webDesign'], keywords: '代码 编程 Cursor 提示词 prompt 开发 前端' },
+  'AI 绘画': { tags: ['AI绘画', '图片', '视觉'], tasks: ['visualCreation', 'posterDesign'], keywords: 'AI绘画 图片生成 图像生成 插画 视觉 广告图 矢量化 拆分图片' },
+  'AI 视频': { tags: ['视频', '动画', '生成'], tasks: ['visualCreation'], keywords: 'AI视频 视频生成 动画 短视频 运镜 概念动画' },
+  'AI 音乐 / 音频': { tags: ['音频', '音乐', '配音'], tasks: ['visualCreation', 'assets'], keywords: 'AI音乐 歌曲 配乐 语音 克隆 配音 合成 音效' },
+  'AIGC 导航与提示词': { tags: ['提示词', '导航', '合集'], tasks: ['copywriting', 'assets'], keywords: '提示词 prompt prompts 咒语 AIGC工具 AI导航 灵感合集' },
+  '素材发现与抓取': { tags: ['抓取', '素材', '检索'], tasks: ['assets'], keywords: '素材下载 视频素材 台词搜索 社媒素材 影视素材 扒取' },
+  'UI 组件与代码': { tags: ['组件', '代码', '前端'], tasks: ['webDesign'], keywords: 'UI组件 前端组件 React Tailwind CSS HTML 代码 复制 粘贴' },
+  '动效、3D 与视觉特效': { tags: ['动效', '3D', '交互'], tasks: ['webDesign', 'visualCreation'], keywords: '动效 微交互 3D 视觉特效 Hero 背景 动画 交互' },
+  '网页灵感与案例': { tags: ['案例', '灵感', '趋势'], tasks: ['webDesign'], keywords: '网页案例 设计趋势 落地页 官网 灵感 排版 配色 产品站' },
+  '设计工具与素材': { tags: ['设计工具', '模板', '素材'], tasks: ['posterDesign', 'webDesign'], keywords: '封面 海报 社媒设计 广告图 电商图 模板 图标 Figma UI设计' },
+  '图片素材': { tags: ['图片', '摄影', '免费'], tasks: ['assets'], keywords: '图片素材 摄影图库 照片 高清图片 免费图片 商用图片' },
+  '动图 GIF': { tags: ['GIF', '动图', '表情'], tasks: ['assets', 'fun'], keywords: 'GIF 动图 表情包 壁纸 动态图片' },
+  '视频素材': { tags: ['视频', '素材', '免费'], tasks: ['assets', 'visualCreation'], keywords: '视频素材 背景视频 高清视频 免费视频 B-roll 空镜' },
+  '音频素材': { tags: ['音效', '配乐', '音频'], tasks: ['assets', 'visualCreation'], keywords: '音效 配乐 背景音乐 免费音频 声音素材' },
+  '字体文字': { tags: ['字体', '商用', '文字'], tasks: ['assets', 'posterDesign'], keywords: '字体 商用字体 免费字体 中文字体 标题字 文字设计' },
+  'PPT 模板': { tags: ['PPT', '模板', '演示'], tasks: ['posterDesign', 'assets'], keywords: 'PPT模板 幻灯片 演示 模板 Office 汇报' },
+  '图标资源': { tags: ['图标', '矢量', '素材'], tasks: ['assets', 'posterDesign', 'webDesign'], keywords: '图标 icon SVG 矢量图标 UI图标 素材' },
+  '矩阵管理': { tags: ['矩阵', '多平台', '管理'], tasks: ['operations'], keywords: '自媒体矩阵 多账号 多平台 发布 管理 账号运营' },
+  '数据热点': { tags: ['热点', '数据', '趋势'], tasks: ['operations'], keywords: '热搜 热点 趋势 指数 数据洞察 抖音 微博 百度 小红书' },
+  '敏感词检测': { tags: ['敏感词', '检测', '合规'], tasks: ['operations'], keywords: '敏感词 违禁词 极限词 小红书 抖音 B站 文案合规' },
+  '图片处理': { tags: ['图片处理', '压缩', '抠图'], tasks: ['fileTools', 'posterDesign'], keywords: '图片压缩 抠图 去背景 去底 透明背景 PNG JPG 无损压缩' },
+  '文件转换': { tags: ['转换', 'PDF', '文件'], tasks: ['fileTools'], keywords: '格式转换 文件转换 PDF 视频转换 压缩 合并 拆分' },
+  '效率工具': { tags: ['效率', '流程图', '表单'], tasks: ['fileTools'], keywords: '流程图 思维导图 白板 表单 数据收集 协作 二维码' },
+  '词云': { tags: ['词云', '可视化', '文字'], tasks: ['fileTools', 'posterDesign'], keywords: '词云 文字云 关键词可视化 海报词云' },
+  '配色': { tags: ['配色', '颜色', '设计'], tasks: ['posterDesign', 'webDesign'], keywords: '配色 色卡 调色板 palette 颜色方案 设计素材' },
+  '软件下载': { tags: ['软件', '资源', '下载'], tasks: ['fileTools', 'assets'], keywords: '软件下载 资源下载 软件资源 工具下载 素材库' },
+  '摸鱼': { tags: ['摸鱼', '游戏', '休闲'], tasks: ['fun'], keywords: '摸鱼 游戏 小游戏 休闲 随机网站 有趣 红白机 FC' }
+};
+
+const SUBCAT_META_ALIASES = {
+  '内容合规': '敏感词检测',
+  '文件处理': '文件转换',
+  '流程与表单': '效率工具',
+  '词云工具': '词云',
+  '配色与素材工具': '配色',
+  '软件资源': '软件下载',
+  '在线小工具': '摸鱼'
+};
+
+const SITE_META = {
+  'ChatGPT': { tags: ['对话', '写作', '通用'], tasks: ['copywriting'], keywords: 'chatgpt openai GPT 文案 脚本 改写 翻译 总结 问答 代码' },
+  'Claude': { tags: ['长文', '推理', '编程'], tasks: ['copywriting'], keywords: 'claude anthropic 长文本 推理 编程 写作 文案 分析' },
+  'DeepSeek': { tags: ['推理', '代码', '国产'], tasks: ['copywriting'], keywords: 'deepseek 深度求索 推理 编程 数学 代码 国产大模型' },
+  '豆包': { tags: ['对话', '写作', '字节'], tasks: ['copywriting'], keywords: '豆包 字节 AI助手 写文案 写脚本 总结 生成图片' },
+  'Gemini': { tags: ['多模态', 'Google', '对话'], tasks: ['copywriting'], keywords: 'gemini google 多模态 图片理解 文案 问答' },
+  '通义千问': { tags: ['对话', '阿里', '办公'], tasks: ['copywriting'], keywords: '通义 千问 阿里 Qwen 文案 办公 对话 图片理解' },
+  'Kimi': { tags: ['长文', '阅读', '写作'], tasks: ['copywriting'], keywords: 'kimi 月之暗面 长文本 文件阅读 文案 总结 论文' },
+  'Grok': { tags: ['实时', '搜索', '对话'], tasks: ['copywriting'], keywords: 'grok xai 实时信息 搜索 热点 问答' },
+  'ChatExcel': { tags: ['Excel', '表格', '数据'], tasks: ['copywriting', 'fileTools'], keywords: 'excel 表格 数据处理 数据分析 办公 自动公式' },
+  'PaperMe': { tags: ['论文', '学术', '写作'], tasks: ['copywriting'], keywords: '论文 学术 开题 文献 降重 写作 参考文献' },
+  'Cursor提示词': { tags: ['Cursor', '编程', '提示词'], tasks: ['copywriting', 'webDesign'], keywords: 'cursor prompt 编程提示词 AI编程 前端开发 代码生成' },
+  'Midjourney': { tags: ['AI绘画', '图像', '灵感'], tasks: ['visualCreation', 'posterDesign'], keywords: 'midjourney MJ AI绘画 图片生成 海报 插画 视觉' },
+  'LiblibAI': { tags: ['AI绘画', '模型', '社区'], tasks: ['visualCreation', 'posterDesign'], keywords: '哩布哩布 liblib 模型 LoRA AI绘画 图片生成' },
+  '堆友': { tags: ['AI绘画', '3D', '素材'], tasks: ['visualCreation', 'posterDesign'], keywords: '堆友 阿里 d.design AI绘画 3D素材 设计素材' },
+  'Recraft Vectorizer': { tags: ['矢量化', '图片', 'SVG'], tasks: ['visualCreation', 'fileTools'], keywords: '矢量化 vector svg 图片转矢量 logo 图标' },
+  'Picell AI': { tags: ['广告图', '拆图', '电商'], tasks: ['visualCreation', 'posterDesign'], keywords: 'picell 广告图 商品图 电商图 拆分图片 图片拆解 海报' },
+  '可灵AI': { tags: ['AI视频', '快手', '生成'], tasks: ['visualCreation'], keywords: '可灵 kling 视频生成 图生视频 文生视频 短视频' },
+  '即梦AI': { tags: ['AI创作', '视频', '图片'], tasks: ['visualCreation'], keywords: '即梦 jimeng 字节 AI视频 AI图片 一站式创作' },
+  'Runway': { tags: ['AI视频', '生成', '剪辑'], tasks: ['visualCreation'], keywords: 'runway 视频生成 生成式视频 AI剪辑 图生视频' },
+  'FogSight 雾象': { tags: ['动画', 'AI视频', '概念'], tasks: ['visualCreation'], keywords: '雾象 fogsight 概念动画 AI动画 视频生成' },
+  'Suno': { tags: ['音乐', '歌曲', 'AI'], tasks: ['visualCreation', 'assets'], keywords: 'suno AI音乐 歌曲 生成 配乐 作曲' },
+  'Fish Audio': { tags: ['语音', '克隆', '配音'], tasks: ['visualCreation', 'assets'], keywords: 'fish audio 语音克隆 配音 TTS 声音合成' },
+  'AIGC工具导航': { tags: ['导航', '工具', '合集'], tasks: ['copywriting', 'assets'], keywords: 'AIGC工具 AI工具导航 工具大全 资源站' },
+  'AltSociety': { tags: ['提示词', '社区', '灵感'], tasks: ['copywriting', 'assets'], keywords: 'altsociety prompt 提示词 AI灵感 社区' },
+  '硬核指南': { tags: ['导航', '资源', '工具'], tasks: ['assets', 'fileTools'], keywords: '硬核指南 工具导航 资源导航 实用工具' },
+  'YouMind Prompts': { tags: ['提示词', 'Prompt', '合集'], tasks: ['copywriting'], keywords: 'youmind prompts 提示词 prompt 咒语 AI写作' },
+  'Res-Downloader': { tags: ['下载', '抓取', '开源'], tasks: ['assets'], keywords: '资源下载器 社媒下载 视频下载 图片下载 GitHub 抓取' },
+  '33台词': { tags: ['台词', '影视', '素材'], tasks: ['assets', 'copywriting'], keywords: '台词搜索 影视素材 电影台词 找片段 文案灵感' },
+  'UIverse': { keywords: 'uiverse 按钮 卡片 表单 loader loading CSS动画 HTML组件' },
+  'React Bits': { keywords: 'reactbits animated components React动画 文本特效 背景 动效组件' },
+  '21st.dev': { keywords: '21st shadcn React组件 Tailwind组件 社区组件 remix' },
+  'Aceternity UI': { keywords: 'aceternity Tailwind Framer Motion Next.js 高级组件 hero背景' },
+  'Fig Components': { keywords: 'figcomponents figma component UI kit 设计系统 免费Figma' },
+  'Spline': { keywords: 'spline 3D建模 交互3D 网页嵌入 产品展示' },
+  'Motion Sites': { keywords: 'motionsites AI网站 hero prompt 动效背景 网站提示词' },
+  'Design Spells': { keywords: 'designspells 微交互 easter egg 彩蛋 交互细节' },
+  'Awwwards': { tags: ['获奖', '案例', '灵感'], tasks: ['webDesign'], keywords: 'awwwards 获奖网站 网页案例 创意网站 设计奖' },
+  'One Page Love': { tags: ['单页', '落地页', '灵感'], tasks: ['webDesign'], keywords: 'one page love 单页网站 landing page 落地页 案例' },
+  'Best of Behance': { tags: ['作品集', '创意', 'Adobe'], tasks: ['webDesign', 'posterDesign'], keywords: 'behance 作品集 创意设计 平面设计 视觉参考' },
+  'Recent Design': { keywords: 'recent design 最新网页 每日灵感 产品界面 trend' },
+  'Variant': { keywords: 'variant AI界面生成 app idea 设计方案 滚动生成' },
+  'Canva可画': { keywords: 'canva 可画 海报 封面 小红书封面 公众号封面 社媒图' },
+  '稿定设计': { keywords: '稿定 电商图 海报 商品图 抠图 模板 运营设计' },
+  '创客贴': { keywords: '创客贴 海报 模板 印刷物料 广告图 封面' },
+  'Iconfont': { keywords: 'iconfont 阿里图标 矢量图标 SVG icon 图标库' },
+  '即时设计': { keywords: '即时设计 js.design UI设计 协作 原型 国产Figma' },
+  'Stitch': { keywords: 'google stitch AI生成界面 UI草图 前端草图 应用界面' },
+  'Pexels': { keywords: 'pexels 免费图片 摄影图库 商用照片 高清照片' },
+  'Unsplash': { keywords: 'unsplash 高清摄影 免费图片 商用图库' },
+  'Pixabay': { keywords: 'pixabay 免费图片 视频 音乐 插画 素材' },
+  'PxHere': { keywords: 'pxhere 免费摄影 CC0 图片素材' },
+  'GIPHY': { keywords: 'giphy gif 动图 表情包 sticker' },
+  'Alpha Coders': { keywords: 'alphacoders 壁纸 高清壁纸 动图 动漫壁纸' },
+  '闪萌': { keywords: '闪萌 soogif GIF 中文动图 表情包' },
+  'Coverr': { keywords: 'coverr 免费视频 背景视频 网站视频 B-roll' },
+  'Mixkit': { keywords: 'mixkit 视频素材 音效 音乐 免费素材' },
+  'Pexels 视频': { keywords: 'pexels video 免费视频 高清视频 视频素材' },
+  '爱给网': { keywords: '爱给 音效 配乐 素材 游戏音效 视频配乐' },
+  'Mixkit 音效': { keywords: 'mixkit sound effects 免费音效 背景音乐' },
+  '100font': { keywords: '100font 免费商用字体 中文字体 标题字体' },
+  '自由字体': { keywords: '自由字体 免费字体 商用字体 中文字体' },
+  '浩哥推荐字体': { keywords: '字体推荐 好看字体 Pinterest 字体灵感' },
+  '微软官方PPT模板': { keywords: 'officeplus PPT模板 微软模板 演示模板 免费PPT' },
+  'Flaticon': { keywords: 'flaticon icon 图标 SVG PNG 矢量图标' },
+  '小V猫': { keywords: '小V猫 自媒体矩阵 多账号 发布 管理 VCat' },
+  '达之云®驭影': { keywords: '达之云 驭影 自媒体矩阵 多平台 管理' },
+  '抖音指数': { keywords: '抖音指数 抖音热点 趋势 达人 内容趋势' },
+  '百度热搜': { keywords: '百度热搜 百度热点 实时热点 搜索趋势' },
+  '微博热搜': { keywords: '微博热搜 微博热点 话题 趋势' },
+  '巨量算数': { keywords: '巨量算数 抖音数据 巨量引擎 趋势洞察' },
+  '飞瓜数据': { keywords: '飞瓜 抖音数据 达人分析 直播 电商 数据' },
+  '新红数据': { keywords: '新红 小红书数据 小红书运营 达人 笔记分析' },
+  '词爪网': { keywords: '词爪 违禁词 敏感词 极限词 广告法 检测' },
+  '零克查词': { keywords: '零克查词 小红书敏感词 抖音敏感词 B站敏感词 检测' },
+  'TinyPNG': { keywords: 'tinypng 图片压缩 png jpg webp 无损压缩' },
+  'Remove.bg': { keywords: 'removebg 抠图 去背景 去底 透明背景 人像抠图' },
+  'Convertio': { keywords: 'convertio 文件转换 格式转换 视频转换 音频转换 图片转换' },
+  'iLovePDF': { keywords: 'ilovepdf PDF合并 PDF压缩 PDF拆分 PDF转换' },
+  'TinyWow Video': { keywords: 'tinywow video 视频压缩 视频转换 在线视频工具' },
+  'ProcessOn': { keywords: 'processon 思维导图 流程图 架构图 在线画图' },
+  'BoardMix': { keywords: 'boardmix 白板 协作 流程图 思维导图' },
+  '金数据': { keywords: '金数据 表单 问卷 数据收集 在线表单' },
+  '美寄词云': { keywords: '美寄词云 词云 文字云 可视化 海报' },
+  'AI词云生成器': { keywords: 'AI词云 词云生成 关键词云 文字可视化' },
+  '词云图在线生成器': { keywords: '词云图 在线词云 文字云 免费词云' },
+  '千图网': { keywords: '千图网 配色 设计素材 海报 素材下载' },
+  'Color Palette Generator': { keywords: 'coolors palette 配色 调色板 色卡 颜色方案' },
+  's7zy.top': { keywords: '软件下载 专业软件 资源软件 安装包' },
+  '软仓': { keywords: '软仓 软件资源 素材资源 工具下载' },
+  'ToolKnit': { keywords: 'toolknit 在线工具 工具箱 实用工具' },
+  '草料二维码': { keywords: '草料 二维码 二维码生成 活码 短链接' },
+  '人生重开模拟器': { keywords: '人生重开 模拟器 摸鱼 小游戏 休闲' },
+  'The Useless Web': { keywords: 'useless web 随机网站 无用网站 有趣 摸鱼' },
+  '小霸王合集': { keywords: '小霸王 FC 红白机 在线游戏 街机 摸鱼' }
+};
+
 const CARD_INFO = {
   'UIverse': {
     short: '复制开源 HTML/CSS/Tailwind UI 元素',
@@ -1673,6 +1872,65 @@ const CARD_INFO = {
   'Stitch': { short: '用 AI 生成应用界面和前端草图' }
 };
 
+function toWords(value) {
+  if (Array.isArray(value)) return value;
+  return String(value || '').split(/\s+/).filter(Boolean);
+}
+
+function uniqueList(items) {
+  const result = [];
+  items.forEach(function(item) {
+    if (item && !result.includes(item)) result.push(item);
+  });
+  return result;
+}
+
+function buildCardMeta(name, category, subcat, shortText) {
+  const info = CARD_INFO[name] || {};
+  const categoryMeta = CATEGORY_META[category] || {};
+  const subcatMeta = SUBCAT_META[subcat] || SUBCAT_META[SUBCAT_META_ALIASES[subcat]] || {};
+  const siteMeta = SITE_META[name] || {};
+  const tasks = uniqueList([]
+    .concat(categoryMeta.tasks || [])
+    .concat(subcatMeta.tasks || [])
+    .concat(siteMeta.tasks || []));
+  const taskWords = tasks.map(function(task) { return TASK_WORDS[task] || ''; }).join(' ');
+  const hiddenKeywords = uniqueList([]
+    .concat(toWords(categoryMeta.keywords))
+    .concat(toWords(subcatMeta.keywords))
+    .concat(toWords(siteMeta.keywords))
+    .concat(toWords(taskWords)));
+  const tags = uniqueList([]
+    .concat(categoryMeta.tags || [])
+    .concat(subcatMeta.tags || [])
+    .concat(siteMeta.tags || [])
+    .concat(info.tags || [])
+    .concat(inferTags(name, category, subcat, shortText))).slice(0, 5);
+
+  return { tasks: tasks, tags: tags, hiddenKeywords: hiddenKeywords };
+}
+
+function defaultDetail(category, subcat, shortText) {
+  if (category === 'AI 应用') return shortText + '，适合处理对话问答、内容写作、资料整理和日常办公提效。';
+  if (category === 'AI 创作') return shortText + '，适合生成图片、视频、音频或视觉内容，补充创作流程里的素材产出。';
+  if (category === 'AI 素材 / 灵感') return shortText + '，适合查找 AI 工具、提示词、创意案例和可复用素材来源。';
+  if (category === '网页设计') return shortText + '，适合做网页界面、组件参考、动效灵感或设计稿搭建。';
+  if (category === '素材资源') return shortText + '，适合查找可用于内容制作的图片、视频、音频、字体或图标资源。';
+  if (category === '自媒体运营') return shortText + '，适合内容选题、热点判断、账号运营、平台数据分析或文案合规检查。';
+  if (category === '工具箱') return shortText + '，适合快速处理文件、图片、PDF、二维码、流程图或其它临时工具需求。';
+  return shortText + '，适合在“' + subcat + '”场景下快速解决具体任务。';
+}
+
+function defaultHelps(category) {
+  if (category === 'AI 应用') return '帮你减少从空白开始的时间，把写作、分析和问答任务先跑起来。';
+  if (category === 'AI 创作') return '帮你把想法更快转成图片、视频、声音或可继续加工的视觉素材。';
+  if (category === '网页设计') return '帮你快速判断这个网站适合找组件、找灵感，还是直接产出设计内容。';
+  if (category === '素材资源') return '帮你缩短找素材的路径，优先定位可直接用于内容制作的资源。';
+  if (category === '自媒体运营') return '帮你更快做选题判断、热点追踪和发布前的风险检查。';
+  if (category === '工具箱') return '帮你快速完成一次性处理任务，减少来回搜索工具的时间。';
+  return '帮你更快找到合适工具，减少搜索和试错时间。';
+}
+
 function inferTags(name, category, subcat, shortText) {
   const source = [name, category, subcat, shortText].join(' ');
   const tags = [];
@@ -1709,9 +1967,10 @@ function enhanceCards() {
     const subcat = card.closest('.subcat')?.querySelector('.subcat-title')?.textContent.trim() || '';
     const info = CARD_INFO[name] || {};
     const shortText = info.short || desc?.textContent.trim() || '';
-    const detailText = info.detail || shortText + '，适合在“' + subcat + '”场景下快速解决创作、设计或运营需求。';
-    const helpsText = info.helps || '帮你更快找到合适工具，减少搜索和试错时间。';
-    const tags = info.tags || inferTags(name, category, subcat, shortText);
+    const meta = buildCardMeta(name, category, subcat, shortText);
+    const detailText = info.detail || defaultDetail(category, subcat, shortText);
+    const helpsText = info.helps || defaultHelps(category);
+    const tags = meta.tags;
     if (desc && shortText) desc.textContent = shortText;
     let tagWrap = card.querySelector('.card-tags');
     if (!tagWrap) {
@@ -1725,7 +1984,20 @@ function enhanceCards() {
     card.dataset.detail = detailText;
     card.dataset.helps = helpsText;
     card.dataset.tags = tags.join(' ');
-    card.dataset.search = [name, shortText, detailText, helpsText, tags.join(' '), category, subcat, card.href].join(' ').toLowerCase();
+    card.dataset.tasks = meta.tasks.join(' ');
+    card.dataset.hiddenTags = meta.hiddenKeywords.join(' ');
+    card.dataset.search = [
+      name,
+      shortText,
+      detailText,
+      helpsText,
+      tags.join(' '),
+      meta.tasks.join(' '),
+      meta.hiddenKeywords.join(' '),
+      category,
+      subcat,
+      card.href
+    ].join(' ').toLowerCase();
   });
 }
 

@@ -137,6 +137,7 @@ class AIFirstCategoryTests(unittest.TestCase):
             ("Awwwards", ("网页设计", "网页灵感与案例")),
             ("UIverse", ("网页设计", "UI 组件与代码")),
             ("Spline", ("网页设计", "动效、3D 与视觉特效")),
+            ("ShaderGradient", ("网页设计", "动效、3D 与视觉特效")),
             ("Recent Design", ("网页设计", "网页灵感与案例")),
             ("Pexels", ("素材资源", "图片素材")),
             ("抖音指数", ("自媒体运营", "数据热点")),

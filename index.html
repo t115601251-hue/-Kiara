@@ -347,6 +347,97 @@
     background: rgba(180,92,255,.10);
   }
 
+  .task-guide {
+    max-width: 1500px;
+    margin: 14px auto 0;
+    padding: 0 28px;
+    position: relative;
+    z-index: 2;
+  }
+  .task-guide-shell {
+    padding: 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.10);
+    background:
+      radial-gradient(circle at 12% 18%, rgba(240,160,40,.13), transparent 28%),
+      radial-gradient(circle at 88% 10%, rgba(180,92,255,.15), transparent 32%),
+      rgba(24,18,48,.48);
+    box-shadow: 0 22px 64px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.12);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    overflow: hidden;
+  }
+  .task-guide-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 2px 12px;
+  }
+  .task-guide-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .task-guide-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 9px;
+  }
+  .task-chip {
+    --accent: var(--nebula);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 56px;
+    padding: 10px 12px;
+    text-align: left;
+    color: var(--sub);
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 14px;
+    background:
+      radial-gradient(circle at var(--mx, 30%) var(--my, 40%), color-mix(in srgb, var(--accent) 15%, transparent), transparent 44%),
+      rgba(255,255,255,.06);
+    cursor: pointer;
+    transition: transform .32s var(--ease-lux), border-color .32s ease, box-shadow .32s ease;
+  }
+  .task-chip:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--accent) 32%, rgba(255,255,255,.10));
+    box-shadow: 0 18px 40px rgba(0,0,0,.28), 0 0 28px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  .task-chip-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,.08);
+    flex-shrink: 0;
+  }
+  .task-chip-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .task-chip strong {
+    font-size: 13px;
+    line-height: 1.25;
+    color: var(--text);
+  }
+  .task-chip span {
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   /* ---- Nav ---- */
   nav {
     display: flex;
@@ -707,6 +798,25 @@
     margin-top: 3px;
     font-weight: 500;
   }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+  .card-tag {
+    max-width: 72px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.055);
+    color: rgba(203,213,225,.80);
+    font-size: 10px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .link-card .arrow {
     margin-left: auto;
     color: var(--muted);
@@ -810,6 +920,21 @@
     color: #d7deea;
     line-height: 1.7;
   }
+  .site-preview-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .site-preview-tags span {
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.07);
+    color: rgba(226,232,240,.86);
+    font-size: 11px;
+    line-height: 1.2;
+  }
   .site-preview-help {
     margin-top: 14px;
     padding-top: 12px;
@@ -821,12 +946,14 @@
   .site-preview.is-visible .site-preview-kicker,
   .site-preview.is-visible .site-preview-title,
   .site-preview.is-visible .site-preview-desc,
+  .site-preview.is-visible .site-preview-tags,
   .site-preview.is-visible .site-preview-help {
     animation: sitePreviewContentEnter .48s var(--ease-lux) both;
   }
   .site-preview.is-visible .site-preview-title { animation-delay: .04s; }
   .site-preview.is-visible .site-preview-desc { animation-delay: .08s; }
-  .site-preview.is-visible .site-preview-help { animation-delay: .12s; }
+  .site-preview.is-visible .site-preview-tags { animation-delay: .10s; }
+  .site-preview.is-visible .site-preview-help { animation-delay: .14s; }
   @keyframes sitePreviewEnter {
     from {
       opacity: 0;
@@ -1015,6 +1142,14 @@
     .quick-chip span { font-size: 12px; }
     .quick-chip img { width: 20px; height: 20px; }
     .quick-access-mode { display: none; }
+    .task-guide { padding: 0 16px; margin-top: 10px; }
+    .task-guide-shell { padding: 10px; border-radius: 16px; }
+    .task-guide-head { flex-direction: column; gap: 2px; margin-bottom: 9px; }
+    .task-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+    .task-chip { min-height: 48px; padding: 8px; gap: 8px; }
+    .task-chip-icon { width: 26px; height: 26px; border-radius: 8px; }
+    .task-chip strong { font-size: 12px; }
+    .task-chip span { font-size: 10px; }
     nav { padding: 10px 16px 4px; gap: 4px; }
     nav a { font-size: 13px; padding: 7px 14px; }
     main { padding: 8px 14px 60px; }
@@ -1025,6 +1160,8 @@
     .link-card .name { font-size: 15px; }
     .link-card .desc { font-size: 12px; }
     .link-card .icon { width: 36px; height: 36px; }
+    .card-tags { display: none; }
+    .site-preview-tags span { font-size: 10px; padding: 3px 7px; }
     .back-to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 16px; }
   }
 
@@ -1096,6 +1233,25 @@
     <div class="quick-access-label">快速访问</div>
     <div class="quick-access-track" id="quickAccessTrack"></div>
     <div class="quick-access-mode" id="quickAccessMode">常用推荐</div>
+  </div>
+</section>
+
+<section class="task-guide" id="taskGuide" aria-label="按任务找工具">
+  <div class="task-guide-shell">
+    <div class="task-guide-head">
+      <div class="task-guide-title">按任务找工具</div>
+      <div class="task-guide-sub">不知道网站名时，直接从要完成的事开始</div>
+    </div>
+    <div class="task-grid">
+      <button class="task-chip" type="button" data-cat="AI应用" data-query="文案 脚本 写作 对话 提示词"><span class="task-chip-icon">✍️</span><span class="task-chip-text"><strong>写文案脚本</strong><span>对话、长文、提示词</span></span></button>
+      <button class="task-chip" type="button" data-cat="网页设计" data-query="网页设计 UI组件 组件 动效 3D 灵感 Figma"><span class="task-chip-icon">🧩</span><span class="task-chip-text"><strong>做网页界面</strong><span>组件、动效、设计参考</span></span></button>
+      <button class="task-chip" type="button" data-cat="AI创作" data-query="AI绘画 图片生成 视频生成 动画 矢量化"><span class="task-chip-icon">🎨</span><span class="task-chip-text"><strong>生成图片视频</strong><span>绘图、视频、动画</span></span></button>
+      <button class="task-chip" type="button" data-cat="网页设计" data-query="封面 海报 社媒设计 广告图 电商图"><span class="task-chip-icon">🖼️</span><span class="task-chip-text"><strong>做封面海报</strong><span>模板、广告图、运营图</span></span></button>
+      <button class="task-chip" type="button" data-cat="素材库" data-query="图片素材 视频素材 摄影 免费 素材 音效 字体"><span class="task-chip-icon">🎬</span><span class="task-chip-text"><strong>找素材资源</strong><span>图片、视频、音效、字体</span></span></button>
+      <button class="task-chip" type="button" data-cat="运营" data-query="热点 数据 抖音 小红书 微博 百度 指数 敏感词"><span class="task-chip-icon">📊</span><span class="task-chip-text"><strong>查热点运营</strong><span>热搜、指数、敏感词</span></span></button>
+      <button class="task-chip" type="button" data-cat="工具箱" data-query="压缩 转换 PDF 抠图 去背景 二维码 文件处理"><span class="task-chip-icon">🧰</span><span class="task-chip-text"><strong>处理文件图片</strong><span>压缩、转换、抠图</span></span></button>
+      <button class="task-chip" type="button" data-cat="工具箱" data-query="摸鱼 游戏 休闲 随机 有趣"><span class="task-chip-icon">🐟</span><span class="task-chip-text"><strong>休息摸鱼</strong><span>小游戏、有趣网站</span></span></button>
+    </div>
   </div>
 </section>
 
@@ -1403,6 +1559,7 @@
   <div class="site-preview-kicker"></div>
   <div class="site-preview-title"></div>
   <div class="site-preview-desc"></div>
+  <div class="site-preview-tags"></div>
   <div class="site-preview-help"></div>
 </aside>
 
@@ -1418,56 +1575,92 @@ gsap.registerPlugin(ScrollTrigger);
 const HAS_PLAYED_INTRO = sessionStorage.getItem('introPlayed');
 const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const SEARCH_SYNONYMS = {
+  '抠图': ['去背景', '去底', '透明背景', 'removebg'],
+  '去背景': ['抠图', '透明背景', 'remove.bg'],
+  '封面': ['海报', '社媒设计', '广告图', '运营图', 'Canva', '稿定', '创客贴', 'Picell'],
+  '海报': ['封面', '社媒设计', '广告图', '模板设计'],
+  '文案': ['写作', '脚本', '标题', '对话', '提示词', 'ChatGPT', 'Claude', '豆包', 'Kimi'],
+  '脚本': ['文案', '写作', '短视频脚本', 'AI对话'],
+  '提示词': ['prompt', 'prompts', '咒语', 'AI素材'],
+  '配音': ['语音', '声音', '音频', '克隆', 'Fish Audio'],
+  '音乐': ['歌曲', '配乐', '音效', 'Suno'],
+  '视频': ['剪辑', '视频生成', '动画', '素材视频', 'Runway', '可灵'],
+  '图片': ['图库', '摄影', '图片素材', 'AI绘画', 'Pexels', 'Unsplash'],
+  '绘画': ['AI绘画', '图片生成', 'Midjourney', 'LiblibAI'],
+  '热点': ['热搜', '趋势', '指数', '运营数据', '抖音', '微博', '百度'],
+  '小红书': ['新红数据', '敏感词', '运营'],
+  '抖音': ['巨量算数', '抖音指数', '飞瓜数据', '热点'],
+  '网页': ['网页设计', 'UI组件', '前端组件', '落地页', '动效'],
+  '组件': ['UI组件', 'React', 'Tailwind', 'Figma', '前端'],
+  '动效': ['动画', '微交互', 'Motion', 'Framer Motion', 'React Bits'],
+  '压缩': ['图片压缩', '视频压缩', 'TinyPNG', 'TinyWow'],
+  '转换': ['格式转换', '文件转换', 'PDF', 'Convertio'],
+  '二维码': ['草料', '二维码生成'],
+  '字体': ['商用字体', '文字', '100font', '自由字体'],
+  '摸鱼': ['小游戏', '休闲', '随机网站', '人生重开', '小霸王']
+};
+
 const CARD_INFO = {
   'UIverse': {
     short: '复制开源 HTML/CSS/Tailwind UI 元素',
     detail: '社区维护的开源 UI 元素库，包含按钮、卡片、表单、加载动画和交互动效，可查看并复制 HTML、CSS、Tailwind 或 React 代码。',
-    helps: '帮你快速找到能直接改造的前端小组件，适合补充按钮特效、卡片样式和局部交互。'
+    helps: '帮你快速找到能直接改造的前端小组件，适合补充按钮特效、卡片样式和局部交互。',
+    tags: ['UI组件', 'CSS', '可复制']
   },
   'React Bits': {
     short: '复制可定制的 React 动效组件',
     detail: '开源 React 动效组件集合，覆盖文本效果、背景、滚动、交互和视觉特效组件，可按项目风格自定义。',
-    helps: '帮你给 React 页面快速加入高级动效、记忆点和可复用交互模块。'
+    helps: '帮你给 React 页面快速加入高级动效、记忆点和可复用交互模块。',
+    tags: ['React', '动效', '组件']
   },
   '21st.dev': {
     short: '发现并混搭社区 React 组件',
     detail: '社区发布的 React 组件平台，支持浏览、复制和 remix 高质量组件，常见于 Tailwind、shadcn 风格项目。',
-    helps: '帮你从社区组件里快速拼出落地页、导航、卡片、按钮和后台界面模块。'
+    helps: '帮你从社区组件里快速拼出落地页、导航、卡片、按钮和后台界面模块。',
+    tags: ['React', 'Tailwind', '社区']
   },
   'Aceternity UI': {
     short: '复制 Tailwind 与 Framer Motion 组件',
     detail: '提供 React、Next.js、Tailwind CSS 和 Framer Motion 构建的组件、区块和模板，偏高级视觉和动效表现。',
-    helps: '帮你快速做出有质感的 Hero 区、背景、卡片、导航和滚动动画。'
+    helps: '帮你快速做出有质感的 Hero 区、背景、卡片、导航和滚动动画。',
+    tags: ['Tailwind', 'Framer', '模板']
   },
   'Fig Components': {
     short: '下载免费 Figma 组件和界面素材',
     detail: '免费 Figma 组件资源库，聚合 UI kits、设计系统、页面模板、图标和界面模块，适合设计稿前期搭建。',
-    helps: '帮你减少从零画组件的时间，快速找到可复用的 Figma 素材和界面结构。'
+    helps: '帮你减少从零画组件的时间，快速找到可复用的 Figma 素材和界面结构。',
+    tags: ['Figma', 'UI Kit', '免费']
   },
   'Spline': {
     short: '在浏览器里制作可嵌入的 3D 交互',
     detail: '浏览器端 3D 设计工具，支持建模、材质、动画和实时协作，可把互动 3D 场景嵌入网页。',
-    helps: '帮你给产品页、官网首屏或展示页加入可交互 3D 模型和空间视觉。'
+    helps: '帮你给产品页、官网首屏或展示页加入可交互 3D 模型和空间视觉。',
+    tags: ['3D', '交互', '网页']
   },
   'Motion Sites': {
     short: '获取 AI 网站 Hero、动效背景和提示词',
     detail: '面向 AI 网站设计的灵感库，提供 Hero 区、动态背景、渐变、模板和设计提示词。',
-    helps: '帮你快速规划官网首屏、动画背景和视觉方向，适合做 AI 产品站原型。'
+    helps: '帮你快速规划官网首屏、动画背景和视觉方向，适合做 AI 产品站原型。',
+    tags: ['Hero', '动效', '提示词']
   },
   'Design Spells': {
     short: '学习网页微交互和隐藏彩蛋细节',
     detail: '收集微交互、彩蛋和那些让网页更有生命力的设计细节，重点关注细腻、有趣的交互体验。',
-    helps: '帮你补足按钮反馈、卡片过渡、滚动细节和小惊喜，让页面不显得僵硬。'
+    helps: '帮你补足按钮反馈、卡片过渡、滚动细节和小惊喜，让页面不显得僵硬。',
+    tags: ['微交互', '灵感', '动效']
   },
   'Recent Design': {
     short: '每日查看最新优秀网页设计案例',
     detail: '每日更新的近期设计灵感集合，聚合互联网上新发布的优秀网页、产品站和品牌界面。',
-    helps: '帮你快速掌握当前流行的网页排版、配色、首屏结构和视觉趋势。'
+    helps: '帮你快速掌握当前流行的网页排版、配色、首屏结构和视觉趋势。',
+    tags: ['案例', '趋势', '灵感']
   },
   'Variant': {
     short: '输入想法并滚动生成界面方案',
     detail: '输入应用或网站想法后持续生成不同设计方向，像刷信息流一样浏览界面方案。',
-    helps: '帮你在早期探索多套视觉方向，快速比较页面风格、结构和创意表达。'
+    helps: '帮你在早期探索多套视觉方向，快速比较页面风格、结构和创意表达。',
+    tags: ['AI设计', '方案', '探索']
   },
   'Awwwards': { short: '浏览全球获奖网页设计案例' },
   'One Page Love': { short: '查找单页落地页设计灵感' },
@@ -1479,6 +1672,27 @@ const CARD_INFO = {
   '即时设计': { short: '国产在线 UI 设计和团队协作工具' },
   'Stitch': { short: '用 AI 生成应用界面和前端草图' }
 };
+
+function inferTags(name, category, subcat, shortText) {
+  const source = [name, category, subcat, shortText].join(' ');
+  const tags = [];
+  function add(tag) {
+    if (tag && !tags.includes(tag) && tags.length < 4) tags.push(tag);
+  }
+
+  if (/AI|ChatGPT|Claude|Kimi|Gemini|豆包|通义|Grok/i.test(source)) add('AI');
+  if (/绘画|图片生成|图像|矢量/.test(source)) add('图片');
+  if (/视频|动画|Runway|可灵|即梦|FogSight/i.test(source)) add('视频');
+  if (/音乐|音效|语音|配音|Audio|Suno/i.test(source)) add('音频');
+  if (/网页|UI|组件|Figma|设计|Tailwind|React/i.test(source)) add('设计');
+  if (/素材|图库|摄影|壁纸|字体|图标/.test(source)) add('素材');
+  if (/热点|指数|数据|运营|敏感词/.test(source)) add('运营');
+  if (/压缩|转换|PDF|抠图|二维码|工具/.test(source)) add('工具');
+  if (/免费|开源|商用/.test(source)) add('免费');
+
+  add(subcat.replace(/[，、/].*$/, '').trim());
+  return tags.slice(0, 3);
+}
 
 function enhanceCards() {
   document.querySelectorAll('.link-card').forEach(function(card) {
@@ -1497,10 +1711,21 @@ function enhanceCards() {
     const shortText = info.short || desc?.textContent.trim() || '';
     const detailText = info.detail || shortText + '，适合在“' + subcat + '”场景下快速解决创作、设计或运营需求。';
     const helpsText = info.helps || '帮你更快找到合适工具，减少搜索和试错时间。';
+    const tags = info.tags || inferTags(name, category, subcat, shortText);
     if (desc && shortText) desc.textContent = shortText;
+    let tagWrap = card.querySelector('.card-tags');
+    if (!tagWrap) {
+      tagWrap = document.createElement('div');
+      tagWrap.className = 'card-tags';
+      card.querySelector('.text')?.appendChild(tagWrap);
+    }
+    tagWrap.innerHTML = tags.map(function(tag) {
+      return '<span class="card-tag">' + tag + '</span>';
+    }).join('');
     card.dataset.detail = detailText;
     card.dataset.helps = helpsText;
-    card.dataset.search = [name, shortText, detailText, helpsText, category, subcat, card.href].join(' ').toLowerCase();
+    card.dataset.tags = tags.join(' ');
+    card.dataset.search = [name, shortText, detailText, helpsText, tags.join(' '), category, subcat, card.href].join(' ').toLowerCase();
   });
 }
 
@@ -1511,7 +1736,9 @@ function initSitePreview() {
   const kicker = preview.querySelector('.site-preview-kicker');
   const title = preview.querySelector('.site-preview-title');
   const desc = preview.querySelector('.site-preview-desc');
+  const tags = preview.querySelector('.site-preview-tags');
   const help = preview.querySelector('.site-preview-help');
+  const touchPreview = window.matchMedia('(hover: none), (pointer: coarse)');
   let activeCard = null;
   let hoverTimer = 0;
   let hideTimer = 0;
@@ -1568,6 +1795,13 @@ function initSitePreview() {
     kicker.textContent = [category, subcat].filter(Boolean).join(' / ');
     title.textContent = name;
     desc.textContent = card.dataset.detail || shortText;
+    const tagList = (card.dataset.tags || '').split(/\s+/).filter(Boolean).slice(0, 4);
+    if (tags) {
+      tags.innerHTML = tagList.map(function(tag) {
+        return '<span>' + tag + '</span>';
+      }).join('');
+      tags.style.display = tagList.length ? 'flex' : 'none';
+    }
     help.textContent = card.dataset.helps || '帮你更快判断这个网站是否适合当前任务。';
     preview.setAttribute('aria-hidden', 'false');
     placePreview(card);
@@ -1602,6 +1836,16 @@ function initSitePreview() {
     card.addEventListener('mouseleave', scheduleHide);
     card.addEventListener('focus', function() { showPreview(card); });
     card.addEventListener('blur', hidePreview);
+    card.addEventListener('click', function(e) {
+      if (!touchPreview.matches) return;
+      if (activeCard !== card || !preview.classList.contains('is-visible')) {
+        e.preventDefault();
+        clearTimeout(hoverTimer);
+        clearTimeout(hideTimer);
+        activeCard = card;
+        showPreview(card);
+      }
+    });
   });
 
   preview.addEventListener('mouseenter', function() {
@@ -1867,7 +2111,7 @@ function initFluidHover() {
   }
 
   document.addEventListener('pointermove', function(e) {
-    const el = e.target.closest('.link-card, .quick-chip, header input');
+    const el = e.target.closest('.link-card, .quick-chip, .task-chip, header input');
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const localX = e.clientX - rect.left;
@@ -1898,7 +2142,7 @@ function initFluidHover() {
   });
 
   document.addEventListener('pointerout', function(e) {
-    const el = e.target.closest('.link-card, .quick-chip, header input');
+    const el = e.target.closest('.link-card, .quick-chip, .task-chip, header input');
     if (!el || el.contains(e.relatedTarget)) return;
     if (hoverTarget === el) hoverTarget = null;
     el.style.setProperty('--mx', '50%');
@@ -2168,8 +2412,24 @@ function initQuickAccess() {
   const subcats = document.querySelectorAll('.subcat');
   const noResult = document.getElementById('noresult');
 
+  function getSearchGroups(keyword) {
+    return keyword.split(/\s+/).filter(Boolean).map(function(part) {
+      const group = [part];
+      Object.keys(SEARCH_SYNONYMS).forEach(function(key) {
+        if (part.includes(key) || key.includes(part)) {
+          SEARCH_SYNONYMS[key].forEach(function(term) {
+            const normalized = term.toLowerCase();
+            if (!group.includes(normalized)) group.push(normalized);
+          });
+        }
+      });
+      return group;
+    });
+  }
+
   function filter() {
     const keyword = search.value.toLowerCase().trim();
+    const searchGroups = getSearchGroups(keyword);
     const activeCat = navEl.querySelector('.active')?.dataset.cat || 'all';
     let visibleCount = 0;
 
@@ -2187,7 +2447,9 @@ function initQuickAccess() {
       subCards.forEach(function(card) {
         const wasHidden = card.classList.contains('hidden');
         const text = card.dataset.search || card.textContent.toLowerCase();
-        const show = keyword === '' || text.includes(keyword);
+        const show = searchGroups.length === 0 || searchGroups.every(function(group) {
+          return group.some(function(term) { return text.includes(term); });
+        });
         card.classList.toggle('hidden', !show);
         if (show && wasHidden && !REDUCE_MOTION) {
           gsap.fromTo(card,
@@ -2250,6 +2512,40 @@ function initQuickAccess() {
     }
   });
 })();
+
+// ======== Task guide ========
+function initTaskGuide() {
+  const guide = document.getElementById('taskGuide');
+  const search = document.getElementById('search');
+  const navEl = document.getElementById('nav');
+  const main = document.getElementById('main');
+  if (!guide || !search || !navEl) return;
+
+  guide.addEventListener('click', function(e) {
+    const chip = e.target.closest('.task-chip');
+    if (!chip) return;
+
+    const cat = chip.dataset.cat || 'all';
+    const query = chip.dataset.query || '';
+    const navTarget = navEl.querySelector('[data-cat="' + cat + '"]') || navEl.querySelector('[data-cat="all"]');
+    if (navTarget) {
+      navEl.querySelectorAll('a').forEach(function(a) { a.classList.remove('active'); });
+      navTarget.classList.add('active');
+      const indicator = navEl.querySelector('.nav-indicator');
+      if (indicator) {
+        gsap.to(indicator, { left: navTarget.offsetLeft, width: navTarget.offsetWidth, duration: 0.35, ease: 'power2.inOut' });
+      }
+    }
+
+    search.value = query;
+    search.dispatchEvent(new Event('input', { bubbles: true }));
+    if (main) {
+      setTimeout(function() {
+        main.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth', block: 'start' });
+      }, 140);
+    }
+  });
+}
 
 // ======== Boot Sequence ========
 document.addEventListener('DOMContentLoaded', function() {
@@ -2315,6 +2611,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initSitePreview();
   initCards();
   initNav();
+  initTaskGuide();
   initBackToTop();
   initFluidHover();
   initGalaxyBackground();

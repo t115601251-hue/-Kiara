@@ -203,6 +203,7 @@
   }
   header input::placeholder { color: rgba(203,213,225,.74); font-size: 15px; }
   .search-wrap { position: relative; display: inline-block; }
+  header .search-wrap { transform: translateY(-10px); }
   .search-wrap::before {
     content: '⌕';
     position: absolute;
@@ -217,7 +218,7 @@
   /* ---- Quick access ---- */
   .quick-access {
     max-width: 1500px;
-    margin: 12px auto 0;
+    margin: 16px auto 0;
     padding: 0 28px;
     transition: opacity 0.5s ease;
   }
@@ -447,9 +448,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    padding: 16px 28px 6px;
+    padding: 10px 0 8px;
     max-width: 1500px;
-    margin: 0 auto;
+    margin: 8px auto 0;
   }
   nav a {
     padding: 8px 18px;
@@ -552,7 +553,7 @@
   /* page hidden during intro */
   body.intro-active header,
   body.intro-active .quick-access,
-  body.intro-active nav,
+  body.intro-active .task-guide,
   body.intro-active footer { opacity: 0; }
   body.intro-active .bg-svg { opacity: 0; }
   body.intro-active .galaxy-canvas { opacity: 0; }
@@ -567,7 +568,7 @@
   .bg-svg { transition: opacity 0.8s ease; }
   header { transition: opacity 0.5s ease; }
   .quick-access { transition: opacity 0.5s ease; }
-  nav { transition: opacity 0.5s ease; }
+  .task-guide { transition: opacity 0.5s ease; }
   footer { transition: opacity 0.5s ease; }
 
   /* main hidden separately — revealed by GSAP with cards */
@@ -1138,6 +1139,7 @@
     .brand-svg { height: 84px; }
     .brand-cn { font-size: 11px; letter-spacing: 1px; }
     .brand-tag { display: block; margin-left: 0; margin-top: 2px; font-size: 11px; }
+    header .search-wrap { transform: none; }
     header input { max-width: 55vw; font-size: 14px; }
     .quick-access { padding: 0 16px; margin-top: 10px; }
     .quick-access-shell { min-height: 52px; padding: 8px; gap: 8px; }
@@ -1154,7 +1156,7 @@
     .task-chip-icon { width: 26px; height: 26px; border-radius: 8px; }
     .task-chip strong { font-size: 12px; }
     .task-chip span { font-size: 10px; }
-    nav { padding: 10px 16px 4px; gap: 4px; }
+    nav { padding: 8px 0 4px; gap: 4px; }
     nav a { font-size: 13px; padding: 7px 14px; }
     main { padding: 8px 14px 60px; }
     .category { padding: 20px 16px 12px; }
@@ -1230,6 +1232,16 @@
       <input type="text" id="search" placeholder="搜索工具、网站、关键词...">
     </div>
   </div>
+  <nav id="nav"><div class="nav-indicator"></div>
+    <a class="active" data-cat="all">全部</a>
+    <a data-cat="AI应用">🤖 AI 应用</a>
+    <a data-cat="AI创作">🎨 AI 创作</a>
+    <a data-cat="AI素材">💡 AI 素材</a>
+    <a data-cat="网页设计">🧩 网页设计</a>
+    <a data-cat="素材库">🎬 素材库</a>
+    <a data-cat="运营">📊 运营</a>
+    <a data-cat="工具箱">🧰 工具箱</a>
+  </nav>
 </header>
 
 <section class="quick-access" id="quickAccess" aria-label="快速访问">
@@ -1254,21 +1266,9 @@
       <button class="task-chip" type="button" data-cat="all" data-query="找素材资源"><span class="task-chip-icon">🎬</span><span class="task-chip-text"><strong>找素材资源</strong><span>图片、视频、音效、字体</span></span></button>
       <button class="task-chip" type="button" data-cat="all" data-query="查热点运营"><span class="task-chip-icon">📊</span><span class="task-chip-text"><strong>查热点运营</strong><span>热搜、指数、敏感词</span></span></button>
       <button class="task-chip" type="button" data-cat="all" data-query="处理文件图片"><span class="task-chip-icon">🧰</span><span class="task-chip-text"><strong>处理文件图片</strong><span>压缩、转换、抠图</span></span></button>
-      <button class="task-chip" type="button" data-cat="all" data-query="休息摸鱼"><span class="task-chip-icon">🐟</span><span class="task-chip-text"><strong>休息摸鱼</strong><span>小游戏、有趣网站</span></span></button>
     </div>
   </div>
 </section>
-
-<nav id="nav"><div class="nav-indicator"></div>
-  <a class="active" data-cat="all">全部</a>
-  <a data-cat="AI应用">🤖 AI 应用</a>
-  <a data-cat="AI创作">🎨 AI 创作</a>
-  <a data-cat="AI素材">💡 AI 素材</a>
-  <a data-cat="网页设计">🧩 网页设计</a>
-  <a data-cat="素材库">🎬 素材库</a>
-  <a data-cat="运营">📊 运营</a>
-  <a data-cat="工具箱">🧰 工具箱</a>
-</nav>
 
 <main id="main" class="main-hidden">
 
@@ -1596,6 +1596,7 @@ const SEARCH_SYNONYMS = {
   '小红书': ['新红数据', '敏感词', '运营'],
   '抖音': ['巨量算数', '抖音指数', '飞瓜数据', '热点'],
   '网页': ['网页设计', 'UI组件', '前端组件', '落地页', '动效'],
+  '设计': ['网页设计', 'UI设计', '海报', '封面', '广告图', '组件', 'Figma', 'ChatGPT', 'Gemini'],
   '组件': ['UI组件', 'React', 'Tailwind', 'Figma', '前端'],
   '动效': ['动画', '微交互', 'Motion', 'Framer Motion', 'React Bits'],
   '压缩': ['图片压缩', '视频压缩', 'TinyPNG', 'TinyWow'],
@@ -1607,8 +1608,8 @@ const SEARCH_SYNONYMS = {
 
 const TASK_WORDS = {
   copywriting: '写文案脚本 文案 脚本 写作 长文 标题 提示词 prompt 对话 论文 编程 办公 表格',
-  webDesign: '做网页界面 网页设计 UI组件 前端组件 落地页 官网 Hero 交互 动效 Figma React Tailwind 3D',
-  visualCreation: '生成图片视频 AI绘画 图片生成 视频生成 动画 矢量化 3D 广告图 拆图 配音 音乐',
+  webDesign: '做网页界面 网页设计 UI设计 设计 前端设计 UI组件 前端组件 落地页 官网 Hero 交互 动效 Figma React Tailwind 3D',
+  visualCreation: '生成图片视频 做图片 做视频 做图片视频 设计 AI绘画 图片生成 视频生成 动画 矢量化 3D 广告图 拆图 配音 音乐',
   posterDesign: '做封面海报 封面 海报 社媒设计 运营图 广告图 电商图 模板 图标 配色 PPT',
   assets: '找素材资源 素材 图片素材 视频素材 音效 字体 图标 壁纸 GIF 免费 商用 摄影',
   operations: '查热点运营 热点 热搜 指数 数据 运营 矩阵管理 敏感词 违禁词 小红书 抖音 微博 百度',
@@ -1708,12 +1709,12 @@ const SUBCAT_META_ALIASES = {
 };
 
 const SITE_META = {
-  'ChatGPT': { tags: ['对话', '写作', '通用'], tasks: ['copywriting'], keywords: 'chatgpt openai GPT 文案 脚本 改写 翻译 总结 问答 代码' },
-  'Claude': { tags: ['长文', '推理', '编程'], tasks: ['copywriting'], keywords: 'claude anthropic 长文本 推理 编程 写作 文案 分析' },
-  'DeepSeek': { tags: ['推理', '代码', '国产'], tasks: ['copywriting'], keywords: 'deepseek 深度求索 推理 编程 数学 代码 国产大模型' },
-  '豆包': { tags: ['对话', '写作', '字节'], tasks: ['copywriting'], keywords: '豆包 字节 AI助手 写文案 写脚本 总结 生成图片' },
-  'Gemini': { tags: ['多模态', 'Google', '对话'], tasks: ['copywriting'], keywords: 'gemini google 多模态 图片理解 文案 问答' },
-  '通义千问': { tags: ['对话', '阿里', '办公'], tasks: ['copywriting'], keywords: '通义 千问 阿里 Qwen 文案 办公 对话 图片理解' },
+  'ChatGPT': { tags: ['对话', '写作', '多模态'], tasks: ['copywriting', 'visualCreation', 'posterDesign', 'webDesign'], keywords: 'chatgpt openai GPT 文案 脚本 改写 翻译 总结 问答 代码 生成图片 图片编辑 视频脚本 UI设计 网页设计 前端方案' },
+  'Claude': { tags: ['长文', '推理', '编程'], tasks: ['copywriting', 'webDesign'], keywords: 'claude anthropic 长文本 推理 编程 写作 文案 分析 前端开发 网页方案 UI文案' },
+  'DeepSeek': { tags: ['推理', '代码', '国产'], tasks: ['copywriting', 'webDesign'], keywords: 'deepseek 深度求索 推理 编程 数学 代码 国产大模型 前端开发 网页代码' },
+  '豆包': { tags: ['对话', '写作', '图片'], tasks: ['copywriting', 'visualCreation', 'posterDesign'], keywords: '豆包 字节 AI助手 写文案 写脚本 总结 生成图片 图片创作 海报 设计' },
+  'Gemini': { tags: ['多模态', 'Google', '视觉'], tasks: ['copywriting', 'visualCreation', 'posterDesign', 'webDesign'], keywords: 'gemini google 多模态 图片理解 文案 问答 生成图片 图片分析 视频理解 设计参考 网页设计' },
+  '通义千问': { tags: ['对话', '阿里', '多模态'], tasks: ['copywriting', 'visualCreation', 'posterDesign'], keywords: '通义 千问 阿里 Qwen 文案 办公 对话 图片理解 生成图片 海报 设计' },
   'Kimi': { tags: ['长文', '阅读', '写作'], tasks: ['copywriting'], keywords: 'kimi 月之暗面 长文本 文件阅读 文案 总结 论文' },
   'Grok': { tags: ['实时', '搜索', '对话'], tasks: ['copywriting'], keywords: 'grok xai 实时信息 搜索 热点 问答' },
   'ChatExcel': { tags: ['Excel', '表格', '数据'], tasks: ['copywriting', 'fileTools'], keywords: 'excel 表格 数据处理 数据分析 办公 自动公式' },
@@ -1805,6 +1806,42 @@ const SITE_META = {
 };
 
 const CARD_INFO = {
+  'ChatGPT': {
+    short: '写作、图片、代码和方案都能处理',
+    detail: 'OpenAI 的通用多模态助手，适合写文案脚本、改稿总结、生成或修改图片、拆解网页方案，也能辅助前端代码和运营思路。',
+    helps: '帮你从一个想法快速推进到文案、视觉方向、页面结构或可执行代码草案。',
+    tags: ['多模态', '写作', '设计']
+  },
+  'Claude': {
+    short: '长文分析、推理和代码协作助手',
+    detail: 'Anthropic 的对话模型，强项是长文本阅读、逻辑分析、写作润色和代码协作，适合整理资料、做网页结构和前端实现思路。',
+    helps: '帮你把复杂需求拆成清晰步骤，适合长文档、方案推理和代码审查。',
+    tags: ['长文', '推理', '代码']
+  },
+  'DeepSeek': {
+    short: '推理、编程和中文任务处理模型',
+    detail: '国产大模型，适合代码生成、问题推理、数学分析和中文内容处理，可用于网页代码思路、脚本改写和工具方案拆解。',
+    helps: '帮你快速产出代码思路、排查逻辑问题，并处理中文场景下的写作和分析任务。',
+    tags: ['推理', '编程', '中文']
+  },
+  '豆包': {
+    short: '中文对话、写作和图片创作助手',
+    detail: '字节系 AI 助手，覆盖中文问答、文案写作、资料整理和图片生成，适合自媒体选题、脚本、封面创意和日常内容生产。',
+    helps: '帮你把中文内容任务快速落到标题、脚本、封面方向和配图创意上。',
+    tags: ['中文', '图片', '写作']
+  },
+  'Gemini': {
+    short: 'Google 多模态 AI，擅长图片和资料理解',
+    detail: 'Google 的多模态 AI 助手，适合处理文本、图片理解、资料分析、创意构思和设计参考，也能辅助生成网页方案和视觉方向。',
+    helps: '帮你把图片、资料和想法放在一起分析，快速得到内容、设计和执行建议。',
+    tags: ['多模态', '图片', '设计']
+  },
+  '通义千问': {
+    short: '阿里通用 AI，适合办公写作和视觉任务',
+    detail: '阿里 Qwen 系列助手，覆盖中文问答、办公写作、图片理解和视觉生成，适合内容整理、海报方向和日常效率任务。',
+    helps: '帮你把办公资料、内容创意和视觉需求整理成可直接执行的输出。',
+    tags: ['办公', '多模态', '中文']
+  },
   'UIverse': {
     short: '复制开源 HTML/CSS/Tailwind UI 元素',
     detail: '社区维护的开源 UI 元素库，包含按钮、卡片、表单、加载动画和交互动效，可查看并复制 HTML、CSS、Tailwind 或 React 代码。',
@@ -1925,7 +1962,39 @@ function defaultDetail(category, subcat, shortText) {
   return shortText + '，适合在“' + subcat + '”场景下快速解决具体任务。';
 }
 
-function defaultHelps(category) {
+function defaultHelps(category, subcat) {
+  const subcatHelps = {
+    'AI 对话模型': '帮你判断它更适合写作、问答、图片理解还是代码协作，减少反复试工具。',
+    'AI 办公与写作': '帮你处理论文、表格、文档和办公材料，让资料整理更快进入可交付状态。',
+    'AI 编程辅助': '帮你把开发问题、页面结构和代码提示词拆清楚，适合快速进入实现。',
+    'AI 绘画': '帮你选择适合出图、做风格探索、生成海报或补充视觉素材的工具。',
+    'AI 视频': '帮你把脚本、图片或概念转成视频方向，适合短视频和动态创意验证。',
+    'AI 音乐 / 音频': '帮你快速找到配乐、歌曲、配音或声音克隆工具，补齐内容音频部分。',
+    'AIGC 导航与提示词': '帮你从工具合集和提示词里找灵感，适合不知道具体工具名时先定位方向。',
+    '素材发现与抓取': '帮你从视频、图片、台词和社媒内容里快速找到可复用素材线索。',
+    'UI 组件与代码': '帮你直接找可复制组件、代码片段和界面模块，缩短前端搭建时间。',
+    '动效、3D 与视觉特效': '帮你寻找网页动效、3D 场景和高级视觉背景，提升页面记忆点。',
+    '网页灵感与案例': '帮你对比优秀网页案例，快速确定版式、首屏结构和视觉趋势。',
+    '设计工具与素材': '帮你快速完成封面、海报、电商图、图标或 UI 设计素材准备。',
+    '图片素材': '帮你定位可用于封面、配图、背景和运营图的高清图片来源。',
+    '动图 GIF': '帮你快速找到表情、动图和轻量动态素材，适合社媒内容补充。',
+    '视频素材': '帮你找到背景视频、B-roll 和空镜素材，减少剪辑找素材时间。',
+    '音频素材': '帮你查找音效、配乐和背景音乐，补齐视频与内容声音层。',
+    '字体文字': '帮你选择可商用字体和标题字资源，减少版权和风格不匹配风险。',
+    'PPT 模板': '帮你快速找演示模板和页面结构，适合汇报、方案和资料展示。',
+    '图标资源': '帮你找到 SVG、PNG 和矢量图标，适合网页、海报和界面补图。',
+    '矩阵管理': '帮你管理多账号、多平台内容发布和账号资产，减少运营切换成本。',
+    '数据热点': '帮你观察热点、趋势和平台数据，适合选题判断和内容规划。',
+    '敏感词检测': '帮你发布前检查违禁词、极限词和平台风险词，降低文案违规概率。',
+    '图片处理': '帮你快速压缩、抠图、换格式和处理透明背景，适合发布前素材整理。',
+    '文件转换': '帮你完成 PDF、视频、音频和图片格式转换，处理一次性文件需求。',
+    '效率工具': '帮你快速做流程图、表单、二维码和协作文档，减少临时找工具时间。',
+    '词云': '帮你把关键词变成可视化词云，适合海报、汇报和选题分析。',
+    '配色': '帮你快速找色卡、调色板和配色参考，统一设计视觉风格。',
+    '软件下载': '帮你定位常用软件和工具资源，适合补齐本地创作环境。',
+    '摸鱼': '帮你快速找到休闲小游戏和有趣网站，只保留在工具箱里按需访问。'
+  };
+  if (subcatHelps[subcat]) return subcatHelps[subcat];
   if (category === 'AI 应用') return '帮你减少从空白开始的时间，把写作、分析和问答任务先跑起来。';
   if (category === 'AI 创作') return '帮你把想法更快转成图片、视频、声音或可继续加工的视觉素材。';
   if (category === '网页设计') return '帮你快速判断这个网站适合找组件、找灵感，还是直接产出设计内容。';
@@ -1973,7 +2042,7 @@ function enhanceCards() {
     const shortText = info.short || desc?.textContent.trim() || '';
     const meta = buildCardMeta(name, category, subcat, shortText);
     const detailText = info.detail || defaultDetail(category, subcat, shortText);
-    const helpsText = info.helps || defaultHelps(category);
+    const helpsText = info.helps || defaultHelps(category, subcat);
     const tags = meta.tags;
     if (desc && shortText) desc.textContent = shortText;
     let tagWrap = card.querySelector('.card-tags');
@@ -2097,7 +2166,7 @@ function initSitePreview() {
 
   function scheduleHide() {
     clearTimeout(hideTimer);
-    hideTimer = setTimeout(hidePreview, 140);
+    hideTimer = setTimeout(hidePreview, 100);
   }
 
   document.querySelectorAll('.link-card').forEach(function(card) {
@@ -2107,7 +2176,7 @@ function initSitePreview() {
       activeCard = card;
       hoverTimer = setTimeout(function() {
         if (activeCard === card) showPreview(card);
-      }, 650);
+      }, 420);
     });
     card.addEventListener('mouseleave', scheduleHide);
     card.addEventListener('focus', function() { showPreview(card); });
@@ -2797,6 +2866,18 @@ function initTaskGuide() {
   const main = document.getElementById('main');
   if (!guide || !search || !navEl) return;
 
+  function scrollToTaskResults() {
+    const target = document.querySelector('.category:not(.hidden)') || main;
+    if (!target) return;
+    const header = document.querySelector('header');
+    const headerHeight = header ? header.offsetHeight : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 18;
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: REDUCE_MOTION ? 'auto' : 'smooth'
+    });
+  }
+
   guide.addEventListener('click', function(e) {
     const chip = e.target.closest('.task-chip');
     if (!chip) return;
@@ -2817,8 +2898,8 @@ function initTaskGuide() {
     search.dispatchEvent(new Event('input', { bubbles: true }));
     if (main) {
       setTimeout(function() {
-        main.scrollIntoView({ behavior: REDUCE_MOTION ? 'auto' : 'smooth', block: 'start' });
-      }, 140);
+        scrollToTaskResults();
+      }, 190);
     }
   });
 }
@@ -2858,7 +2939,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (!REDUCE_MOTION) {
-      gsap.fromTo(['header', '.quick-access', 'nav'],
+      gsap.fromTo(['header', '.quick-access', '.task-guide'],
         { opacity: 0, y: -18, scale: 0.99 },
         { opacity: 1, y: 0, scale: 1, stagger: 0.08, duration: 0.55, ease: 'power3.out', clearProps: 'transform,opacity' }
       );

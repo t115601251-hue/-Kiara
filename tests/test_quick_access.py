@@ -8,12 +8,13 @@ HTML = (ROOT / "index.html").read_text(encoding="utf-8")
 
 
 class QuickAccessTests(unittest.TestCase):
-    def test_quick_access_bar_sits_between_header_and_category_nav(self):
+    def test_category_nav_sits_inside_header_before_quick_access(self):
         self.assertIn('id="quickAccess"', HTML)
         self.assertIn('id="quickAccessTrack"', HTML)
-        self.assertIn("快速访问", HTML)
+        self.assertIn('id="quickAccessMode"', HTML)
+        self.assertLess(HTML.index("<header>"), HTML.index('<nav id="nav"'))
+        self.assertLess(HTML.index('<nav id="nav"'), HTML.index("</header>"))
         self.assertLess(HTML.index("</header>"), HTML.index('id="quickAccess"'))
-        self.assertLess(HTML.index('id="quickAccess"'), HTML.index('<nav id="nav"'))
 
     def test_quick_access_records_recent_card_clicks(self):
         self.assertIn("mediaVault.recentLinks.v1", HTML)

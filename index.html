@@ -62,10 +62,6 @@
     0%, 100% { box-shadow: 0 0 14px rgba(180,92,255,.32), 0 0 20px rgba(91,77,255,.18); filter: saturate(1); }
     50% { box-shadow: 0 0 26px rgba(215,71,255,.38), 0 0 22px rgba(240,109,66,.24); filter: saturate(1.25); }
   }
-  @keyframes searchGlowSpin {
-    from { transform: translate(-50%, -50%) rotate(70deg); }
-    to { transform: translate(-50%, -50%) rotate(430deg); }
-  }
   @keyframes meteorDrift {
     0%, 72% {
       opacity: 0;
@@ -238,20 +234,19 @@
         transparent 304deg,
         transparent 360deg);
     filter: blur(7px) saturate(1.2);
-    opacity: .55;
+    opacity: .42;
     transform: translate(-50%, -50%) rotate(70deg);
     z-index: 0;
     pointer-events: none;
-    animation: searchGlowSpin 8s linear infinite;
-    animation-play-state: paused;
-    transition: opacity .28s ease, filter .28s ease;
+    transition: opacity .22s ease, filter .22s ease;
   }
-  header .search-wrap:hover::after,
+  header .search-wrap:hover::after {
+    opacity: .58;
+    filter: blur(7px) saturate(1.28) brightness(1.06);
+  }
   header .search-wrap:focus-within::after {
     opacity: .95;
     filter: blur(6px) saturate(1.45) brightness(1.14);
-    animation-duration: 3.8s;
-    animation-play-state: running;
   }
   .search-wrap::before {
     content: '⌕';

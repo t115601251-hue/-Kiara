@@ -1178,6 +1178,89 @@
     font-size: 17px;
   }
 
+  /* ---- Target cursor for options and cards ---- */
+  .target-cursor-hit,
+  .target-cursor-hit * {
+    cursor: none !important;
+  }
+  .target-cursor-wrapper {
+    --target-w: 36px;
+    --target-h: 36px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 9000;
+    opacity: 0;
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity;
+  }
+  .target-cursor-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 0 10px rgba(255,255,255,.7), 0 0 16px rgba(92,255,229,.42);
+    transform: translate(-50%, -50%);
+  }
+  .target-cursor-corner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(255,255,255,.94);
+    filter: drop-shadow(0 0 8px rgba(92,255,229,.44)) drop-shadow(0 0 10px rgba(180,92,255,.34));
+    transition: transform .2s var(--ease-lux), border-color .16s ease, filter .16s ease;
+    will-change: transform;
+  }
+  .target-cursor-corner.corner-tl {
+    transform: translate(-150%, -150%);
+    border-right: none;
+    border-bottom: none;
+  }
+  .target-cursor-corner.corner-tr {
+    transform: translate(50%, -150%);
+    border-left: none;
+    border-bottom: none;
+  }
+  .target-cursor-corner.corner-br {
+    transform: translate(50%, 50%);
+    border-left: none;
+    border-top: none;
+  }
+  .target-cursor-corner.corner-bl {
+    transform: translate(-150%, 50%);
+    border-right: none;
+    border-top: none;
+  }
+  .target-cursor-wrapper.is-targeting .target-cursor-dot {
+    background: rgba(92,255,229,.95);
+    box-shadow: 0 0 10px rgba(92,255,229,.62), 0 0 16px rgba(255,112,214,.36);
+  }
+  .target-cursor-wrapper.is-targeting .target-cursor-corner {
+    border-color: rgba(92,255,229,.96);
+    filter: drop-shadow(0 0 8px rgba(92,255,229,.56)) drop-shadow(0 0 12px rgba(255,112,214,.32));
+  }
+  .target-cursor-wrapper.is-targeting .corner-tl {
+    transform: translate(calc(var(--target-w) / -2 - 5px), calc(var(--target-h) / -2 - 5px));
+  }
+  .target-cursor-wrapper.is-targeting .corner-tr {
+    transform: translate(calc(var(--target-w) / 2 - 8px), calc(var(--target-h) / -2 - 5px));
+  }
+  .target-cursor-wrapper.is-targeting .corner-br {
+    transform: translate(calc(var(--target-w) / 2 - 8px), calc(var(--target-h) / 2 - 8px));
+  }
+  .target-cursor-wrapper.is-targeting .corner-bl {
+    transform: translate(calc(var(--target-w) / -2 - 5px), calc(var(--target-h) / 2 - 8px));
+  }
+
   /* ---- Responsive ---- */
   @media (max-width: 768px) {
     body { font-size: 15px; }
@@ -1219,6 +1302,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
+    .target-cursor-wrapper { display: none !important; }
+    .target-cursor-hit,
+    .target-cursor-hit * { cursor: auto !important; }
     *, *::before, *::after {
       animation-duration: .001ms !important;
       animation-iteration-count: 1 !important;
@@ -2559,7 +2645,127 @@ function initFluidHover() {
   });
 }
 
-// ======== 7. Lightweight Galaxy Background ========
+// ======== 7. Target cursor for options and cards ========
+function initTargetCursor() {
+  if (REDUCE_MOTION || !window.gsap) return;
+
+  const mm = window.matchMedia('(pointer: fine) and (hover: hover)');
+  if (!mm.matches) return;
+
+  const targetSelector = 'nav a, .quick-chip, .task-chip, .link-card';
+  const targets = document.querySelectorAll(targetSelector);
+  if (!targets.length) return;
+
+  targets.forEach(function(target) {
+    target.classList.add('target-cursor-hit');
+  });
+
+  const cursor = document.createElement('div');
+  cursor.className = 'target-cursor-wrapper';
+  cursor.setAttribute('aria-hidden', 'true');
+  cursor.innerHTML = [
+    '<div class="target-cursor-dot"></div>',
+    '<div class="target-cursor-corner corner-tl"></div>',
+    '<div class="target-cursor-corner corner-tr"></div>',
+    '<div class="target-cursor-corner corner-br"></div>',
+    '<div class="target-cursor-corner corner-bl"></div>'
+  ].join('');
+  document.body.appendChild(cursor);
+
+  const dot = cursor.querySelector('.target-cursor-dot');
+  let activeTarget = null;
+  let lastPointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+  gsap.set(cursor, {
+    xPercent: -50,
+    yPercent: -50,
+    x: lastPointer.x,
+    y: lastPointer.y,
+    autoAlpha: 0
+  });
+
+  const spinTl = gsap.timeline({ repeat: -1 })
+    .to(cursor, { rotation: '+=360', duration: 2.4, ease: 'none' });
+
+  function setTargetBox(target) {
+    const rect = target.getBoundingClientRect();
+    cursor.style.setProperty('--target-w', rect.width.toFixed(2) + 'px');
+    cursor.style.setProperty('--target-h', rect.height.toFixed(2) + 'px');
+    gsap.to(cursor, {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+      autoAlpha: 1,
+      duration: 0.18,
+      ease: 'power3.out',
+      overwrite: 'auto'
+    });
+  }
+
+  function releaseTarget() {
+    if (!activeTarget) return;
+    activeTarget = null;
+    cursor.classList.remove('is-targeting');
+    spinTl.restart();
+    gsap.to(cursor, {
+      x: lastPointer.x,
+      y: lastPointer.y,
+      autoAlpha: 0,
+      rotation: '+=45',
+      duration: 0.18,
+      ease: 'power3.out',
+      overwrite: 'auto'
+    });
+  }
+
+  window.addEventListener('pointermove', function(e) {
+    lastPointer = { x: e.clientX, y: e.clientY };
+    if (activeTarget) return;
+    gsap.to(cursor, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.1,
+      ease: 'power3.out',
+      overwrite: 'auto'
+    });
+  }, { passive: true });
+
+  document.addEventListener('pointerover', function(e) {
+    const target = e.target.closest(targetSelector);
+    if (!target || activeTarget === target) return;
+    target.classList.add('target-cursor-hit');
+    activeTarget = target;
+    spinTl.pause();
+    gsap.set(cursor, { rotation: 0 });
+    cursor.classList.add('is-targeting');
+    setTargetBox(target);
+  }, { passive: true });
+
+  document.addEventListener('pointerout', function(e) {
+    const target = e.target.closest(targetSelector);
+    if (!target || target.contains(e.relatedTarget)) return;
+    releaseTarget();
+  }, { passive: true });
+
+  window.addEventListener('scroll', function() {
+    if (activeTarget) setTargetBox(activeTarget);
+  }, { passive: true });
+
+  window.addEventListener('resize', function() {
+    if (activeTarget) setTargetBox(activeTarget);
+  });
+
+  window.addEventListener('pointerdown', function() {
+    gsap.to(dot, { scale: 0.65, duration: 0.12, ease: 'power2.out', overwrite: 'auto' });
+    gsap.to(cursor, { scale: 0.96, duration: 0.12, ease: 'power2.out', overwrite: 'auto' });
+  }, { passive: true });
+
+  window.addEventListener('pointerup', function() {
+    gsap.to(dot, { scale: 1, duration: 0.18, ease: 'power2.out', overwrite: 'auto' });
+    gsap.to(cursor, { scale: 1, duration: 0.18, ease: 'power2.out', overwrite: 'auto' });
+  }, { passive: true });
+}
+
+// ======== 8. Lightweight Galaxy Background ========
 function initGalaxyBackground() {
   const canvas = document.getElementById('galaxyCanvas');
   if (!canvas || REDUCE_MOTION) return;
@@ -3033,6 +3239,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initTaskGuide();
   initBackToTop();
   initFluidHover();
+  initTargetCursor();
   initGalaxyBackground();
 });
 </script>

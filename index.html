@@ -214,6 +214,7 @@
     display: inline-block;
     border-radius: 28px;
     isolation: isolate;
+    overflow: hidden;
   }
   header .search-wrap { transform: translateY(-12px); }
   header .search-wrap::after {
@@ -221,9 +222,9 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    width: calc(100% + 18px);
-    height: calc(100% + 18px);
-    border-radius: 32px;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
     background:
       conic-gradient(from 70deg,
         transparent 0deg,
@@ -233,20 +234,20 @@
         rgba(207,48,170,.88) 220deg,
         transparent 304deg,
         transparent 360deg);
-    filter: blur(7px) saturate(1.2);
-    opacity: .42;
+    filter: blur(3px) saturate(1.1);
+    opacity: .20;
     transform: translate(-50%, -50%) rotate(70deg);
     z-index: 0;
     pointer-events: none;
     transition: opacity .22s ease, filter .22s ease;
   }
   header .search-wrap:hover::after {
-    opacity: .58;
-    filter: blur(7px) saturate(1.28) brightness(1.06);
+    opacity: .34;
+    filter: blur(3px) saturate(1.18) brightness(1.05);
   }
   header .search-wrap:focus-within::after {
-    opacity: .95;
-    filter: blur(6px) saturate(1.45) brightness(1.14);
+    opacity: .50;
+    filter: blur(3px) saturate(1.28) brightness(1.1);
   }
   .search-wrap::before {
     content: '⌕';

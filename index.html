@@ -1186,6 +1186,8 @@
   .target-cursor-wrapper {
     --target-w: 36px;
     --target-h: 36px;
+    --target-gap: 3px;
+    --target-corner: 13px;
     position: fixed;
     left: 0;
     top: 0;
@@ -1194,7 +1196,7 @@
     pointer-events: none;
     z-index: 9000;
     opacity: 0;
-    mix-blend-mode: screen;
+    mix-blend-mode: normal;
     transform: translate(-50%, -50%);
     will-change: transform, opacity;
   }
@@ -1205,18 +1207,18 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: rgba(255,255,255,.96);
-    box-shadow: 0 0 10px rgba(255,255,255,.7), 0 0 16px rgba(92,255,229,.42);
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 0 10px rgba(255,255,255,.58), 0 0 16px rgba(180,92,255,.40);
     transform: translate(-50%, -50%);
   }
   .target-cursor-corner {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 13px;
-    height: 13px;
-    border: 2px solid rgba(255,255,255,.94);
-    filter: drop-shadow(0 0 8px rgba(92,255,229,.44)) drop-shadow(0 0 10px rgba(180,92,255,.34));
+    width: var(--target-corner);
+    height: var(--target-corner);
+    border: 2px solid rgba(215,71,255,.96);
+    filter: drop-shadow(0 0 8px rgba(180,92,255,.54)) drop-shadow(0 0 10px rgba(240,109,66,.26));
     transition: transform .2s var(--ease-lux), border-color .16s ease, filter .16s ease;
     will-change: transform;
   }
@@ -1241,24 +1243,24 @@
     border-top: none;
   }
   .target-cursor-wrapper.is-targeting .target-cursor-dot {
-    background: rgba(92,255,229,.95);
-    box-shadow: 0 0 10px rgba(92,255,229,.62), 0 0 16px rgba(255,112,214,.36);
+    background: rgba(215,71,255,.95);
+    box-shadow: 0 0 10px rgba(215,71,255,.56), 0 0 16px rgba(240,109,66,.30);
   }
   .target-cursor-wrapper.is-targeting .target-cursor-corner {
-    border-color: rgba(92,255,229,.96);
-    filter: drop-shadow(0 0 8px rgba(92,255,229,.56)) drop-shadow(0 0 12px rgba(255,112,214,.32));
+    border-color: rgba(215,71,255,.96);
+    filter: drop-shadow(0 0 8px rgba(180,92,255,.60)) drop-shadow(0 0 12px rgba(240,109,66,.30));
   }
   .target-cursor-wrapper.is-targeting .corner-tl {
-    transform: translate(calc(var(--target-w) / -2 - 5px), calc(var(--target-h) / -2 - 5px));
+    transform: translate(calc(var(--target-w) / -2 - var(--target-gap)), calc(var(--target-h) / -2 - var(--target-gap)));
   }
   .target-cursor-wrapper.is-targeting .corner-tr {
-    transform: translate(calc(var(--target-w) / 2 - 8px), calc(var(--target-h) / -2 - 5px));
+    transform: translate(calc(var(--target-w) / 2 - var(--target-corner) + var(--target-gap)), calc(var(--target-h) / -2 - var(--target-gap)));
   }
   .target-cursor-wrapper.is-targeting .corner-br {
-    transform: translate(calc(var(--target-w) / 2 - 8px), calc(var(--target-h) / 2 - 8px));
+    transform: translate(calc(var(--target-w) / 2 - var(--target-corner) + var(--target-gap)), calc(var(--target-h) / 2 - var(--target-corner) + var(--target-gap)));
   }
   .target-cursor-wrapper.is-targeting .corner-bl {
-    transform: translate(calc(var(--target-w) / -2 - 5px), calc(var(--target-h) / 2 - 8px));
+    transform: translate(calc(var(--target-w) / -2 - var(--target-gap)), calc(var(--target-h) / 2 - var(--target-corner) + var(--target-gap)));
   }
 
   /* ---- Responsive ---- */
@@ -2684,9 +2686,6 @@ function initTargetCursor() {
     autoAlpha: 0
   });
 
-  const spinTl = gsap.timeline({ repeat: -1 })
-    .to(cursor, { rotation: '+=360', duration: 2.4, ease: 'none' });
-
   function setTargetBox(target) {
     const rect = target.getBoundingClientRect();
     cursor.style.setProperty('--target-w', rect.width.toFixed(2) + 'px');
@@ -2705,12 +2704,10 @@ function initTargetCursor() {
     if (!activeTarget) return;
     activeTarget = null;
     cursor.classList.remove('is-targeting');
-    spinTl.restart();
     gsap.to(cursor, {
       x: lastPointer.x,
       y: lastPointer.y,
       autoAlpha: 0,
-      rotation: '+=45',
       duration: 0.18,
       ease: 'power3.out',
       overwrite: 'auto'
@@ -2734,7 +2731,6 @@ function initTargetCursor() {
     if (!target || activeTarget === target) return;
     target.classList.add('target-cursor-hit');
     activeTarget = target;
-    spinTl.pause();
     gsap.set(cursor, { rotation: 0 });
     cursor.classList.add('is-targeting');
     setTargetBox(target);

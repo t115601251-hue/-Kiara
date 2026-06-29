@@ -1362,6 +1362,7 @@
       <a class="link-card card-ai" href="https://d.design/" target="_blank"><img class="icon" src="icons/duiyou.png" alt=""><div class="text"><div class="name">堆友</div><div class="desc">阿里出品AI绘画与3D素材</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://www.recraft.ai/ai-image-vectorizer" target="_blank"><img class="icon" src="icons/recraft.png" alt=""><div class="text"><div class="name">Recraft Vectorizer</div><div class="desc">AI图片矢量化转换工具</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-ai" href="https://picell.ai/zh-CN/ad-image" target="_blank"><img class="icon" src="icons/picell.svg" alt=""><div class="text"><div class="name">Picell AI</div><div class="desc">广告图生成，可拆分图片</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-ai" href="https://tuduck.art/web/portal/ai-retouch/online-editing" target="_blank"><img class="icon" src="icons/tuduck.svg" alt=""><div class="text"><div class="name">Tuduck AI Retouch</div><div class="desc">在线 AI 修图和图片精修编辑</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
   <div class="subcat"><div class="subcat-title">AI 视频</div>
@@ -1503,6 +1504,7 @@
   <div class="subcat"><div class="subcat-title">图标资源</div>
     <div class="links">
       <a class="link-card card-design" href="https://www.flaticon.com/" target="_blank"><img class="icon" src="icons/flaticon.ico" alt=""><div class="text"><div class="name">Flaticon</div><div class="desc">全球最大免费图标库</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-design" href="https://www.thiings.co/things" target="_blank"><img class="icon" src="icons/thiings.png" alt=""><div class="text"><div class="name">Thiings</div><div class="desc">下载免费 AI 生成 3D 图标</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
 
@@ -1548,6 +1550,7 @@
     <div class="links">
       <a class="link-card card-tool" href="https://tinypng.com/" target="_blank"><img class="icon" src="icons/tinypng.png" alt=""><div class="text"><div class="name">TinyPNG</div><div class="desc">智能PNG/JPEG图片无损压缩</div></div><div class="arrow">↗</div></a>
       <a class="link-card card-tool" href="https://www.remove.bg/" target="_blank"><img class="icon" src="icons/removebg.ico" alt=""><div class="text"><div class="name">Remove.bg</div><div class="desc">一键AI去除图片背景</div></div><div class="arrow">↗</div></a>
+      <a class="link-card card-tool" href="https://shizitou1210-pixel.github.io/detail-slicer/" target="_blank"><img class="icon" src="icons/detail-slicer.svg" alt=""><div class="text"><div class="name">详情图切片工具</div><div class="desc">长详情图切片导出小工具</div></div><div class="arrow">↗</div></a>
     </div>
   </div>
   <div class="subcat"><div class="subcat-title">文件处理</div>
@@ -1657,11 +1660,11 @@ const SEARCH_SYNONYMS = {
 const TASK_WORDS = {
   copywriting: '写文案脚本 文案 脚本 写作 长文 标题 提示词 prompt 对话 论文 编程 办公 表格',
   webDesign: '做网页界面 网页设计 UI设计 设计 前端设计 UI组件 前端组件 落地页 官网 Hero 交互 动效 Figma React Tailwind 3D',
-  visualCreation: '生成图片视频 做图片 做视频 做图片视频 设计 AI绘画 图片生成 视频生成 动画 矢量化 3D 广告图 拆图 配音 音乐',
-  posterDesign: '做封面海报 封面 海报 社媒设计 运营图 广告图 电商图 模板 图标 配色 PPT',
-  assets: '找素材资源 素材 图片素材 视频素材 音效 字体 图标 壁纸 GIF 免费 商用 摄影',
+  visualCreation: '生成图片视频 做图片 做视频 做图片视频 设计 AI绘画 图片生成 视频生成 动画 矢量化 3D 广告图 拆图 修图 精修 配音 音乐',
+  posterDesign: '做封面海报 封面 海报 社媒设计 运营图 广告图 电商图 详情图 模板 图标 配色 PPT',
+  assets: '找素材资源 素材 图片素材 视频素材 音效 字体 图标 3D图标 壁纸 GIF 免费 商用 摄影',
   operations: '查热点运营 热点 热搜 指数 数据 运营 矩阵管理 敏感词 违禁词 小红书 抖音 微博 百度',
-  fileTools: '处理文件图片 文件处理 图片压缩 视频压缩 格式转换 PDF 抠图 去背景 二维码 表单 流程图 词云',
+  fileTools: '处理文件图片 文件处理 图片压缩 视频压缩 格式转换 PDF 抠图 去背景 切片 裁切 二维码 表单 流程图 词云',
   fun: '休息摸鱼 摸鱼 休闲 游戏 小游戏 随机 有趣 FC 红白机 人生模拟'
 };
 
@@ -1718,7 +1721,7 @@ const SUBCAT_META = {
   'AI 对话模型': { tags: ['对话', '写作', '问答'], tasks: ['copywriting'], keywords: '聊天 问答 文案 脚本 改写 总结 翻译 头脑风暴 AI助手' },
   'AI 办公与写作': { tags: ['办公', '写作', '效率'], tasks: ['copywriting'], keywords: '论文 表格 Excel 办公 学术 写作 文档 数据处理' },
   'AI 编程辅助': { tags: ['编程', '提示词', 'Cursor'], tasks: ['copywriting', 'webDesign'], keywords: '代码 编程 Cursor 提示词 prompt 开发 前端' },
-  'AI 绘画': { tags: ['AI绘画', '图片', '视觉'], tasks: ['visualCreation', 'posterDesign'], keywords: 'AI绘画 图片生成 图像生成 插画 视觉 广告图 矢量化 拆分图片' },
+  'AI 绘画': { tags: ['AI绘画', '图片', '视觉'], tasks: ['visualCreation', 'posterDesign'], keywords: 'AI绘画 图片生成 图像生成 插画 视觉 广告图 矢量化 拆分图片 修图 精修 图片编辑' },
   'AI 视频': { tags: ['视频', '动画', '生成'], tasks: ['visualCreation'], keywords: 'AI视频 视频生成 动画 短视频 运镜 概念动画' },
   'AI 音乐 / 音频': { tags: ['音频', '音乐', '配音'], tasks: ['visualCreation', 'assets'], keywords: 'AI音乐 歌曲 配乐 语音 克隆 配音 合成 音效' },
   'AIGC 导航与提示词': { tags: ['提示词', '导航', '合集'], tasks: ['copywriting', 'assets'], keywords: '提示词 prompt prompts 咒语 AIGC工具 AI导航 灵感合集' },
@@ -1737,7 +1740,7 @@ const SUBCAT_META = {
   '矩阵管理': { tags: ['矩阵', '多平台', '管理'], tasks: ['operations'], keywords: '自媒体矩阵 多账号 多平台 发布 管理 账号运营' },
   '数据热点': { tags: ['热点', '数据', '趋势'], tasks: ['operations'], keywords: '热搜 热点 趋势 指数 数据洞察 抖音 微博 百度 小红书' },
   '敏感词检测': { tags: ['敏感词', '检测', '合规'], tasks: ['operations'], keywords: '敏感词 违禁词 极限词 小红书 抖音 B站 文案合规' },
-  '图片处理': { tags: ['图片处理', '压缩', '抠图'], tasks: ['fileTools', 'posterDesign'], keywords: '图片压缩 抠图 去背景 去底 透明背景 PNG JPG 无损压缩' },
+  '图片处理': { tags: ['图片处理', '压缩', '抠图'], tasks: ['fileTools', 'posterDesign'], keywords: '图片压缩 抠图 去背景 去底 透明背景 PNG JPG 无损压缩 详情图切片 长图切片 图片裁切' },
   '文件转换': { tags: ['转换', 'PDF', '文件'], tasks: ['fileTools'], keywords: '格式转换 文件转换 PDF 视频转换 压缩 合并 拆分' },
   '效率工具': { tags: ['效率', '流程图', '表单'], tasks: ['fileTools'], keywords: '流程图 思维导图 白板 表单 数据收集 协作 二维码' },
   '词云': { tags: ['词云', '可视化', '文字'], tasks: ['fileTools', 'posterDesign'], keywords: '词云 文字云 关键词可视化 海报词云' },
@@ -1773,6 +1776,7 @@ const SITE_META = {
   '堆友': { tags: ['AI绘画', '3D', '素材'], tasks: ['visualCreation', 'posterDesign'], keywords: '堆友 阿里 d.design AI绘画 3D素材 设计素材' },
   'Recraft Vectorizer': { tags: ['矢量化', '图片', 'SVG'], tasks: ['visualCreation', 'fileTools'], keywords: '矢量化 vector svg 图片转矢量 logo 图标' },
   'Picell AI': { tags: ['广告图', '拆图', '电商'], tasks: ['visualCreation', 'posterDesign'], keywords: 'picell 广告图 商品图 电商图 拆分图片 图片拆解 海报' },
+  'Tuduck AI Retouch': { tags: ['AI修图', '精修', '图片编辑'], tasks: ['visualCreation', 'posterDesign', 'fileTools'], keywords: 'tuduck 图鸭 AI修图 在线修图 图片精修 图片编辑 人像修图 商品修图 照片增强 去瑕疵 retouch online editing' },
   '可灵AI': { tags: ['AI视频', '快手', '生成'], tasks: ['visualCreation'], keywords: '可灵 kling 视频生成 图生视频 文生视频 短视频' },
   '即梦AI': { tags: ['AI创作', '视频', '图片'], tasks: ['visualCreation'], keywords: '即梦 jimeng 字节 AI视频 AI图片 一站式创作' },
   'Runway': { tags: ['AI视频', '生成', '剪辑'], tasks: ['visualCreation'], keywords: 'runway 视频生成 生成式视频 AI剪辑 图生视频' },
@@ -1798,7 +1802,7 @@ const SITE_META = {
   'One Page Love': { tags: ['单页', '落地页', '灵感'], tasks: ['webDesign'], keywords: 'one page love 单页网站 landing page 落地页 案例' },
   'Bento Grids': { tags: ['Bento', '版式', '灵感'], tasks: ['webDesign'], keywords: 'bentogrids bento grids Bento网格 Bento布局 Bento版式 网页布局 卡片布局 landing page dashboard UI布局 灵感 案例' },
   'Best of Behance': { tags: ['作品集', '创意', 'Adobe'], tasks: ['webDesign', 'posterDesign'], keywords: 'behance 作品集 创意设计 平面设计 视觉参考' },
-  'Recent Design': { keywords: 'recent design 最新网页 每日灵感 产品界面 trend' },
+  'Recent Design': { tags: ['案例', '趋势', '灵感'], tasks: ['webDesign'], keywords: 'recent design 最新网页 每日灵感 产品界面 trend web design inspiration website gallery' },
   'Variant': { keywords: 'variant AI界面生成 app idea 设计方案 滚动生成' },
   'Canva可画': { keywords: 'canva 可画 海报 封面 小红书封面 公众号封面 社媒图' },
   '稿定设计': { keywords: '稿定 电商图 海报 商品图 抠图 模板 运营设计' },
@@ -1823,6 +1827,7 @@ const SITE_META = {
   '浩哥推荐字体': { keywords: '字体推荐 好看字体 Pinterest 字体灵感' },
   '微软官方PPT模板': { keywords: 'officeplus PPT模板 微软模板 演示模板 免费PPT' },
   'Flaticon': { keywords: 'flaticon icon 图标 SVG PNG 矢量图标' },
+  'Thiings': { tags: ['3D图标', '免费', '素材'], tasks: ['assets', 'posterDesign', 'webDesign'], keywords: 'thiings things 3D icon 3D图标 免费图标 AI生成图标 立体图标 PNG 素材 UI图标 网站图标' },
   '小V猫': { keywords: '小V猫 自媒体矩阵 多账号 发布 管理 VCat' },
   '达之云®驭影': { keywords: '达之云 驭影 自媒体矩阵 多平台 管理' },
   '抖音指数': { keywords: '抖音指数 抖音热点 趋势 达人 内容趋势' },
@@ -1835,6 +1840,7 @@ const SITE_META = {
   '零克查词': { keywords: '零克查词 小红书敏感词 抖音敏感词 B站敏感词 检测' },
   'TinyPNG': { keywords: 'tinypng 图片压缩 png jpg webp 无损压缩' },
   'Remove.bg': { keywords: 'removebg 抠图 去背景 去底 透明背景 人像抠图' },
+  '详情图切片工具': { tags: ['切片', '详情图', '长图'], tasks: ['fileTools', 'posterDesign'], keywords: '详情图切片 长图切片 图片切片 电商详情页 商品详情图 淘宝详情页 拼多多详情页 小红书长图 图片裁切 图片分割 导出切片' },
   'Convertio': { keywords: 'convertio 文件转换 格式转换 视频转换 音频转换 图片转换' },
   'iLovePDF': { keywords: 'ilovepdf PDF合并 PDF压缩 PDF拆分 PDF转换' },
   'TinyWow Video': { keywords: 'tinywow video 视频压缩 视频转换 在线视频工具' },
@@ -1972,7 +1978,25 @@ const CARD_INFO = {
   '创客贴': { short: '用模板快速做广告图和印刷物料' },
   'Iconfont': { short: '下载中文项目常用矢量图标' },
   '即时设计': { short: '国产在线 UI 设计和团队协作工具' },
-  'Stitch': { short: '用 AI 生成应用界面和前端草图' }
+  'Stitch': { short: '用 AI 生成应用界面和前端草图' },
+  'Tuduck AI Retouch': {
+    short: '在线 AI 修图和图片精修编辑',
+    detail: 'Tuduck 的在线 AI 修图编辑器，适合做图片精修、照片增强、商品图优化和局部瑕疵处理。',
+    helps: '帮你不用打开专业修图软件，也能快速处理人物照、商品图和运营配图的精修需求。',
+    tags: ['AI修图', '精修', '图片编辑']
+  },
+  'Thiings': {
+    short: '下载免费 AI 生成 3D 图标',
+    detail: 'Thiings 收集上万枚免费 AI 生成 3D 图标，覆盖物品、符号和界面常用视觉元素，可用于网页、海报和演示。',
+    helps: '帮你快速找到统一质感的 3D 小图标，补充封面、功能卡片、网页区块和 PPT 视觉。',
+    tags: ['3D图标', '免费', '素材']
+  },
+  '详情图切片工具': {
+    short: '长详情图切片导出小工具',
+    detail: '本地浏览器可用的详情图切片工具，面向长图、商品详情页和运营图，适合按段切分后导出图片。',
+    helps: '帮你把一张长详情图拆成多张可上传、可复用的小图，适合电商详情页和社媒长图处理。',
+    tags: ['切片', '详情图', '长图']
+  }
 };
 
 function toWords(value) {

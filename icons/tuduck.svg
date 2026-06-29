@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tuduck Favicon - Mint Green Theme -->
+  <!-- Optimized for small sizes -->
+
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#2DD4BF"/>
+
+  <!-- Letter T -->
+  <path d="M8 8 H24 V12 H18 V24 H14 V12 H8 V8 Z" fill="white"/>
+
+  <!-- AI Dot -->
+  <circle cx="26" cy="26" r="4" fill="#0F766E"/>
+  <circle cx="26" cy="26" r="2" fill="white"/>
+</svg>
